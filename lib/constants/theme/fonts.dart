@@ -22,6 +22,12 @@ class AppFonts {
 
   static const TextStyle bodyTextStyle = TextStyle(
     fontSize: 16,
-    color: Colors.black,
+    color: AppColors.commonTextColor,
   );
+
+  static const TextStyle authforgotTextStyle = TextStyle(
+    color: AppColors.commonTextColor,
+  );
+
+
 }

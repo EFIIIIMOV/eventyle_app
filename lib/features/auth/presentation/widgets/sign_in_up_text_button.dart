@@ -1,31 +1,27 @@
 import 'package:eventyle_app/constants/theme/colors.dart';
+import 'package:eventyle_app/constants/theme/fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../viewmodel/sign_in_view_model.dart';
+import '../viewmodel/sign_up_view_model.dart';
 
 class SignUpTextButton extends StatelessWidget {
-  final VoidCallback onPressed;
+  final  Function() onTap;
   final String signQuestionTitle;
   final String signTitle;
 
   const SignUpTextButton(
-      {super.key,
-      required this.onPressed,
-      required this.signTitle,
-      required this.signQuestionTitle});
+      {super.key, required this.signTitle, required this.signQuestionTitle, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          signQuestionTitle,
-          style: TextStyle(
-            color: AppColors.commonTextColor,
-          ),
-        ),
+        Text(signQuestionTitle, style: AppFonts.authforgotTextStyle),
         const SizedBox(width: 10),
         InkWell(
-          onTap: onPressed,
+          onTap: onTap,
           child: Container(
             padding: const EdgeInsets.only(bottom: 0),
             decoration: const BoxDecoration(
@@ -38,7 +34,7 @@ class SignUpTextButton extends StatelessWidget {
             ),
             child: Text(
               signTitle,
-              style: TextStyle(
+              style: const TextStyle(
                 color: AppColors.commonTextColor,
                 fontWeight: FontWeight.bold,
               ),
@@ -49,3 +45,4 @@ class SignUpTextButton extends StatelessWidget {
     );
   }
 }
+
