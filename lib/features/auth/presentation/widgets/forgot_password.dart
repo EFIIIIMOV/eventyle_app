@@ -1,6 +1,8 @@
 import 'package:eventyle_app/constants/theme/colors.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../constants/theme/fonts.dart';
+
 class ForgotPassword extends StatelessWidget {
   final VoidCallback onPressed;
 
@@ -22,10 +24,7 @@ class ForgotPassword extends StatelessWidget {
         ),
         child: const Text(
           'Забыли пароль?',
-          style: TextStyle(
-            color: AppColors.commonTextColor,
-            fontWeight: FontWeight.bold,
-          ),
+          style: AppFonts.inkWellButtonTextStyle
         ),
       ),
     );

@@ -25,9 +25,12 @@ class AppFonts {
     color: AppColors.commonTextColor,
   );
 
-  static const TextStyle authforgotTextStyle = TextStyle(
+  static const TextStyle signQuestionTextStyle = TextStyle(
     color: AppColors.commonTextColor,
   );
 
-
+  static const TextStyle inkWellButtonTextStyle = TextStyle(
+    color: AppColors.commonTextColor,
+    fontWeight: FontWeight.bold,
+  );
 }

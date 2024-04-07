@@ -3,7 +3,9 @@ import 'package:provider/provider.dart';
 import '/features/auth/presentation/view/sign_in_view.dart';
 import 'features/auth/presentation/view/sign_up_view.dart';
 import 'features/auth/presentation/viewmodel/sign_in_view_model.dart';
-import 'features/auth/presentation/viewmodel/sign_up_view_model.dart'; // Убедитесь, что вы импортировали ваш ViewModel
+import 'features/auth/presentation/viewmodel/sign_up_view_model.dart';
+import 'features/event/presentation/view/event_main_view.dart';
+import 'features/event/presentation/view/events_list_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,8 +27,10 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         routes: {
-          '/': (context) => SignInView(),
+          '/1': (context) => SignInView(),
           '/signUp': (context) => SignUpView(),
+          '/events': (context) => EventsListView(),
+          '/': (context) => EventMainView(),
         },
         debugShowCheckedModeBanner: false,
       ),

@@ -23,7 +23,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: Divider(
-            height: 1,
+            height: 0.1,
             color: AppColors.dividerColor, // Цвет полоски
           ),
         ),

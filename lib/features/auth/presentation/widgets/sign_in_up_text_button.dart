@@ -18,7 +18,7 @@ class SignUpTextButton extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(signQuestionTitle, style: AppFonts.authforgotTextStyle),
+        Text(signQuestionTitle, style: AppFonts.signQuestionTextStyle),
         const SizedBox(width: 10),
         InkWell(
           onTap: onTap,
@@ -34,10 +34,7 @@ class SignUpTextButton extends StatelessWidget {
             ),
             child: Text(
               signTitle,
-              style: const TextStyle(
-                color: AppColors.commonTextColor,
-                fontWeight: FontWeight.bold,
-              ),
+              style: AppFonts.inkWellButtonTextStyle
             ),
           ),
         ),
