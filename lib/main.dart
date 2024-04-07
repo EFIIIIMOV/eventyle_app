@@ -29,8 +29,9 @@ class MyApp extends StatelessWidget {
         routes: {
           '/1': (context) => SignInView(),
           '/signUp': (context) => SignUpView(),
-          '/events': (context) => EventsListView(),
-          '/': (context) => EventMainView(),
+          //'/events': (context) => EventsListView(),
+          '/': (context) => EventsListView(),
+          '/eventHome': (context) => EventMainView(),
         },
         debugShowCheckedModeBanner: false,
       ),

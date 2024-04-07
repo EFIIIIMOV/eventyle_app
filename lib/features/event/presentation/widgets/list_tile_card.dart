@@ -5,28 +5,41 @@ class ListTileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Определяем ширину экрана
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Container(
       width: screenWidth,
-      // Устанавливаем ширину контейнера равной ширине экрана
       decoration: BoxDecoration(
-        color: Colors.white, // Устанавливаем цвет фона контейнера в белый
+        color: Colors.white,
         border: Border(
           bottom: BorderSide(
-            color: Colors.grey.shade300, // Устанавливаем цвет рамки снизу
-            width: 1, // Устанавливаем толщину рамки снизу
+            color: Colors.grey.shade300,
+            width: 1,
           ),
         ),
       ),
-      child: ListTile(
-        leading: FlutterLogo(size: 56.0),
-        title: Text('Two-line ListTile'),
-        subtitle: Text('Here is a second line'),
-        trailing: Icon(
-          Icons.add_circle,
-          color: Colors.blue,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Center(
+          child: ListTile(
+            contentPadding: EdgeInsets.zero,
+            // Убираем внутренний отступ ListTile
+            leading: ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.asset(
+                'assets/images/test_image.png',
+                width: 50,
+                height: 50,
+                fit: BoxFit.cover,
+              ),
+            ),
+            title: const Text('Two-line ListTile'),
+            subtitle: const Text('Here is a second line'),
+            trailing: const Icon(
+              Icons.add_circle,
+              color: Colors.blue,
+            ),
+          ),
         ),
       ),
     );

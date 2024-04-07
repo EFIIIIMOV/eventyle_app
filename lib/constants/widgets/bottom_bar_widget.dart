@@ -9,8 +9,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom),
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: BottomNavigationBar(
         selectedFontSize: 13,
         unselectedFontSize: 13,
@@ -18,7 +18,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
         type: BottomNavigationBarType.fixed,
         currentIndex: currentIndex,
         selectedItemColor: Colors.blue,
-        onTap: (index) => onTabTapped(context, index),
+        onTap: (index) => onTabTapped(context, index, currentIndex),
         items: const [
           BottomNavigationBarItem(
             label: 'Подрядчики',
@@ -42,15 +42,17 @@ class CustomBottomNavigationBar extends StatelessWidget {
   }
 }
 
-void onTabTapped(BuildContext context, int index) {
+void onTabTapped(BuildContext context, int index, int currentIndex) {
   // Определение маршрутов для каждой страницы
   final Map<int, String> routes = {
     0: '/home',
     1: '/messages',
-    2: '/profile',
+    2: '/',
     3: '/settings',
   };
 
-  // Переход на соответствующую страницу
-  Navigator.pushNamed(context, routes[index]!);
+  if (index != currentIndex) {
+    // Переход на соответствующую страницу
+    Navigator.pushReplacementNamed(context, routes[index]!);
+  }
 }

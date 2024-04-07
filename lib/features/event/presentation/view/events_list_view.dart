@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../constants/theme/colors.dart';
 import '../../../../constants/widgets/app_bar_widget.dart';
 import '../../../../constants/widgets/bottom_bar_widget.dart';
+import '../widgets/event_list_info.dart';
 import '../widgets/events_list_tile.dart';
 
 class EventsListView extends StatelessWidget {
@@ -10,9 +11,9 @@ class EventsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.viewBackgroundColor,
-      appBar: const CustomAppBar(title: 'Мероприятия'),
+    return const Scaffold(
+      backgroundColor: AppColors.viewSecondBackgroundColor,
+      appBar: CustomAppBar(title: 'Мероприятия'),
       bottomNavigationBar: CustomBottomNavigationBar(
         currentIndex: 2,
       ),

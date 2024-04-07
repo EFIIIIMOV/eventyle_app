@@ -12,6 +12,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Column(
       children: [
         AppBar(
+          scrolledUnderElevation: 0.0,
           title: Text(
             title,
             style: AppFonts.appBarTextStyle,
@@ -20,12 +21,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           backgroundColor: AppColors.appBarBackgroundColor,
           elevation: 0,
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Divider(
-            height: 0.1,
-            color: AppColors.dividerColor, // Цвет полоски
-          ),
+        const Divider(
+          height: 1,
+          color: AppColors.dividerColor,
         ),
       ],
     );

@@ -11,7 +11,7 @@ class EventsListTile extends StatelessWidget {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
-            Navigator.pushReplacementNamed(context, '/signUp');
+            Navigator.pushNamed(context, '/eventHome');
             print('Элемент списка нажат: $index');
           },
           child: ListTileCard(),

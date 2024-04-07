@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppColors {
   //background
   static const Color viewBackgroundColor = Color(0xFFFFFFFF);
-  static const Color viewSecondBackgroundColor = Color(0xFFFFFFFF);
+  static const Color viewSecondBackgroundColor = Color(0xFAFAFAFF);
   static const Color appBarBackgroundColor = Color(0xFFFFFFFF);
 
   //text

@@ -3,6 +3,7 @@ import 'package:eventyle_app/constants/widgets/app_bar_widget.dart';
 import 'package:eventyle_app/constants/widgets/bottom_bar_widget.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/event_list_info.dart';
 import '../widgets/event_top_info.dart';
 
 class EventMainView extends StatelessWidget {
@@ -10,19 +11,23 @@ class EventMainView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromRGBO(250, 250, 250, 1.0),
-      appBar: const CustomAppBar(title: 'Мероприятие NAME',),
-      bottomNavigationBar: const CustomBottomNavigationBar(currentIndex: 2,),
-      body: SafeArea(
-        child: Center(
-          child: Column(
+    return const Scaffold(
+      backgroundColor: AppColors.viewSecondBackgroundColor,
+      appBar: CustomAppBar(
+        title: 'Мероприятие NAME',
+      ),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        currentIndex: 2,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
             children: [
               EventTopInfo(),
+              EventListInfo(),
+              SizedBox(height: 30),
             ],
           ),
         ),
-      ),
     );
   }
 }

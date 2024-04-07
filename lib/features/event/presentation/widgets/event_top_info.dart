@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../constants/theme/colors.dart';
 
 class EventTopInfo extends StatelessWidget {
+  const EventTopInfo({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,10 +32,14 @@ class EventTopInfo extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Container(
-                    width: 100,
-                    height: 100,
-                    child: Image.asset('assets/images/test_image.png'),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: Image.asset(
+                      'assets/images/test_image.png',
+                      width: 100,
+                      height: 100,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                   const SizedBox(width: 16),
                   const Expanded(
