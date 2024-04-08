@@ -35,10 +35,10 @@ class ListTileCard extends StatelessWidget {
             ),
             title: const Text('Two-line ListTile'),
             subtitle: const Text('Here is a second line'),
-            trailing: const Icon(
-              Icons.add_circle,
-              color: Colors.blue,
-            ),
+            // trailing: const Icon(
+            //   Icons.add_circle,
+            //   color: Colors.blue,
+            // ),
           ),
         ),
       ),

@@ -11,9 +11,15 @@ class EventsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: AppColors.viewSecondBackgroundColor,
-      appBar: CustomAppBar(title: 'Мероприятия'),
+      appBar: CustomAppBar(
+        title: 'Мероприятия',
+        buttonIcon: Icons.add,
+        onButtonPressed: () {
+          Navigator.pushNamed(context, '/eventCreate');
+        },
+      ),
       bottomNavigationBar: CustomBottomNavigationBar(
         currentIndex: 2,
       ),

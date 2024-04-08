@@ -20,7 +20,7 @@ class SignInView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.viewBackgroundColor,
-      appBar: const CustomAppBar(title: 'EVENTYLE'),
+      appBar: const CustomAppBar(title: 'EVENTYLE', buttonIcon: null, onButtonPressed: null,),
       body: SafeArea(
         child: Center(
           child: Column(

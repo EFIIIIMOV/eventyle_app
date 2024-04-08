@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../../constants/theme/fonts.dart';
+import '../../../../constants/widgets/container_box_decoration.dart';
 import 'list_tile_card.dart';
 
 class EventListInfo extends StatelessWidget {
@@ -11,37 +12,24 @@ class EventListInfo extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            color: Colors.grey,
-            width: 0.1,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              spreadRadius: 2,
-              blurRadius: 7,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
+        decoration: CustomContainerBoxDecoration.customDecoration,
         child: Column(
-          children: generateList(),
+          children: generateList(context),
         ),
       ),
     );
   }
 }
 
-List<Widget> generateList() {
+List<Widget> generateList(BuildContext context) {
   List<Widget> children = [];
   children.add(
     ListTile(
       title: InkWell(
-          onTap: () {},
-          child: Row(
+          onTap: () {
+            Navigator.pushNamed(context, '/eventInfoCreate');
+          },
+          child: const Row(
             children: [
               Icon(
                 Icons.add,

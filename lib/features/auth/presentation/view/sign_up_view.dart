@@ -21,7 +21,7 @@ class SignUpView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.viewBackgroundColor,
-      appBar: const CustomAppBar(title: 'EVENTYLE'),
+      appBar: const CustomAppBar(title: 'EVENTYLE', buttonIcon: null, onButtonPressed: null,),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

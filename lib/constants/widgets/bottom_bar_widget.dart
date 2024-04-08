@@ -11,32 +11,42 @@ class CustomBottomNavigationBar extends StatelessWidget {
     return Padding(
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-      child: BottomNavigationBar(
-        selectedFontSize: 13,
-        unselectedFontSize: 13,
-        backgroundColor: AppColors.appBarBackgroundColor,
-        type: BottomNavigationBarType.fixed,
-        currentIndex: currentIndex,
-        selectedItemColor: Colors.blue,
-        onTap: (index) => onTabTapped(context, index, currentIndex),
-        items: const [
-          BottomNavigationBarItem(
-            label: 'Подрядчики',
-            icon: Icon(Icons.group_add),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(
+              color: Colors.black.withOpacity(0.2), // Цвет полоски
+              width: 1, // Толщина полоски
+            ),
           ),
-          BottomNavigationBarItem(
-            label: 'Чаты',
-            icon: Icon(Icons.messenger_outlined),
-          ),
-          BottomNavigationBarItem(
-            label: 'Мероприятия',
-            icon: Icon(Icons.event_note),
-          ),
-          BottomNavigationBarItem(
-            label: 'Профиль',
-            icon: Icon(Icons.account_circle_rounded),
-          ),
-        ],
+        ),
+        child: BottomNavigationBar(
+          selectedFontSize: 13,
+          unselectedFontSize: 13,
+          backgroundColor: AppColors.appBarBackgroundColor,
+          type: BottomNavigationBarType.fixed,
+          currentIndex: currentIndex,
+          selectedItemColor: Colors.blue,
+          onTap: (index) => onTabTapped(context, index, currentIndex),
+          items: const [
+            BottomNavigationBarItem(
+              label: 'Подрядчики',
+              icon: Icon(Icons.group_add),
+            ),
+            BottomNavigationBarItem(
+              label: 'Чаты',
+              icon: Icon(Icons.messenger_outlined),
+            ),
+            BottomNavigationBarItem(
+              label: 'Мероприятия',
+              icon: Icon(Icons.event_note),
+            ),
+            BottomNavigationBarItem(
+              label: 'Профиль',
+              icon: Icon(Icons.account_circle_rounded),
+            ),
+          ],
+        ),
       ),
     );
   }

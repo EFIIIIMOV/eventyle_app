@@ -4,8 +4,11 @@ import '/features/auth/presentation/view/sign_in_view.dart';
 import 'features/auth/presentation/view/sign_up_view.dart';
 import 'features/auth/presentation/viewmodel/sign_in_view_model.dart';
 import 'features/auth/presentation/viewmodel/sign_up_view_model.dart';
+import 'features/event/presentation/view/create_event_info_view.dart';
+import 'features/event/presentation/view/create_event_view.dart';
 import 'features/event/presentation/view/event_main_view.dart';
 import 'features/event/presentation/view/events_list_view.dart';
+import 'constants/theme/themeData.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,12 +29,15 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
+        theme: CustomThemeData,
         routes: {
           '/1': (context) => SignInView(),
           '/signUp': (context) => SignUpView(),
           //'/events': (context) => EventsListView(),
           '/': (context) => EventsListView(),
           '/eventHome': (context) => EventMainView(),
+          '/eventCreate': (context) => CreateEventView(),
+          '/eventInfoCreate': (context) => CreateEventInfoView(),
         },
         debugShowCheckedModeBanner: false,
       ),

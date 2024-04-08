@@ -15,19 +15,21 @@ class EventMainView extends StatelessWidget {
       backgroundColor: AppColors.viewSecondBackgroundColor,
       appBar: CustomAppBar(
         title: 'Мероприятие NAME',
+        buttonIcon: Icons.edit,
+        onButtonPressed: null,
       ),
       bottomNavigationBar: CustomBottomNavigationBar(
         currentIndex: 2,
       ),
       body: SingleChildScrollView(
         child: Column(
-            children: [
-              EventTopInfo(),
-              EventListInfo(),
-              SizedBox(height: 30),
-            ],
-          ),
+          children: [
+            EventTopInfo(),
+            EventListInfo(),
+            SizedBox(height: 30),
+          ],
         ),
+      ),
     );
   }
 }

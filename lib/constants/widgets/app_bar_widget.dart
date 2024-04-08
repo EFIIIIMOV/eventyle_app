@@ -4,8 +4,14 @@ import '../theme/colors.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final IconData? buttonIcon;
+  final VoidCallback? onButtonPressed;
 
-  const CustomAppBar({super.key, required this.title});
+  const CustomAppBar(
+      {super.key,
+      required this.title,
+      required this.buttonIcon,
+      required this.onButtonPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +26,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           centerTitle: true,
           backgroundColor: AppColors.appBarBackgroundColor,
           elevation: 0,
+          actions: IconData != null
+              ? [
+                  IconButton(
+                    icon: Icon(buttonIcon, color: Colors.black,),
+                    onPressed: onButtonPressed,
+                  ),
+                ]
+              : [],
         ),
         const Divider(
           height: 1,
@@ -32,3 +46,4 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight + 1);
 }
+
