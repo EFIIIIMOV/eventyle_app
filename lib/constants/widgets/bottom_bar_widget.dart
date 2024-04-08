@@ -58,7 +58,7 @@ void onTabTapped(BuildContext context, int index, int currentIndex) {
     0: '/home',
     1: '/messages',
     2: '/',
-    3: '/settings',
+    3: '/profile',
   };
 
   if (index != currentIndex) {

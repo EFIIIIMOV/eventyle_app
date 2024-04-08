@@ -51,8 +51,7 @@ List<Widget> generateList() {
         ),
         ListTile(
           leading: CircleAvatar(
-            // Круглая картинка
-            child: Icon(Icons.person), // Иконка, замените на ваше изображение
+            child: Icon(Icons.person),
           ),
           title: Text('Информация о мероприятии ${i + 1}'), // Текст
         ),

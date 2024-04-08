@@ -9,6 +9,7 @@ import 'features/event/presentation/view/create_event_view.dart';
 import 'features/event/presentation/view/event_main_view.dart';
 import 'features/event/presentation/view/events_list_view.dart';
 import 'constants/theme/themeData.dart';
+import 'features/profile/presentation/view/profile_main_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
+        //debugShowMaterialGrid: true, // Показывает сетку Material Design
         theme: CustomThemeData,
         routes: {
           '/1': (context) => SignInView(),
@@ -38,6 +40,7 @@ class MyApp extends StatelessWidget {
           '/eventHome': (context) => EventMainView(),
           '/eventCreate': (context) => CreateEventView(),
           '/eventInfoCreate': (context) => CreateEventInfoView(),
+          '/profile': (context) => ProfileMainView(),
         },
         debugShowCheckedModeBanner: false,
       ),
