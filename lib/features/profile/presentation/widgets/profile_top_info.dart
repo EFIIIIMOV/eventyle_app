@@ -20,7 +20,7 @@ class ProfileTopInfo extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 16),
-            Expanded(
+            const Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -46,7 +46,7 @@ class ProfileTopInfo extends StatelessWidget {
             padding: EdgeInsets.all(16),
             child: Column(
               children: [
-                Align(
+                const Align(
                   alignment: Alignment.topLeft,
                   child: Text(
                     'О себе',
@@ -56,7 +56,7 @@ class ProfileTopInfo extends StatelessWidget {
                   ),
                 ),
                 Divider(color: Colors.grey.shade300, thickness: 1, height: 10),
-                Align(
+                const Align(
                   alignment: Alignment.topLeft,
                   child: Text(
                     'data',

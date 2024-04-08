@@ -1,16 +1,14 @@
+import 'package:eventyle_app/constants/widgets/container_box_decoration.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../constants/theme/colors.dart';
 import '../../../../constants/theme/fonts.dart';
-import '../../../../constants/widgets/container_box_decoration.dart';
 
-class EventCreateTopInfo extends StatelessWidget {
-  final _nameController = TextEditingController();
-  final _dateController = TextEditingController();
-  final _placeController = TextEditingController();
-  final _infoDescriptionController = TextEditingController();
+class ProfileEditInfo extends StatelessWidget {
+  final infoNameController = TextEditingController();
+  final infoSurnameController = TextEditingController();
+  final infoDescriptionController = TextEditingController();
 
-  EventCreateTopInfo({super.key});
+  ProfileEditInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +16,11 @@ class EventCreateTopInfo extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ClipRRect(
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(150.0),
           child: Image.asset(
             'assets/images/test_image.png',
-            width: 150,
-            height: 150,
+            width: 130,
+            height: 130,
             fit: BoxFit.cover,
           ),
         ),
@@ -45,18 +43,13 @@ class EventCreateTopInfo extends StatelessWidget {
             child: Column(
               children: [
                 CustomCreateEventTextField(
-                  fieldHintText: 'Полное название',
-                  textController: _nameController,
+                  fieldHintText: 'Имя',
+                  textController: infoNameController,
                 ),
                 Divider(color: Colors.grey.shade300, thickness: 1, height: 1),
                 CustomCreateEventTextField(
-                  fieldHintText: 'Дата проведения',
-                  textController: _dateController,
-                ),
-                Divider(color: Colors.grey.shade300, thickness: 1, height: 1),
-                CustomCreateEventTextField(
-                  fieldHintText: 'Место проведения',
-                  textController: _placeController,
+                  fieldHintText: 'Фамилия',
+                  textController: infoSurnameController,
                 ),
               ],
             ),
@@ -69,17 +62,17 @@ class EventCreateTopInfo extends StatelessWidget {
           child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               return ConstrainedBox(
-                constraints: const BoxConstraints(
-                  minHeight: 50,
-                  maxHeight: 200,
+                constraints: BoxConstraints(
+                  minHeight: 50, // Минимальная высота
+                  maxHeight: 200, // Максимальная высота
                 ),
                 child: SingleChildScrollView(
                   child: TextField(
                     maxLines: null,
                     keyboardType: TextInputType.multiline,
-                    controller: _infoDescriptionController,
+                    controller: infoDescriptionController,
                     decoration: const InputDecoration(
-                      hintText: 'Описание',
+                      hintText: 'О себе',
                       border: InputBorder.none,
                     ),
                   ),

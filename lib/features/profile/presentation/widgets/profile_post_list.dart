@@ -25,7 +25,7 @@ class ProfilePostList extends StatelessWidget {
               child: IconButton(
                 padding: EdgeInsets.zero,
                 // Устанавливаем padding в EdgeInsets.zero
-                onPressed: () {},
+                onPressed: () {Navigator.pushNamed(context, '/profilePostCreate');},
                 icon: const Icon(
                   Icons.add_box,
                   color: Colors.black,
@@ -35,7 +35,6 @@ class ProfilePostList extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 10),
         Column(
           children: generateList(5),
         )

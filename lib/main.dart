@@ -9,6 +9,8 @@ import 'features/event/presentation/view/create_event_view.dart';
 import 'features/event/presentation/view/event_main_view.dart';
 import 'features/event/presentation/view/events_list_view.dart';
 import 'constants/theme/themeData.dart';
+import 'features/profile/presentation/view/profile_create_post_view.dart';
+import 'features/profile/presentation/view/profile_edit_view.dart';
 import 'features/profile/presentation/view/profile_main_view.dart';
 
 void main() {
@@ -41,6 +43,8 @@ class MyApp extends StatelessWidget {
           '/eventCreate': (context) => CreateEventView(),
           '/eventInfoCreate': (context) => CreateEventInfoView(),
           '/profile': (context) => ProfileMainView(),
+          '/profileEdit': (context) => ProfileEditView(),
+          '/profilePostCreate': (context) => ProfileCreatePostView(),
         },
         debugShowCheckedModeBanner: false,
       ),
