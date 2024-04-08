@@ -4,6 +4,8 @@ import '/features/auth/presentation/view/sign_in_view.dart';
 import 'features/auth/presentation/view/sign_up_view.dart';
 import 'features/auth/presentation/viewmodel/sign_in_view_model.dart';
 import 'features/auth/presentation/viewmodel/sign_up_view_model.dart';
+import 'features/chat/presentation/view/chat_create_view.dart';
+import 'features/chat/presentation/view/chat_list_view.dart';
 import 'features/event/presentation/view/create_event_info_view.dart';
 import 'features/event/presentation/view/create_event_view.dart';
 import 'features/event/presentation/view/event_main_view.dart';
@@ -45,6 +47,8 @@ class MyApp extends StatelessWidget {
           '/profile': (context) => ProfileMainView(),
           '/profileEdit': (context) => ProfileEditView(),
           '/profilePostCreate': (context) => ProfileCreatePostView(),
+          '/chatList': (context) => ChatListView(),
+          '/chatCreate': (context) => ChatCreateView(),
         },
         debugShowCheckedModeBanner: false,
       ),

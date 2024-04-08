@@ -56,7 +56,7 @@ void onTabTapped(BuildContext context, int index, int currentIndex) {
   // Определение маршрутов для каждой страницы
   final Map<int, String> routes = {
     0: '/home',
-    1: '/messages',
+    1: '/chatList',
     2: '/',
     3: '/profile',
   };
