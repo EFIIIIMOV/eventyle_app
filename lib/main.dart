@@ -12,6 +12,7 @@ import 'features/event/presentation/view/create_event_view.dart';
 import 'features/event/presentation/view/event_main_view.dart';
 import 'features/event/presentation/view/events_list_view.dart';
 import 'constants/theme/themeData.dart';
+import 'features/found_users/presentation/view/user_list_view.dart';
 import 'features/profile/presentation/view/profile_create_post_view.dart';
 import 'features/profile/presentation/view/profile_edit_view.dart';
 import 'features/profile/presentation/view/profile_main_view.dart';
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
           '/chatList': (context) => ChatListView(),
           '/chatCreate': (context) => ChatCreateView(),
           '/chatMain': (context) => ChatMainView(),
+          '/userList': (context) => UserListView(),
         },
         debugShowCheckedModeBanner: false,
       ),
