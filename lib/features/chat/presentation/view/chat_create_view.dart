@@ -21,14 +21,16 @@ class ChatCreateView extends StatelessWidget {
       bottomNavigationBar: CustomBottomNavigationBar(
         currentIndex: 1,
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          children: [
-            ChatCreateTopInfo(),
-            SizedBox(height: 16),
-            ChatCreateUsers(),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            children: [
+              ChatCreateTopInfo(),
+              SizedBox(height: 16),
+              ChatCreateUsers(),
+            ],
+          ),
         ),
       ),
     );
