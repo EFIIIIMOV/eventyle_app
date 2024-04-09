@@ -39,10 +39,9 @@ class MyApp extends StatelessWidget {
         //debugShowMaterialGrid: true, // Показывает сетку Material Design
         theme: CustomThemeData,
         routes: {
-          '/1': (context) => SignInView(),
+          '/': (context) => SignInView(),
           '/signUp': (context) => SignUpView(),
-          //'/events': (context) => EventsListView(),
-          '/': (context) => EventsListView(),
+          '/events': (context) => EventsListView(),
           '/eventHome': (context) => EventMainView(),
           '/eventCreate': (context) => CreateEventView(),
           '/eventInfoCreate': (context) => CreateEventInfoView(),

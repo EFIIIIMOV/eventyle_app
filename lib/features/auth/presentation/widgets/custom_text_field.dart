@@ -15,14 +15,14 @@ class CustomTextField extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 40),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0), // Закругленные углы
-          border: Border.all(color: AppColors.appBarTextColor), // Цвет границы
+          borderRadius: BorderRadius.circular(10.0),
+          border: Border.all(color: AppColors.appBarTextColor),
         ),
         child: TextField(
           controller: controller,
           decoration: InputDecoration(
             contentPadding:
-                const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+                const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
             hintText: hintText,
             border: InputBorder.none,
           ),

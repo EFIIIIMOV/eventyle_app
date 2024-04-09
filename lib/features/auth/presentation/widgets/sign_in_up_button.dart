@@ -3,18 +3,19 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../constants/theme/colors.dart';
 
-class SignInButton extends StatelessWidget {
+class SignInUpButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String text;
 
-  const SignInButton({super.key, required this.onPressed, required this.text});
+  const SignInUpButton(
+      {super.key, required this.onPressed, required this.text});
 
   @override
   Widget build(BuildContext context) {
     return Material(
       borderRadius: BorderRadius.circular(20.0),
       elevation: 4.0,
-      color: Colors.transparent, // Прозрачный цвет, чтобы не перекрывать эффект Ink
+      color: Colors.transparent,
       child: Ink(
         decoration: BoxDecoration(
           color: AppColors.buttonColor,
@@ -27,10 +28,7 @@ class SignInButton extends StatelessWidget {
             width: 300.0,
             height: 42.0,
             alignment: Alignment.center,
-            child: Text(
-              text,
-              style: AppFonts.buttonTextStyle,
-            ),
+            child: Text(text, style: AppFonts.buttonTextStyle),
           ),
         ),
       ),

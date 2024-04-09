@@ -5,13 +5,16 @@ import 'package:provider/provider.dart';
 import '../viewmodel/sign_in_view_model.dart';
 import '../viewmodel/sign_up_view_model.dart';
 
-class SignUpTextButton extends StatelessWidget {
-  final  Function() onTap;
+class SignInUpTextButton extends StatelessWidget {
+  final Function() onTap;
   final String signQuestionTitle;
   final String signTitle;
 
-  const SignUpTextButton(
-      {super.key, required this.signTitle, required this.signQuestionTitle, required this.onTap});
+  const SignInUpTextButton(
+      {super.key,
+      required this.signTitle,
+      required this.signQuestionTitle,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +26,6 @@ class SignUpTextButton extends StatelessWidget {
         InkWell(
           onTap: onTap,
           child: Container(
-            padding: const EdgeInsets.only(bottom: 0),
             decoration: const BoxDecoration(
               border: Border(
                 bottom: BorderSide(
@@ -32,14 +34,10 @@ class SignUpTextButton extends StatelessWidget {
                 ),
               ),
             ),
-            child: Text(
-              signTitle,
-              style: AppFonts.inkWellButtonTextStyle
-            ),
+            child: Text(signTitle, style: AppFonts.inkWellButtonTextStyle),
           ),
         ),
       ],
     );
   }
 }
-

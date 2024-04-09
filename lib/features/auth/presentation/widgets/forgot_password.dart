@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import '../../../../constants/theme/fonts.dart';
 
 class ForgotPassword extends StatelessWidget {
+  final String buttonTitle;
   final VoidCallback onPressed;
 
-  const ForgotPassword({super.key, required this.onPressed});
+  const ForgotPassword(
+      {super.key, required this.onPressed, required this.buttonTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +24,9 @@ class ForgotPassword extends StatelessWidget {
             ),
           ),
         ),
-        child: const Text(
-          'Забыли пароль?',
-          style: AppFonts.inkWellButtonTextStyle
+        child: Text(
+          buttonTitle,
+          style: AppFonts.inkWellButtonTextStyle,
         ),
       ),
     );
