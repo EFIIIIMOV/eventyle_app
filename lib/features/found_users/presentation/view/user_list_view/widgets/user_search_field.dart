@@ -21,7 +21,7 @@ class UserSearchField extends StatelessWidget {
         children: [
           Expanded(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -38,16 +38,12 @@ class UserSearchField extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 0),
-            child: IconButton(
-              onPressed: () {
-                // Действие, выполняемое при нажатии на кнопку
-              },
-              icon: Icon(
-                Icons.search,
-                color: Colors.black,
-              ),
+          IconButton(
+            padding: EdgeInsets.only(right: 15),
+            onPressed: () {},
+            icon: const Icon(
+              Icons.search,
+              color: Colors.black,
             ),
           ),
         ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../constants/widgets/container_box_decoration.dart';
+import '../../../../../../constants/widgets/container_box_decoration.dart';
 
 class ChatCreateUsers extends StatelessWidget {
   const ChatCreateUsers({super.key});
@@ -18,23 +18,18 @@ class ChatCreateUsers extends StatelessWidget {
 
 List<Widget> generateList() {
   List<Widget> children = [];
+
   children.add(
     ListTile(
-      title: InkWell(
-          onTap: () {},
-          child: const Row(
-            children: [
-              Icon(
-                Icons.add,
-                color: Colors.blue,
-              ),
-              Text(
-                'Добавить пользователя',
-                style:
-                TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
-              ),
-            ],
-          )),
+      onTap: () {},
+      leading: Icon(
+        Icons.add,
+        color: Colors.blue,
+      ),
+      title: Text(
+        'Добавить пользователя',
+        style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+      ),
     ),
   );
 
@@ -50,7 +45,7 @@ List<Widget> generateList() {
           ),
         ),
         ListTile(
-          leading: CircleAvatar(
+          leading: const CircleAvatar(
             child: Icon(Icons.person),
           ),
           title: Text('Информация о мероприятии ${i + 1}'), // Текст

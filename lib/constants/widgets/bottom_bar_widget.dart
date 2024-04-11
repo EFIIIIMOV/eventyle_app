@@ -57,7 +57,7 @@ void onTabTapped(BuildContext context, int index, int currentIndex) {
   final Map<int, String> routes = {
     0: '/userList',
     1: '/chatList',
-    2: '/',
+    2: '/events',
     3: '/profile',
   };
 

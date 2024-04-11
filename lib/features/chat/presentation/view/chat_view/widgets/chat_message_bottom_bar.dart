@@ -16,12 +16,12 @@ class ChatMessageBottomBar extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 4),
+        padding: const EdgeInsets.symmetric(vertical: 8),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             IconButton(
-              icon: Icon(Icons.attach_file, size: 30),
+              icon: const Icon(Icons.attach_file, size: 30),
               color: Colors.black,
               onPressed: () {},
             ),
@@ -29,29 +29,28 @@ class ChatMessageBottomBar extends StatelessWidget {
               child: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
                   return ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minHeight: 0, // Минимальная высота
-                      maxHeight: 150, // Максимальная высота
+                    constraints: const BoxConstraints(
+                      minHeight: 0,
+                      maxHeight: 150,
                     ),
                     child: Padding(
-                      padding: EdgeInsets.only(bottom: 6),
+                      padding: EdgeInsets.only(bottom: 4),
                       child: Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(color: Colors.black)),
                         padding: EdgeInsets.symmetric(horizontal: 8),
                         child: SingleChildScrollView(
-                          padding: EdgeInsets.symmetric(vertical: 0),
+                          padding: EdgeInsets.symmetric(vertical: 4),
                           child: TextField(
                             maxLines: null,
                             keyboardType: TextInputType.multiline,
                             controller: _controller,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               isDense: true,
                               hintText: "Введите сообщение",
                               border: InputBorder.none,
-                              contentPadding: EdgeInsets.symmetric(
-                                  vertical: 5), // Изменение отступов
+                              contentPadding: EdgeInsets.symmetric(vertical: 4),
                             ),
                             onSubmitted: (String) {},
                           ),
@@ -63,7 +62,7 @@ class ChatMessageBottomBar extends StatelessWidget {
               ),
             ),
             IconButton(
-              icon: Icon(Icons.send, size: 30),
+              icon: const Icon(Icons.send, size: 30),
               color: Colors.black,
               onPressed: () {},
             ),

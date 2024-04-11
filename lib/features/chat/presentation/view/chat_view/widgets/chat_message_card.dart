@@ -15,16 +15,12 @@ class ChatMessageCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          if (!isMyMessage) // Добавляем круглую картинку только для входящих сообщений
-            CircleAvatar(
+          if (!isMyMessage)
+            const CircleAvatar(
               radius: 16,
-              backgroundColor: Colors.blue, // Цвет фона вашей круглой картинки
-              child: Text(
-                "ИФ", // Имя и фамилия (первые буквы)
-                style: TextStyle(color: Colors.white),
-              ),
+              backgroundColor: Colors.blue,
             ),
-          SizedBox(width: 8), // Промежуток между круглой картинкой и текстом
+          SizedBox(width: 8),
           Expanded(
             child: Column(
               crossAxisAlignment: isMyMessage
@@ -53,9 +49,9 @@ class ChatMessageCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (!isMyMessage) // Добавляем имя и фамилию только для входящих сообщений
+                      if (!isMyMessage)
                         Text(
-                          "Имя Фамилия", // Имя и фамилия
+                          "Имя Фамилия",
                           style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,

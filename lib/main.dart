@@ -4,9 +4,12 @@ import '/features/auth/presentation/view/sign_in_view.dart';
 import 'features/auth/presentation/view/sign_up_view.dart';
 import 'features/auth/presentation/viewmodel/sign_in_view_model.dart';
 import 'features/auth/presentation/viewmodel/sign_up_view_model.dart';
-import 'features/chat/presentation/view/chat_create_view.dart';
-import 'features/chat/presentation/view/chat_list_view.dart';
-import 'features/chat/presentation/view/chat_view.dart';
+import 'features/chat/presentation/view/chat_create_view/chat_create_view.dart';
+import 'features/chat/presentation/view/chat_list_view/chat_list_view.dart';
+import 'features/chat/presentation/view/chat_view/chat_view.dart';
+import 'features/chat/presentation/viewmodel/chat_create_view_model.dart';
+import 'features/chat/presentation/viewmodel/chat_list_view_model.dart';
+import 'features/chat/presentation/viewmodel/chat_view_model.dart';
 import 'features/event/presentation/view/create_event_info_view/create_event_info_view.dart';
 import 'features/event/presentation/view/create_event_view/create_event_view.dart';
 import 'features/event/presentation/view/event_main_view/event_main_view.dart';
@@ -16,7 +19,7 @@ import 'features/event/presentation/viewmodel/create_event_info_view_model.dart'
 import 'features/event/presentation/viewmodel/create_event_view_model.dart';
 import 'features/event/presentation/viewmodel/event_main_view_model.dart';
 import 'features/event/presentation/viewmodel/events_list_view_model.dart';
-import 'features/found_users/presentation/view/user_list_view.dart';
+import 'features/found_users/presentation/view/user_list_view/user_list_view.dart';
 import 'features/profile/presentation/view/profile_create_post_view/profile_create_post_view.dart';
 import 'features/profile/presentation/view/profile_edit_view/profile_edit_view.dart';
 import 'features/profile/presentation/view/profile_main_view/profile_main_view.dart';
@@ -49,6 +52,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => ProfileCreatePostViewModel()),
         ChangeNotifierProvider(create: (context) => ProfileEditViewModel()),
         ChangeNotifierProvider(create: (context) => ProfileMainViewModel()),
+
+        //CHAT
+        ChangeNotifierProvider(create: (context) => ChatCreateViewModel()),
+        ChangeNotifierProvider(create: (context) => ChatListViewModel()),
+        ChangeNotifierProvider(create: (context) => ChatViewModel()),
       ],
       child: MaterialApp(
         theme: CustomThemeData,

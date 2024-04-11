@@ -1,7 +1,8 @@
 import 'package:eventyle_app/constants/widgets/container_box_decoration.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../constants/theme/fonts.dart';
+import '../../../../../../constants/theme/colors.dart';
+import '../../../../../../constants/theme/fonts.dart';
 
 class ChatCreateTopInfo extends StatelessWidget {
   final infoNameController = TextEditingController();
@@ -21,16 +22,24 @@ class ChatCreateTopInfo extends StatelessWidget {
             'assets/images/test_image.png',
             width: 130,
             height: 130,
-            fit: BoxFit.cover,
           ),
         ),
         const SizedBox(height: 15),
         InkWell(
           onTap: () {},
           child: Container(
-            decoration: const BoxDecoration(),
-            child: const Text('Выбрать фотографию',
-                style: AppFonts.inkWellButtonTextStyle),
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: AppColors.commonTextColor,
+                  width: 1.0,
+                ),
+              ),
+            ),
+            child: const Text(
+              'Выбрать фотографию',
+              style: AppFonts.inkWellButtonTextStyle,
+            ),
           ),
         ),
         const SizedBox(height: 20),
@@ -38,7 +47,6 @@ class ChatCreateTopInfo extends StatelessWidget {
           decoration: CustomContainerBoxDecoration.customDecoration,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
-            // Отступы по 16 по вертикали
             child: Column(
               children: [
                 CustomCreateEventTextField(
@@ -49,7 +57,7 @@ class ChatCreateTopInfo extends StatelessWidget {
                 LayoutBuilder(
                   builder: (BuildContext context, BoxConstraints constraints) {
                     return ConstrainedBox(
-                      constraints: BoxConstraints(
+                      constraints: const BoxConstraints(
                         minHeight: 50, // Минимальная высота
                         maxHeight: 200, // Максимальная высота
                       ),
@@ -71,7 +79,6 @@ class ChatCreateTopInfo extends StatelessWidget {
             ),
           ),
         ),
-
       ],
     );
   }

@@ -1,4 +1,4 @@
-import 'package:eventyle_app/features/found_users/presentation/widgets/user_list_tile_card.dart';
+import 'package:eventyle_app/features/found_users/presentation/view/user_list_view/widgets/user_list_tile_card.dart';
 import 'package:flutter/material.dart';
 
 class UserListTile extends StatelessWidget {
@@ -8,7 +8,7 @@ class UserListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        itemCount: 2,
+        itemCount: 5,
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {},
