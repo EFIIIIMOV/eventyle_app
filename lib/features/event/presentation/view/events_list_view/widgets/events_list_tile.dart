@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../viewmodel/events_list_view_model.dart';
 import 'list_tile_card.dart';
 
 class EventsListTile extends StatelessWidget {
-  const EventsListTile({Key? key}) : super(key: key);
+  final VoidCallback onTap;
+
+  const EventsListTile({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 2,
+      itemCount: 5,
       itemBuilder: (context, index) {
         return GestureDetector(
-          onTap: () {
-            Navigator.pushNamed(context, '/eventHome');
-            print('Элемент списка нажат: $index');
-          },
-          child: ListTileCard(),
+          onTap: onTap,
+          child: const ListTileCard(),
         );
       },
     );

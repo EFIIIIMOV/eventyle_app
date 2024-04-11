@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../constants/theme/colors.dart';
-import '../../../../constants/widgets/app_bar_widget.dart';
-import '../../../../constants/widgets/bottom_bar_widget.dart';
-import '../widgets/profile_edit_info.dart';
+import '../../../../../constants/theme/colors.dart';
+import '../../../../../constants/widgets/app_bar_widget.dart';
+import '../../../../../constants/widgets/bottom_bar_widget.dart';
+import 'widgets/profile_edit_info.dart';
 
 class ProfileEditView extends StatelessWidget {
   const ProfileEditView({super.key});
@@ -12,7 +12,7 @@ class ProfileEditView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.viewSecondBackgroundColor,
-      appBar: CustomAppBar(
+      appBar: const CustomAppBar(
         title: 'Профиль',
         buttonIcon: Icons.save,
         onButtonPressed: null,
@@ -20,13 +20,11 @@ class ProfileEditView extends StatelessWidget {
       bottomNavigationBar: const CustomBottomNavigationBar(currentIndex: 3),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(16),
-          child: Center(
-            child: Column(
-              children: [
-                ProfileEditInfo(),
-              ],
-            ),
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              ProfileEditInfo(),
+            ],
           ),
         ),
       ),

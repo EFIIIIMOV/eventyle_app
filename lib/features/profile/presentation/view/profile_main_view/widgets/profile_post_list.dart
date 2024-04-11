@@ -1,9 +1,11 @@
-import 'package:eventyle_app/features/profile/presentation/widgets/profile_post_card.dart';
+import 'package:eventyle_app/features/profile/presentation/view/profile_main_view/widgets/profile_post_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePostList extends StatelessWidget {
-  const ProfilePostList({Key? key});
+  final VoidCallback onTap;
+
+  const ProfilePostList({Key? key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +25,9 @@ class ProfilePostList extends StatelessWidget {
             Transform.translate(
               offset: Offset(12.0, 0.0),
               child: IconButton(
-                padding: EdgeInsets.zero,
-                // Устанавливаем padding в EdgeInsets.zero
-                onPressed: () {Navigator.pushNamed(context, '/profilePostCreate');},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/profilePostCreate');
+                },
                 icon: const Icon(
                   Icons.add_box,
                   color: Colors.black,
@@ -48,7 +50,7 @@ List<Widget> generateList(int count) {
 
   for (int i = 0; i < count; i++) {
     children.add(
-      Padding(
+      const Padding(
         padding: EdgeInsets.symmetric(vertical: 8),
         child: ProfilePostCard(),
       ),

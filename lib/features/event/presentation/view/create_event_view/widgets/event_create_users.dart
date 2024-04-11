@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../constants/widgets/container_box_decoration.dart';
+import '../../../../../../constants/widgets/container_box_decoration.dart';
 
 class EventCreateUsers extends StatelessWidget {
   const EventCreateUsers({super.key});
@@ -20,21 +20,15 @@ List<Widget> generateList() {
   List<Widget> children = [];
   children.add(
     ListTile(
-      title: InkWell(
-          onTap: () {},
-          child: const Row(
-            children: [
-              Icon(
-                Icons.add,
-                color: Colors.blue,
-              ),
-              Text(
-                'Добавить пользователя',
-                style:
-                    TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
-              ),
-            ],
-          )),
+      onTap: () {},
+      leading: const Icon(
+        Icons.add,
+        color: Colors.blue,
+      ),
+      title: const Text(
+        'Добавить пользователя',
+        style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+      ),
     ),
   );
 
@@ -50,7 +44,7 @@ List<Widget> generateList() {
           ),
         ),
         ListTile(
-          leading: CircleAvatar(
+          leading: const CircleAvatar(
             child: Icon(Icons.person),
           ),
           title: Text('Информация о мероприятии ${i + 1}'), // Текст

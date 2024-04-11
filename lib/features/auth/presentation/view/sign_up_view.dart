@@ -14,7 +14,8 @@ class SignUpView extends StatelessWidget {
   SignUpView({super.key});
 
   final _loginController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final _passwordControllerFirst = TextEditingController();
+  final _passwordControllerSecond = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +40,12 @@ class SignUpView extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             CustomTextField(
-              controller: _passwordController,
+              controller: _passwordControllerFirst,
               hintText: "Пароль",
             ),
             const SizedBox(height: 20),
             CustomTextField(
-              controller: _passwordController,
+              controller: _passwordControllerSecond,
               hintText: "Повторить пароль",
             ),
             const SizedBox(height: 30),

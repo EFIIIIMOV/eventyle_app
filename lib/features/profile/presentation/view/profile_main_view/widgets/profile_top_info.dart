@@ -2,6 +2,10 @@ import 'package:eventyle_app/constants/widgets/container_box_decoration.dart';
 import 'package:flutter/material.dart';
 
 class ProfileTopInfo extends StatelessWidget {
+  final String nameSurname = 'Имя Фамилия';
+  final String speciality = 'Специальность';
+  final String description = 'data';
+
   const ProfileTopInfo({super.key});
 
   @override
@@ -16,21 +20,20 @@ class ProfileTopInfo extends StatelessWidget {
                 'assets/images/test_image.png',
                 width: 130,
                 height: 130,
-                fit: BoxFit.cover,
               ),
             ),
             const SizedBox(width: 16),
-            const Expanded(
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Имя Фамилия',
+                    nameSurname,
                     style: TextStyle(fontSize: 25),
                   ),
                   SizedBox(height: 10),
                   Text(
-                    'Специальность',
+                    speciality,
                     style: TextStyle(fontSize: 16),
                   ),
                 ],
@@ -45,25 +48,18 @@ class ProfileTopInfo extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.all(16),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    'О себе',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
+                const Text(
+                  'О себе',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 Divider(color: Colors.grey.shade300, thickness: 1, height: 10),
-                const Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    'data',
-                    maxLines: 4,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: 14),
-                  ),
+                Text(
+                  description,
+                  maxLines: 4,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(fontSize: 14),
                 ),
               ],
             ),

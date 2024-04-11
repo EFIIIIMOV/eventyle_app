@@ -12,16 +12,12 @@ class ProfilePostCard extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text('Текст поста'),
-            ),
+            Text('Текст поста'),
             Divider(color: Colors.grey.shade300, thickness: 1, height: 10),
             SizedBox(height: 4),
             Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

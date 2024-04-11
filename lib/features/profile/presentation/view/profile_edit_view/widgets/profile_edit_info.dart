@@ -1,7 +1,8 @@
 import 'package:eventyle_app/constants/widgets/container_box_decoration.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../constants/theme/fonts.dart';
+import '../../../../../../constants/theme/colors.dart';
+import '../../../../../../constants/theme/fonts.dart';
 
 class ProfileEditInfo extends StatelessWidget {
   final infoNameController = TextEditingController();
@@ -28,18 +29,25 @@ class ProfileEditInfo extends StatelessWidget {
         InkWell(
           onTap: () {},
           child: Container(
-            padding: const EdgeInsets.only(top: 0),
-            decoration: const BoxDecoration(),
-            child: const Text('Выбрать фотографию',
-                style: AppFonts.inkWellButtonTextStyle),
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: AppColors.commonTextColor,
+                  width: 1.0,
+                ),
+              ),
+            ),
+            child: const Text(
+              'Выбрать фотографию',
+              style: AppFonts.inkWellButtonTextStyle,
+            ),
           ),
         ),
         const SizedBox(height: 20),
         Container(
           decoration: CustomContainerBoxDecoration.customDecoration,
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-            // Отступы по 16 по вертикали
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
                 CustomCreateEventTextField(
@@ -62,7 +70,7 @@ class ProfileEditInfo extends StatelessWidget {
           child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               return ConstrainedBox(
-                constraints: BoxConstraints(
+                constraints: const BoxConstraints(
                   minHeight: 50, // Минимальная высота
                   maxHeight: 200, // Максимальная высота
                 ),

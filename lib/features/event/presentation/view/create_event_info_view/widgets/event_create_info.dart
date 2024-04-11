@@ -1,8 +1,8 @@
 import 'package:eventyle_app/constants/widgets/container_box_decoration.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../constants/theme/colors.dart';
-import '../../../../constants/theme/fonts.dart';
+import '../../../../../../constants/theme/colors.dart';
+import '../../../../../../constants/theme/fonts.dart';
 
 class CreateEventInfo extends StatelessWidget {
   final infoNameController = TextEditingController();
@@ -30,15 +30,13 @@ class CreateEventInfo extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(horizontal: 16),
           decoration: CustomContainerBoxDecoration.customDecoration,
-          child: SingleChildScrollView(
-            child: TextField(
-              maxLines: null,
-              keyboardType: TextInputType.multiline,
-              controller: infoDescriptionController,
-              decoration: const InputDecoration(
-                hintText: 'Текст информации',
-                border: InputBorder.none,
-              ),
+          child: TextField(
+            maxLines: null,
+            //keyboardType: TextInputType.multiline,
+            controller: infoDescriptionController,
+            decoration: const InputDecoration(
+              hintText: 'Текст информации',
+              border: InputBorder.none,
             ),
           ),
         ),
@@ -47,7 +45,6 @@ class CreateEventInfo extends StatelessWidget {
           borderRadius: BorderRadius.circular(20.0),
           elevation: 4.0,
           color: Colors.transparent,
-          // Прозрачный цвет, чтобы не перекрывать эффект Ink
           child: Ink(
             decoration: BoxDecoration(
               color: AppColors.buttonColor,
@@ -60,7 +57,7 @@ class CreateEventInfo extends StatelessWidget {
                 width: 200.0,
                 height: 40.0,
                 alignment: Alignment.center,
-                child: Text(
+                child: const Text(
                   'Добавить файл',
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
