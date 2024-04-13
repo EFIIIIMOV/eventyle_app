@@ -1,6 +1,3 @@
-import 'package:eventyle_app/constants/widgets/bottom_bar_widget.dart';
-import 'package:eventyle_app/constants/widgets/container_box_decoration.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ChatMessageBottomBar extends StatelessWidget {

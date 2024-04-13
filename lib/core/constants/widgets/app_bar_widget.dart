@@ -1,6 +1,6 @@
-import 'package:eventyle_app/constants/theme/fonts.dart';
 import 'package:flutter/material.dart';
 import '../theme/colors.dart';
+import '../theme/fonts.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;

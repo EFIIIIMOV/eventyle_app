@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../constants/widgets/container_box_decoration.dart';
+import '../../../../../../core/constants/widgets/container_box_decoration.dart';
+
+
 
 class EventCreateUsers extends StatelessWidget {
   const EventCreateUsers({super.key});

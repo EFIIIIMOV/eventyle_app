@@ -1,7 +1,7 @@
-import 'package:eventyle_app/constants/theme/colors.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../constants/theme/fonts.dart';
+import '../../../../core/constants/theme/colors.dart';
+import '../../../../core/constants/theme/fonts.dart';
 
 class ForgotPassword extends StatelessWidget {
   final String buttonTitle;

@@ -1,0 +1,25 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "name": "Birthday Party",
+      "date": "2024-05-15",
+      "place": "123 Main Street",
+      "description": "Join us for a fun birthday celebration!"
+    },
+    {
+      "id": 2,
+      "name": "Conference",
+      "date": "2024-06-20",
+      "place": "Conference Center",
+      "description": "A conference for professionals in the tech industry."
+    },
+    {
+      "id": 3,
+      "name": "Charity Gala",
+      "date": "2024-07-10",
+      "place": "Grand Ballroom",
+      "description": "Support a good cause and enjoy an elegant evening."
+    }
+  ]
+}

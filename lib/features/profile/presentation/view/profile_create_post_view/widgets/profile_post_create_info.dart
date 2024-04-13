@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../constants/theme/colors.dart';
-import '../../../../../../constants/theme/fonts.dart';
-import '../../../../../../constants/widgets/container_box_decoration.dart';
+import '../../../../../../core/constants/theme/colors.dart';
+import '../../../../../../core/constants/theme/fonts.dart';
+import '../../../../../../core/constants/widgets/container_box_decoration.dart';
 
 class ProfilePostCreateInfo extends StatelessWidget {
   final infoDescriptionController = TextEditingController();

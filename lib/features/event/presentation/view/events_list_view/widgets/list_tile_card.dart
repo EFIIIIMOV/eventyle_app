@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ListTileCard extends StatelessWidget {
-  const ListTileCard({super.key});
+  final String eventTitle;
+  final String eventDate;
+
+  const ListTileCard(
+      {super.key, required this.eventTitle, required this.eventDate});
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +30,8 @@ class ListTileCard extends StatelessWidget {
               height: 50,
             ),
           ),
-          title: const Text('Название мероприятия'),
-          subtitle: const Text('Дата проведения'),
+          title: Text(eventTitle),
+          subtitle: Text(eventDate),
         ),
       ),
     );

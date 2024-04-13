@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../constants/theme/colors.dart';
-import '../../../../../constants/widgets/app_bar_widget.dart';
-import '../../../../../constants/widgets/bottom_bar_widget.dart';
+import '../../../../../core/constants/theme/colors.dart';
+import '../../../../../core/constants/widgets/app_bar_widget.dart';
+import '../../../../../core/constants/widgets/bottom_bar_widget.dart';
 import 'widgets/chat_create_top_info.dart';
 import 'widgets/chat_create_users.dart';
 

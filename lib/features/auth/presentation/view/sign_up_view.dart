@@ -1,13 +1,12 @@
-import 'package:eventyle_app/constants/theme/fonts.dart';
 import 'package:eventyle_app/features/auth/presentation/widgets/custom_text_field.dart';
-import 'package:eventyle_app/features/auth/presentation/widgets/forgot_password.dart';
 import 'package:eventyle_app/features/auth/presentation/widgets/sign_in_up_button.dart';
 import 'package:eventyle_app/features/auth/presentation/widgets/sign_in_up_text_button.dart';
 import 'package:provider/provider.dart';
-import '../../../../constants/theme/colors.dart';
-import '../../../../constants/widgets/app_bar_widget.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/constants/theme/colors.dart';
+import '../../../../core/constants/theme/fonts.dart';
+import '../../../../core/constants/widgets/app_bar_widget.dart';
 import '../viewmodel/sign_up_view_model.dart';
 
 class SignUpView extends StatelessWidget {

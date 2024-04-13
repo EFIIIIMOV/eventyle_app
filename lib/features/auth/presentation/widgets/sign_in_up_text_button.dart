@@ -1,9 +1,7 @@
-import 'package:eventyle_app/constants/theme/colors.dart';
-import 'package:eventyle_app/constants/theme/fonts.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../viewmodel/sign_in_view_model.dart';
-import '../viewmodel/sign_up_view_model.dart';
+
+import '../../../../core/constants/theme/colors.dart';
+import '../../../../core/constants/theme/fonts.dart';
 
 class SignInUpTextButton extends StatelessWidget {
   final Function() onTap;

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../constants/theme/colors.dart';
-import '../../../../../../constants/theme/fonts.dart';
-import '../../../../../../constants/widgets/container_box_decoration.dart';
+import '../../../../../../core/constants/theme/colors.dart';
+import '../../../../../../core/constants/theme/fonts.dart';
+import '../../../../../../core/constants/widgets/container_box_decoration.dart';
+
+
 
 class EventCreateTopInfo extends StatelessWidget {
   final _nameController = TextEditingController();
@@ -49,7 +51,6 @@ class EventCreateTopInfo extends StatelessWidget {
           decoration: CustomContainerBoxDecoration.customDecoration,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-            // Отступы по 16 по вертикали
             child: Column(
               children: [
                 CustomCreateEventTextField(

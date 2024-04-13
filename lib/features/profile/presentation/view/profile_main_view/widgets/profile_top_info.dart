@@ -1,5 +1,6 @@
-import 'package:eventyle_app/constants/widgets/container_box_decoration.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../../core/constants/widgets/container_box_decoration.dart';
 
 class ProfileTopInfo extends StatelessWidget {
   final String nameSurname = 'Имя Фамилия';

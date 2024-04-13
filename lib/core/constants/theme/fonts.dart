@@ -1,5 +1,6 @@
-import 'package:eventyle_app/constants/theme/colors.dart';
 import 'package:flutter/material.dart';
+
+import 'colors.dart';
 
 class AppFonts {
   static const TextStyle appBarTextStyle = TextStyle(

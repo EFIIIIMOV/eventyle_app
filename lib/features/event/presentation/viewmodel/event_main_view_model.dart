@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../domain/entities/event_entity.dart';
+
 class EventMainViewModel extends ChangeNotifier {
   EventMainViewModel();
 

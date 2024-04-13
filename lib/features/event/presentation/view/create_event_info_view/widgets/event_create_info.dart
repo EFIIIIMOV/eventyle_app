@@ -1,8 +1,7 @@
-import 'package:eventyle_app/constants/widgets/container_box_decoration.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../constants/theme/colors.dart';
-import '../../../../../../constants/theme/fonts.dart';
+import '../../../../../../core/constants/theme/colors.dart';
+import '../../../../../../core/constants/widgets/container_box_decoration.dart';
 
 class CreateEventInfo extends StatelessWidget {
   final infoNameController = TextEditingController();
