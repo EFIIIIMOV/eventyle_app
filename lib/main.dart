@@ -29,6 +29,7 @@ import 'features/profile/presentation/view/profile_main_view/profile_main_view.d
 import 'features/profile/presentation/viewmodel/profile_create_post_view_model.dart';
 import 'features/profile/presentation/viewmodel/profile_edit_view_model.dart';
 import 'features/profile/presentation/viewmodel/profile_main_view_model.dart';
+import 'package:dcdg/dcdg.dart';
 
 void main() {
   runApp(const MyApp());

@@ -16,7 +16,7 @@ class CreateEventInfoView extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.viewSecondBackgroundColor,
       appBar: const CustomAppBar(
-        title: 'Информация',
+        title: 'Новая информация',
         buttonIcon: Icons.save,
         onButtonPressed: null,
       ),

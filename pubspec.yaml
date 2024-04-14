@@ -38,6 +38,7 @@ dependencies:
   provider: ^6.1.2
   equatable: ^2.0.0
   dartz: ^0.10.1
+  dcdg: ^4.1.0
 
 dev_dependencies:
   flutter_test:

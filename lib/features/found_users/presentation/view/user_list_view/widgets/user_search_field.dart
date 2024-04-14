@@ -31,7 +31,7 @@ class UserSearchField extends StatelessWidget {
                   controller: _controller,
                   decoration: const InputDecoration(
                     contentPadding: EdgeInsets.symmetric(horizontal: 16),
-                    hintText: 'Search',
+                    hintText: 'Поиск',
                     border: InputBorder.none,
                   ),
                 ),

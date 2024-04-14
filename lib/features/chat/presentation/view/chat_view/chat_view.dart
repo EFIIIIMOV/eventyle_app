@@ -15,7 +15,7 @@ class ChatMainView extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.viewSecondBackgroundColor,
       appBar: const CustomAppBar(
-        title: 'Новый чат',
+        title: 'Название чата',
         buttonIcon: Icons.edit,
         onButtonPressed: null,
       ),

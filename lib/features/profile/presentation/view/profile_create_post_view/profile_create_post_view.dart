@@ -14,7 +14,7 @@ class ProfileCreatePostView extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.viewSecondBackgroundColor,
       appBar: const CustomAppBar(
-        title: 'Пост',
+        title: 'Новый пост',
         buttonIcon: Icons.save,
         onButtonPressed: null,
       ),

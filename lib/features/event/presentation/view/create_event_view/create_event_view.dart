@@ -14,7 +14,7 @@ class CreateEventView extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.viewSecondBackgroundColor,
       appBar: CustomAppBar(
-        title: 'Мероприятие',
+        title: 'Новое мероприятие',
         buttonIcon: Icons.save,
         onButtonPressed: null,
       ),

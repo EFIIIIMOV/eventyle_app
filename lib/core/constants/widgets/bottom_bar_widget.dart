@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../features/event/presentation/view/events_list_view/events_list_view.dart';
 import '../theme/colors.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
@@ -16,8 +17,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border(
             top: BorderSide(
-              color: Colors.black.withOpacity(0.2), // Цвет полоски
-              width: 1, // Толщина полоски
+              color: Colors.black.withOpacity(0.2),
+              width: 1,
             ),
           ),
         ),
