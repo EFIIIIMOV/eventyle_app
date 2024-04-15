@@ -1,0 +1,53 @@
+@startuml
+skinparam nodesep 50
+skinparam ranksep 150
+class SignUpViewModel
+SignUpViewModel : +onSignUpButtonPressed() dynamic
+SignUpViewModel : +onSignInTextButtonPressed() dynamic
+SignUpViewModel -left- SignUpView
+SignUpViewModel ..> Navigator
+
+class SignInViewModel
+SignInViewModel : +onSignInButtonPressed() dynamic
+SignInViewModel : +onForgotTextButtonPressed() dynamic
+SignInViewModel : +onSignUpTextButtonPressed() dynamic
+SignInViewModel -right- SignInView
+SignInViewModel ..> Navigator
+
+class SignInView
+SignInView : +build() Widget
+
+class SignUpView
+SignUpView : +build() Widget
+
+class SignInUpTextButton
+SignInUpTextButton : +onTap dynamic Function
+SignInUpTextButton : +signQuestionTitle String
+SignInUpTextButton : +signTitle String
+SignInUpTextButton : +build() Widget
+SignInUpTextButton --* SignInView
+SignInUpTextButton --* SignUpView
+
+class ForgotPassword
+ForgotPassword : +buttonTitle String
+ForgotPassword : +onPressed void Function
+ForgotPassword : +build() Widget
+ForgotPassword --* SignInView
+
+class SignInUpButton
+SignInUpButton : +onPressed void Function
+SignInUpButton : +text String
+SignInUpButton : +build() Widget
+SignInUpButton --* SignInView
+SignInUpButton --* SignUpView
+
+class CustomTextField
+CustomTextField : +hintText String
+CustomTextField : +build() Widget
+CustomTextField --* SignInView
+CustomTextField --* SignUpView
+
+class Navigator
+
+
+@enduml

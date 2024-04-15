@@ -1,0 +1,6 @@
+{
+  echo "@startuml";
+  flutter pub global run dcdg -s lib/features/profile -e StatelessWidget -b mermaid;
+  echo "@enduml";
+} > lib/core/UML/profile_class_diagram/profile_class_diagram.puml
+

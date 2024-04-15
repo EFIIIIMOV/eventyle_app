@@ -18,23 +18,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Column(
       children: [
         AppBar(
-          scrolledUnderElevation: 0.0,
-          title: Text(
-            title,
-            style: AppFonts.appBarTextStyle,
-          ),
-          centerTitle: true,
-          backgroundColor: AppColors.appBarBackgroundColor,
-          elevation: 0,
-          actions: IconData != null
-              ? [
-                  IconButton(
-                    icon: Icon(buttonIcon, color: Colors.black,),
-                    onPressed: onButtonPressed,
-                  ),
-                ]
-              : [],
-        ),
+            scrolledUnderElevation: 0.0,
+            title: Text(
+              title,
+              style: AppFonts.appBarTextStyle,
+            ),
+            centerTitle: true,
+            backgroundColor: AppColors.appBarBackgroundColor,
+            elevation: 0,
+            actions: IconData != null
+                ? [
+                    IconButton(
+                        icon: Icon(buttonIcon, color: Colors.black),
+                        onPressed: onButtonPressed)
+                  ]
+                : []),
         const Divider(
           height: 1,
           color: AppColors.dividerColor,
@@ -46,4 +44,3 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight + 1);
 }
-

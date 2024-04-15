@@ -1,0 +1,62 @@
+@startuml
+class ChatViewModel
+ChatViewModel -- ChatMainView
+ChatViewModel ..> Navigator
+
+class ChatListViewModel
+ChatListViewModel : +onNewChatButtonPressed() dynamic
+ChatListViewModel : +onChatPressed() dynamic
+ChatListViewModel -- ChatListView
+ChatListViewModel ..> Navigator
+
+class ChatCreateViewModel
+ChatCreateViewModel -- ChatCreateView
+ChatCreateViewModel ..> Navigator
+
+class ChatCreateView
+ChatCreateView : +build() Widget
+
+class ChatCreateTopInfo
+ChatCreateTopInfo : +build() Widget
+ChatCreateTopInfo --* ChatCreateView
+
+class CustomCreateEventTextField
+CustomCreateEventTextField : +fieldHintText String
+CustomCreateEventTextField : +build() Widget
+
+class ChatCreateUsers
+ChatCreateUsers : +build() Widget
+ChatCreateUsers --* ChatCreateView
+
+class ChatMainView
+ChatMainView : +build() Widget
+
+class ChatMessageList
+ChatMessageList : +build() Widget
+ChatMessageList --* ChatMainView
+
+class ChatMessageCard
+ChatMessageCard : +messages List~String~
+ChatMessageCard : +isMyMessage bool
+ChatMessageCard : +build() Widget
+ChatMessageCard --* ChatMessageList
+
+class ChatMessageBottomBar
+ChatMessageBottomBar : +build() Widget
+ChatMessageBottomBar --* ChatMainView
+
+class ChatListView
+ChatListView : +build() Widget
+
+class ChatListTileCard
+ChatListTileCard : +build() Widget
+ChatListTileCard --* ChatListTile
+
+class ChatListTile
+ChatListTile : +onTap void Function
+ChatListTile : +build() Widget
+ChatListTile --* ChatListView
+
+class Navigator
+
+@enduml

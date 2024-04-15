@@ -1,0 +1,58 @@
+@startuml
+class ProfileEditViewModel
+ProfileEditViewModel -left- ProfileEditView
+ProfileEditViewModel ..> Navigator
+
+class ProfileMainViewModel
+ProfileMainViewModel : +onEditProfileInfoButtonPressed() dynamic
+ProfileMainViewModel : +onNewPostButtonPressed() dynamic
+ProfileMainViewModel -right- ProfileMainView
+ProfileMainViewModel ..> Navigator
+
+class ProfileCreatePostViewModel
+ProfileCreatePostViewModel -right- ProfileCreatePostView
+ProfileCreatePostViewModel ..> Navigator
+
+class ProfileCreatePostView
+ProfileCreatePostView : +build() Widget
+
+class ProfilePostCreateInfo
+ProfilePostCreateInfo : +build() Widget
+ProfilePostCreateInfo --* ProfileCreatePostView
+
+class ProfileMainView
+ProfileMainView : +build() Widget
+
+class ProfileTopInfo
+ProfileTopInfo : +nameSurname String
+ProfileTopInfo : +speciality String
+ProfileTopInfo : +description String
+ProfileTopInfo : +build() Widget
+ProfileTopInfo --* ProfileMainView
+
+class ProfilePostList
+ProfilePostList : +onTap void Function
+ProfilePostList : +build() Widget
+ProfilePostList --* ProfileMainView
+
+class ProfilePostCard
+ProfilePostCard : +build() Widget
+ProfilePostCard --* ProfilePostList
+
+class ProfileEditView
+ProfileEditView : +build() Widget
+
+class ProfileEditInfo
+ProfileEditInfo : +build() Widget
+ProfileEditInfo --* ProfileEditView
+
+class CustomCreateEventTextField
+CustomCreateEventTextField : +fieldHintText String
+CustomCreateEventTextField : +build() Widget
+CustomCreateEventTextField --* ProfileEditInfo
+
+class Navigator
+
+
+
+@enduml

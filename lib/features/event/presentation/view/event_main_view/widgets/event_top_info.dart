@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../core/constants/widgets/container_box_decoration.dart';
 
-
-
 class EventTopInfo extends StatelessWidget {
-  String eventDate = 'Дата проведения мероприятия';
-  String eventPlace = 'Место проведения мероприятия';
-  String eventDescription =
-      'Описание мероприятия Описание мероприятия Описание мероприятия Описание мероприятия Описание мероприятия Описание мероприятия Описание мероприятия Описание мероприятия Описание мероприятия Описание мероприятия ';
+  final String eventDate;
+  final String eventPlace;
+  final String eventDescription;
 
-  EventTopInfo({super.key});
+  const EventTopInfo(
+      {super.key,
+      required this.eventDate,
+      required this.eventPlace,
+      required this.eventDescription});
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +40,11 @@ class EventTopInfo extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Text(
-                          eventDate,
+                          'Дата проведения:\n$eventDate',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          eventPlace,
+                          'Место проведения:\n$eventPlace',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],

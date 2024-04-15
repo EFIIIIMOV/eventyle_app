@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../core/constants/widgets/container_box_decoration.dart';
 
-
-
 class EventCreateUsers extends StatelessWidget {
   const EventCreateUsers({super.key});
 
@@ -49,7 +47,7 @@ List<Widget> generateList() {
           leading: const CircleAvatar(
             child: Icon(Icons.person),
           ),
-          title: Text('Информация о мероприятии ${i + 1}'), // Текст
+          title: Text('Имя Фамилия ${i + 1}'),
         ),
       ],
     );

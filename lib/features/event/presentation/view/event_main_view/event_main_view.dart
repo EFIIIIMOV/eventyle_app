@@ -9,83 +9,52 @@ import '../../viewmodel/event_main_view_model.dart';
 import 'widgets/event_list_info.dart';
 import 'widgets/event_top_info.dart';
 
-class EventMainView extends StatefulWidget {
-  const EventMainView({super.key});
-
-  @override
-  State<EventMainView> createState() => _EventMainViewState();
-}
-
-class _EventMainViewState extends State<EventMainView> {
-  late EventEntity eventEntity;
-
-  @override
-  void didChangeDependencies() {
-    final Map<String, dynamic> args =
-        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
-
-    eventEntity = args['event'];
-    super.didChangeDependencies();
-  }
+class EventMainView extends StatelessWidget {
+  const EventMainView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final viewModel = context.read<EventMainViewModel>();
+    final Map<String, dynamic>? args =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    final EventEntity eventEntity = args?['event'] as EventEntity;
+
     return Scaffold(
       backgroundColor: AppColors.viewSecondBackgroundColor,
       appBar: CustomAppBar(
         title: eventEntity.name,
         buttonIcon: Icons.edit,
-        onButtonPressed: null,
+        onButtonPressed: () => viewModel.onEditEventButtonPressed(context),
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(currentIndex: 2),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            children: [
-              EventTopInfo(),
-              SizedBox(height: 15),
-              EventListInfo(
-                  onTap: () => viewModel.onNewInfoButtonPressed(context)),
-              SizedBox(height: 30),
-            ],
-          ),
-        ),
+      body: FutureBuilder(
+        future: viewModel.getListEventInfo(eventEntity.id),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    EventTopInfo(
+                      eventDate: eventEntity.date,
+                      eventPlace: eventEntity.place,
+                      eventDescription: eventEntity.description,
+                    ),
+                    const SizedBox(height: 15),
+                    EventListInfo(
+                      onTap: () => viewModel.onNewInfoButtonPressed(context),
+                      eventInfoEntity: viewModel.listEventInfo,
+                    ),
+                    const SizedBox(height: 30),
+                  ],
+                ),
+              ),
+            );
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
       ),
     );
   }
 }
-
-//
-// class EventMainView extends StatelessWidget {
-//   const EventMainView({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final viewModel = context.read<EventMainViewModel>();
-//     return Scaffold(
-//       backgroundColor: AppColors.viewSecondBackgroundColor,
-//       appBar: const CustomAppBar(
-//         title: 'Название мероприятия',
-//         buttonIcon: Icons.edit,
-//         onButtonPressed: null,
-//       ),
-//       bottomNavigationBar: CustomBottomNavigationBar(currentIndex: 2),
-//       body: SingleChildScrollView(
-//         child: Padding(
-//           padding: EdgeInsets.all(16),
-//           child: Column(
-//             children: [
-//               EventTopInfo(),
-//               SizedBox(height: 15),
-//               EventListInfo(
-//                   onTap: () => viewModel.onNewInfoButtonPressed(context)),
-//               SizedBox(height: 30),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }

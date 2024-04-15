@@ -24,12 +24,7 @@ class EventsListViewModel extends ChangeNotifier {
   }
 
   Future<void> onEventPressed(BuildContext context, int index) async {
-    Navigator.pushNamed(
-      context,
-      '/eventMain',
-      arguments: {
-        'event': listEvents[index],
-      },
-    );
+    Navigator.pushNamed(context, '/eventMain',
+        arguments: {'event': listEvents[index]});
   }
 }

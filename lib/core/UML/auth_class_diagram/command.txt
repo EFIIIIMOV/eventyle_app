@@ -1,0 +1,5 @@
+{
+  echo "@startuml";
+  flutter pub global run dcdg -s lib/features/auth -e ChangeNotifier,StatelessWidget,TextEditingController -b mermaid;
+  echo "@enduml";
+} > lib/core/UML/auth_class_diagram/auth_class_diagram.puml

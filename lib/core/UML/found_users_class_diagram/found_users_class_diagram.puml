@@ -1,0 +1,24 @@
+@startuml
+class UserListViewModel
+UserListViewModel : +onNewEventButtonPressed() dynamic
+UserListViewModel -- UserListView
+UserListViewModel ..> Navigator
+
+class UserListView
+UserListView : +build() Widget
+
+class UserSearchField
+UserSearchField : +build() Widget
+UserSearchField --* UserListView
+
+class UserListTileCard
+UserListTileCard : +build() Widget
+UserListTileCard --* UserListTile
+
+class UserListTile
+UserListTile : +build() Widget
+UserListTile --* UserListView
+
+class Navigator
+
+@enduml

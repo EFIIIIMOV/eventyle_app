@@ -50,7 +50,7 @@ class ChatMessageCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       if (!isMyMessage)
-                        Text(
+                        const Text(
                           "Имя Фамилия",
                           style: TextStyle(
                             color: Colors.black,

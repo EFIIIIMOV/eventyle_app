@@ -15,10 +15,10 @@ class CreateEventInfoView extends StatelessWidget {
     final viewModel = context.read<CreateEventInfoViewModel>();
     return Scaffold(
       backgroundColor: AppColors.viewSecondBackgroundColor,
-      appBar: const CustomAppBar(
+      appBar: CustomAppBar(
         title: 'Новая информация',
         buttonIcon: Icons.save,
-        onButtonPressed: null,
+        onButtonPressed: () => viewModel.onSaveEventInfoButtonPressed(context),
       ),
       bottomNavigationBar: const CustomBottomNavigationBar(currentIndex: 2),
       body: SingleChildScrollView(

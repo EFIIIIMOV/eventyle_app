@@ -1,0 +1,5 @@
+{
+  echo "@startuml";
+  flutter pub global run dcdg -s lib/features/event -e ChangeNotifier,StatelessWidget,TextEditingController,State,StatefulWidget,Equatable -b mermaid;
+  echo "@enduml";
+} > lib/core/UML/event_class_diagram/event_class_diagram.puml

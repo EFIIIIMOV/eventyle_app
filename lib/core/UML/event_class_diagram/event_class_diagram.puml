@@ -1,0 +1,105 @@
+@startuml
+class EventRemoteDataSource
+EventRemoteDataSource : +getAllEvents()* dynamic
+
+class EventRemoteDataSourceImpl
+EventRemoteDataSourceImpl : +getAllEvents() dynamic
+EventRemoteDataSource <|.. EventRemoteDataSourceImpl
+
+class EventRepositoryImpl
+EventRepositoryImpl : +eventRemoteDataSource EventRemoteDataSource
+EventRepositoryImpl o-- EventRemoteDataSource
+EventRepositoryImpl : +getAllEvents() dynamic
+EventRepository <|.. EventRepositoryImpl
+EventRepositoryImpl -o EventModel
+
+class EventModel
+EventModel : +fromJson() Map<String, dynamic>
+EventModel : +toJson() Map<String, dynamic>
+EventEntity <|-- EventModel
+
+class EventRepository
+EventRepository : +getAllEvents()* dynamic
+
+class GetAllEventUseCase
+GetAllEventUseCase : +eventRepository EventRepository
+GetAllEventUseCase o-- EventRepository
+GetAllEventUseCase : +call() dynamic
+UseCase <|.. GetAllEventUseCase
+
+class EventEntity
+EventEntity : +id int
+EventEntity : +name String
+EventEntity : +date String
+EventEntity : +place String
+EventEntity : +description String
+EventEntity : +props List~Object?~
+
+class CreateEventViewModel
+CreateEventViewModel ..> Navigator
+CreateEventViewModel -- CreateEventView
+
+class EventsListViewModel
+EventsListViewModel : +getAllEventUseCase GetAllEventUseCase
+EventsListViewModel o-- GetAllEventUseCase
+EventsListViewModel : +listEvents List~EventEntity~
+EventsListViewModel : +getListEvents() dynamic
+EventsListViewModel : +onNewEventButtonPressed() dynamic
+EventsListViewModel : +onEventPressed() dynamic
+EventsListViewModel ..> Navigator
+EventsListViewModel -- EventsListView
+EventsListViewModel -o EventEntity
+
+class EventMainViewModel
+EventMainViewModel : +onNewInfoButtonPressed() dynamic
+EventMainViewModel ..> Navigator
+EventMainViewModel -- EventMainView
+
+class CreateEventInfoViewModel
+CreateEventInfoViewModel ..> Navigator
+CreateEventInfoViewModel -- CreateEventInfoView
+
+class EventCreateTopInfo
+EventCreateTopInfo : +build() Widget
+EventCreateTopInfo --* CreateEventView
+
+class EventCreateUsers
+EventCreateUsers : +build() Widget
+EventCreateUsers --* CreateEventView
+
+class CreateEventView
+CreateEventView : +build() Widget
+
+class CreateEventInfoView
+CreateEventInfoView : +build() Widget
+
+class CreateEventInfo
+CreateEventInfo : +build() Widget
+CreateEventInfo -up-* CreateEventInfoView
+
+class EventsListView
+EventsListView : +build() Widget
+
+class ListTileCard
+ListTileCard : +eventTitle String
+ListTileCard : +eventDate String
+ListTileCard : +build() Widget
+ListTileCard -up-* EventsListView
+
+class EventMainView
+
+class EventTopInfo
+EventTopInfo : +eventDate String
+EventTopInfo : +eventPlace String
+EventTopInfo : +eventDescription String
+EventTopInfo : +build() Widget
+EventTopInfo --* EventMainView
+
+class EventListInfo
+EventListInfo : +onTap void Function
+EventListInfo : +build() Widget
+EventListInfo -up-* EventMainView
+
+class Navigator
+
+@enduml

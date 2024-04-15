@@ -55,7 +55,6 @@ class CustomBottomNavigationBar extends StatelessWidget {
 }
 
 void onTabTapped(BuildContext context, int index, int currentIndex) {
-  // Определение маршрутов для каждой страницы
   final Map<int, String> routes = {
     0: '/userList',
     1: '/chatList',
@@ -64,7 +63,6 @@ void onTabTapped(BuildContext context, int index, int currentIndex) {
   };
 
   if (index != currentIndex) {
-    // Переход на соответствующую страницу
     Navigator.pushReplacementNamed(context, routes[index]!);
   }
 }

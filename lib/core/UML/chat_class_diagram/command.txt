@@ -1,0 +1,5 @@
+{
+  echo "@startuml";
+  flutter pub global run dcdg -s lib/features/chat -e ChangeNotifier,StatelessWidget,TextEditingController,State,StatefulWidget,Equatable -b mermaid;
+  echo "@enduml";
+} > lib/core/UML/chat_class_diagram/chat_class_diagram.puml
