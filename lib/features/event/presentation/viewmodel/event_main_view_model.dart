@@ -26,6 +26,18 @@ class EventMainViewModel extends ChangeNotifier {
     Navigator.pushNamed(context, '/eventInfoCreate');
   }
 
+  Future<void> onInfoPressed(
+      BuildContext context, int index, String eventName) async {
+    Navigator.pushNamed(
+      context,
+      '/eventInfo',
+      arguments: {
+        'eventInfo': listEventInfo[index],
+        'eventName': eventName,
+      },
+    );
+  }
+
   Future<void> onEditEventButtonPressed(BuildContext context) async {
     Navigator.of(context).pop();
   }

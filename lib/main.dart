@@ -16,6 +16,7 @@ import 'features/event/data/datasources/event_remote_data_source.dart';
 import 'features/event/data/repositories/event_repository_impl.dart';
 import 'features/event/presentation/view/create_event_info_view/create_event_info_view.dart';
 import 'features/event/presentation/view/create_event_view/create_event_view.dart';
+import 'features/event/presentation/view/event_info_view/event_info_view.dart';
 import 'features/event/presentation/view/event_main_view/event_main_view.dart';
 import 'features/event/presentation/view/events_list_view/events_list_view.dart';
 import 'features/event/presentation/viewmodel/create_event_info_view_model.dart';
@@ -53,7 +54,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => EventsListViewModel()),
 
         //PROFILE
-        ChangeNotifierProvider(create: (context) => ProfileCreatePostViewModel()),
+        ChangeNotifierProvider(
+            create: (context) => ProfileCreatePostViewModel()),
         ChangeNotifierProvider(create: (context) => ProfileEditViewModel()),
         ChangeNotifierProvider(create: (context) => ProfileMainViewModel()),
 
@@ -71,6 +73,7 @@ class MyApp extends StatelessWidget {
           '/eventMain': (context) => EventMainView(),
           '/eventCreate': (context) => CreateEventView(),
           '/eventInfoCreate': (context) => CreateEventInfoView(),
+          '/eventInfo': (context) => EventInfoView(),
           '/profile': (context) => ProfileMainView(),
           '/profileEdit': (context) => ProfileEditView(),
           '/profilePostCreate': (context) => ProfileCreatePostView(),

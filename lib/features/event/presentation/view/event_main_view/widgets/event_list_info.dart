@@ -1,3 +1,4 @@
+import 'package:eventyle_app/features/event/presentation/viewmodel/event_main_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -5,10 +6,15 @@ import '../../../../../../core/constants/widgets/container_box_decoration.dart';
 import '../../../../domain/entities/event_info_entity.dart';
 
 class EventListInfo extends StatelessWidget {
-  final VoidCallback onTap;
+  final String eventName;
+  final EventMainViewModel eventMainViewModel;
   final List<EventInfoEntity> eventInfoEntity;
 
-  EventListInfo({Key? key, required this.onTap, required this.eventInfoEntity});
+  EventListInfo(
+      {Key? key,
+      required this.eventInfoEntity,
+      required this.eventMainViewModel,
+      required this.eventName});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +23,7 @@ class EventListInfo extends StatelessWidget {
       child: Column(
         children: [
           ListTile(
-            onTap: onTap,
+            onTap: () => eventMainViewModel.onNewInfoButtonPressed(context),
             leading: const Icon(Icons.add, color: Colors.blue),
             title: const Text('Добавить информацию',
                 style:
@@ -41,6 +47,8 @@ class EventListInfo extends StatelessWidget {
         itemCount: eventInfoEntity.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
+            onTap: () =>
+                eventMainViewModel.onInfoPressed(context, index, eventName),
             title: Text(eventInfoEntity[index].name),
           );
         },

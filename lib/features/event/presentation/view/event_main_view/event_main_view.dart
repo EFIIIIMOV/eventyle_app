@@ -42,8 +42,9 @@ class EventMainView extends StatelessWidget {
                     ),
                     const SizedBox(height: 15),
                     EventListInfo(
-                      onTap: () => viewModel.onNewInfoButtonPressed(context),
                       eventInfoEntity: viewModel.listEventInfo,
+                      eventMainViewModel: viewModel,
+                      eventName: eventEntity.name,
                     ),
                     const SizedBox(height: 30),
                   ],

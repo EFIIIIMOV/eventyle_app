@@ -2,24 +2,24 @@
   "events": [
     {
       "id": 1,
-      "name": "Birthday Party",
+      "name": "День Рождения",
       "date": "2024-05-15",
-      "place": "123 Main Street",
-      "description": "Join us for a fun birthday celebration!"
+      "place": "123 Главная улица",
+      "description": "Присоединяйтесь к нам на веселое празднование дня рождения!"
     },
     {
       "id": 2,
-      "name": "Conference",
+      "name": "Конференция",
       "date": "2024-06-20",
-      "place": "Conference Center",
-      "description": "A conference for professionals in the tech industry."
+      "place": "Конференц-центр",
+      "description": "Конференция для профессионалов в сфере технологий."
     },
     {
       "id": 3,
-      "name": "Charity Gala",
+      "name": "Благотворительный Гала-вечер",
       "date": "2024-07-10",
-      "place": "Grand Ballroom",
-      "description": "Support a good cause and enjoy an elegant evening."
+      "place": "Большой зал",
+      "description": "Поддержите хорошее дело и насладитесь элегантным вечером."
     }
   ]
 }
