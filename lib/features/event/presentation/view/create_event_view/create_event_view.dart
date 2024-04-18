@@ -11,14 +11,19 @@ class CreateEventView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _nameController = TextEditingController();
+    final _dateController = TextEditingController();
+    final _placeController = TextEditingController();
+    final _infoDescriptionController = TextEditingController();
+
     return Scaffold(
       backgroundColor: AppColors.viewSecondBackgroundColor,
-      appBar: CustomAppBar(
+      appBar: const CustomAppBar(
         title: 'Новое мероприятие',
         buttonIcon: Icons.save,
         onButtonPressed: null,
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(
+      bottomNavigationBar: const CustomBottomNavigationBar(
         currentIndex: 2,
       ),
       body: SingleChildScrollView(
@@ -27,7 +32,12 @@ class CreateEventView extends StatelessWidget {
           child: Center(
             child: Column(
               children: [
-                EventCreateTopInfo(),
+                EventCreateTopInfo(
+                  nameController: _nameController,
+                  dateController: _dateController,
+                  placeController: _placeController,
+                  infoDescriptionController: _infoDescriptionController,
+                ),
                 SizedBox(height: 20),
                 EventCreateUsers(),
               ],

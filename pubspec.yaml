@@ -39,6 +39,7 @@ dependencies:
   equatable: ^2.0.0
   dartz: ^0.10.1
   dcdg: ^4.1.0
+  mysql1: ^0.20.0
 
 dev_dependencies:
   flutter_test:

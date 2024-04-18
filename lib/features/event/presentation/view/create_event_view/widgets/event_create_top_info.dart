@@ -4,15 +4,18 @@ import '../../../../../../core/constants/theme/colors.dart';
 import '../../../../../../core/constants/theme/fonts.dart';
 import '../../../../../../core/constants/widgets/container_box_decoration.dart';
 
-
-
 class EventCreateTopInfo extends StatelessWidget {
-  final _nameController = TextEditingController();
-  final _dateController = TextEditingController();
-  final _placeController = TextEditingController();
-  final _infoDescriptionController = TextEditingController();
+  final TextEditingController nameController;
+  final TextEditingController dateController;
+  final TextEditingController placeController;
+  final TextEditingController infoDescriptionController;
 
-  EventCreateTopInfo({super.key});
+  EventCreateTopInfo(
+      {super.key,
+      required this.nameController,
+      required this.dateController,
+      required this.placeController,
+      required this.infoDescriptionController});
 
   @override
   Widget build(BuildContext context) {
@@ -55,17 +58,17 @@ class EventCreateTopInfo extends StatelessWidget {
               children: [
                 CustomCreateEventTextField(
                   fieldHintText: 'Полное название',
-                  textController: _nameController,
+                  textController: nameController,
                 ),
                 Divider(color: Colors.grey.shade300, thickness: 1, height: 1),
                 CustomCreateEventTextField(
                   fieldHintText: 'Дата проведения',
-                  textController: _dateController,
+                  textController: dateController,
                 ),
                 Divider(color: Colors.grey.shade300, thickness: 1, height: 1),
                 CustomCreateEventTextField(
                   fieldHintText: 'Место проведения',
-                  textController: _placeController,
+                  textController: placeController,
                 ),
               ],
             ),
@@ -86,7 +89,7 @@ class EventCreateTopInfo extends StatelessWidget {
                   child: TextField(
                     maxLines: null,
                     keyboardType: TextInputType.multiline,
-                    controller: _infoDescriptionController,
+                    controller: infoDescriptionController,
                     decoration: const InputDecoration(
                       hintText: 'Описание',
                       border: InputBorder.none,
