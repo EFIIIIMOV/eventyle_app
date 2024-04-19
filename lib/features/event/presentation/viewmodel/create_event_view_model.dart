@@ -6,7 +6,7 @@ import '../../data/repositories/event_repository_impl.dart';
 import '../../domain/usecases/add_event.dart';
 
 class CreateEventViewModel extends ChangeNotifier {
-  final AddEventUseCase getEventUseCase = AddEventUseCase(
+  final AddEventUseCase addEventUseCase = AddEventUseCase(
     eventRepository: EventRepositoryImpl(
       eventRemoteDataSource: EventRemoteDataSourceImpl(),
     ),
@@ -23,7 +23,7 @@ class CreateEventViewModel extends ChangeNotifier {
   }) async {
     final EventEntity eventEntity = EventEntity(
         id: 0, name: name, date: date, place: place, description: description);
-    getEventUseCase.call(eventEntity);
-    //Navigator.pop(context);
+    addEventUseCase.call(eventEntity);
+    Navigator.pop(context);
   }
 }

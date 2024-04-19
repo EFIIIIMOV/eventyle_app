@@ -5,6 +5,7 @@ import '../../data/repositories/event_repository_impl.dart';
 import '../../domain/entities/event_entity.dart';
 import '../../domain/usecases/get_all_event.dart';
 
+
 class EventsListViewModel extends ChangeNotifier {
   final GetAllEventUseCase getAllEventUseCase = GetAllEventUseCase(
     eventRepository: EventRepositoryImpl(
