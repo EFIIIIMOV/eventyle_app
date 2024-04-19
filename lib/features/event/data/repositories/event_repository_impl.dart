@@ -15,4 +15,16 @@ class EventRepositoryImpl implements EventRepository {
         eventModels.map((eventModel) => eventModel as EventEntity).toList();
     return eventEntities;
   }
+
+  @override
+  Future<void> addEvent(EventEntity eventEntity) async {
+    final EventModel eventModel = EventModel(
+        id: eventEntity.id,
+        name: eventEntity.name,
+        date: eventEntity.date,
+        place: eventEntity.place,
+        description: eventEntity.description);
+    await eventRemoteDataSource.addEvent(eventModel);
+    return Future.value();
+  }
 }

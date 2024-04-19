@@ -2,16 +2,14 @@ import 'dart:convert';
 
 import 'package:eventyle_app/core/error/exception.dart';
 import 'package:eventyle_app/features/event/data/models/event_model.dart';
-import 'package:flutter/services.dart';
-import 'package:mysql1/mysql1.dart';
-import 'dart:convert' show utf8;
-import 'package:crypto/crypto.dart';
 
 import '../../../../core/mySQL/mySQL.dart';
 import '../../../../core/mySQL/refactorResult.dart';
 
 abstract class EventRemoteDataSource {
   Future<List<EventModel>> getAllEvents();
+
+  Future<void> addEvent(EventModel eventModel);
 }
 
 class EventRemoteDataSourceImpl implements EventRemoteDataSource {
@@ -31,6 +29,13 @@ class EventRemoteDataSourceImpl implements EventRemoteDataSource {
     }
   }
 
+  @override
+  Future<void> addEvent(EventModel eventModel) async {
+    print('addEvent() ${eventModel.name}');
+    await addDataFromDB(eventModel);
+    return Future.value();
+  }
+
   Future fetchDataFromDB() async {
     final connection = await MySQL().getConnection();
 
@@ -42,5 +47,52 @@ class EventRemoteDataSourceImpl implements EventRemoteDataSource {
     connection.close();
 
     return await refactorResult(result, 'events');
+  }
+
+  Future addDataFromDB(EventModel eventModel) async {
+    final connection = await MySQL().getConnection();
+
+    await Future.delayed(const Duration(microseconds: 1));
+
+    String formattedDate = formatDateToIso8601(eventModel.date);
+
+    print('formattedDate = ${formattedDate}');
+
+    // SQL-запрос для вставки нового события
+    String sql =
+        "INSERT INTO eventyle_app_test_db.event (name, date, place, description) VALUES (?, ?, ?, ?);";
+
+    // Выполнение запроса
+    var result = await connection.query(sql, [
+      eventModel.name,
+      formattedDate,
+      eventModel.place,
+      eventModel.description
+    ]);
+
+    await Future.delayed(const Duration(microseconds: 1));
+
+    connection.close();
+
+    // Проверка успешности операции
+    if (result == 1) {
+      print("Событие успешно добавлено в базу данных.");
+    } else {
+      print("Ошибка при добавлении события в базу данных.");
+    }
+  }
+
+  String formatDateToIso8601(String date) {
+    // Разделение строки даты на день, месяц и год
+    List<String> parts = date.split('.');
+    int day = int.parse(parts[0]);
+    int month = int.parse(parts[1]);
+    int year = int.parse(parts[2]);
+
+    // Создание объекта DateTime
+    DateTime dateTime = DateTime(year, month, day);
+
+    // Форматирование даты в строку в формате ISO 8601
+    return dateTime.toIso8601String().split('T').first;
   }
 }
