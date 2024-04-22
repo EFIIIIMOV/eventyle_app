@@ -10,7 +10,7 @@ import 'widgets/event_list_info.dart';
 import 'widgets/event_top_info.dart';
 
 class EventMainView extends StatelessWidget {
-  const EventMainView({Key? key}) : super(key: key);
+  const EventMainView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +42,9 @@ class EventMainView extends StatelessWidget {
                     ),
                     const SizedBox(height: 15),
                     EventListInfo(
-                      eventInfoEntity: viewModel.listEventInfo,
                       eventMainViewModel: viewModel,
                       eventName: eventEntity.name,
+                      event_id: eventEntity.event_id,
                     ),
                     const SizedBox(height: 30),
                   ],

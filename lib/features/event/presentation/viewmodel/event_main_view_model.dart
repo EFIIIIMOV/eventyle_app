@@ -19,16 +19,28 @@ class EventMainViewModel extends ChangeNotifier {
 
   Future<void> getListEventInfo(String idEvent) async {
     listEventInfo = await getAllEventInfoUseCase.call(idEvent);
-    print(listEventInfo[0]);
     notifyListeners();
   }
 
-  Future<void> onNewInfoButtonPressed(BuildContext context) async {
-    Navigator.pushNamed(context, '/eventInfoCreate');
+  Future<void> onNewInfoButtonPressed({
+    required BuildContext context,
+    required String event_id,
+  }) async {
+    print(event_id);
+    Navigator.pushNamed(
+      context,
+      '/eventInfoCreate',
+      arguments: {
+        'event_id': event_id,
+      },
+    );
   }
 
   Future<void> onInfoPressed(
-      BuildContext context, int index, String eventName) async {
+    BuildContext context,
+    int index,
+    String eventName,
+  ) async {
     Navigator.pushNamed(
       context,
       '/eventInfo',

@@ -4,10 +4,14 @@ import '../../../../../../core/constants/theme/colors.dart';
 import '../../../../../../core/constants/widgets/container_box_decoration.dart';
 
 class CreateEventInfo extends StatelessWidget {
-  final infoNameController = TextEditingController();
-  final infoDescriptionController = TextEditingController();
+  final TextEditingController infoNameController;
+  final TextEditingController infoDescriptionController;
 
-  CreateEventInfo({super.key});
+  const CreateEventInfo({
+    super.key,
+    required this.infoNameController,
+    required this.infoDescriptionController,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +38,7 @@ class CreateEventInfo extends StatelessWidget {
             //keyboardType: TextInputType.multiline,
             controller: infoDescriptionController,
             decoration: const InputDecoration(
-              hintText: 'Текст информации',
+              hintText: 'Описание',
               border: InputBorder.none,
             ),
           ),

@@ -8,6 +8,8 @@ import '../models/event_info_model.dart';
 
 abstract class EventInfoRemoteDataSource {
   Future<List<EventInfoModel>> getAllEventInfo(String idEvent);
+
+  Future<void> addEventInfo(EventInfoModel eventInfoModel);
 }
 
 class EventInfoRemoteDataSourceImpl implements EventInfoRemoteDataSource {
@@ -23,6 +25,22 @@ class EventInfoRemoteDataSourceImpl implements EventInfoRemoteDataSource {
           .map((event) => EventInfoModel.fromJson(event))
           .toList();
     } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<void> addEventInfo(EventInfoModel eventInfoModel) async {
+    final Map<String, dynamic> eventInfoData = eventInfoModel.toJson();
+    final response = await client.post(
+      Uri.parse('http://10.0.2.2:8000/events/info/create/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(eventInfoData),
+    );
+
+    if (response.statusCode != 200) {
       throw ServerException();
     }
   }
