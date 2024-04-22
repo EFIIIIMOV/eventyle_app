@@ -1,14 +1,14 @@
 import 'package:equatable/equatable.dart';
 
 class EventEntity extends Equatable {
-  final int id;
+  final String event_id;
   final String name;
-  final String date;
+  final DateTime date;
   final String place;
   final String description;
 
   const EventEntity({
-    required this.id,
+    required this.event_id,
     required this.name,
     required this.date,
     required this.place,
@@ -17,7 +17,7 @@ class EventEntity extends Equatable {
 
   @override
   List<Object?> get props => [
-        id,
+        event_id,
         name,
         date,
         place,

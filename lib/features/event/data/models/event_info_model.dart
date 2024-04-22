@@ -4,14 +4,16 @@ import '../../domain/entities/event_info_entity.dart';
 
 class EventInfoModel extends EventInfoEntity {
   const EventInfoModel({
-    required super.id,
+    required super.info_id,
+    required super.event_id,
     required super.name,
     required super.description,
   });
 
   factory EventInfoModel.fromJson(Map<String, dynamic> json) {
     return EventInfoModel(
-      id: json['id'] ?? '',
+      info_id: json['info_id'] ?? '',
+      event_id: json['event_id'] ?? '',
       name: json['name'] ?? '',
       description: json['description'] ?? '',
     );
@@ -19,7 +21,8 @@ class EventInfoModel extends EventInfoEntity {
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      'info_id': info_id,
+      'event_id': event_id,
       'name': name,
       'description': description,
     };

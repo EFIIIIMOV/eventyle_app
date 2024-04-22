@@ -2,7 +2,7 @@ import 'package:eventyle_app/features/event/domain/entities/event_entity.dart';
 
 class EventModel extends EventEntity {
   const EventModel({
-    required super.id,
+    required super.event_id,
     required super.name,
     required super.date,
     required super.place,
@@ -11,9 +11,9 @@ class EventModel extends EventEntity {
 
   factory EventModel.fromJson(Map<String, dynamic> json) {
     return EventModel(
-      id: json['id'] ?? '',
+      event_id: json['event_id'] ?? '',
       name: json['name'] ?? '',
-      date: json['date'] ?? '',
+      date: DateTime.parse(json['date']),
       place: json['place'] ?? '',
       description: json['description'] ?? '',
     );
@@ -21,7 +21,7 @@ class EventModel extends EventEntity {
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      'event_id': event_id,
       'name': name,
       'date': date,
       'place': place,

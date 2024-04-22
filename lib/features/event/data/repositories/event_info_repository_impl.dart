@@ -13,7 +13,7 @@ class EventInfoRepositoryImpl implements EventInfoRepository {
   EventInfoRepositoryImpl({required this.eventInfoRemoteDataSource});
 
   @override
-  Future<List<EventInfoEntity>> getAllEventInfo(int idEvent) async {
+  Future<List<EventInfoEntity>> getAllEventInfo(String idEvent) async {
     final eventInfoModels = await eventInfoRemoteDataSource.getAllEventInfo(idEvent);
     List<EventInfoEntity> eventInfoEntities = eventInfoModels
         .map((eventInfoModel) => eventInfoModel as EventInfoEntity)

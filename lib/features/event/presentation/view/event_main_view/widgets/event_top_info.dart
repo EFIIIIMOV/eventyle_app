@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/constants/widgets/container_box_decoration.dart';
+import '../../../../../../core/utils/datetime_parse_util.dart';
 
 class EventTopInfo extends StatelessWidget {
-  final String eventDate;
+  final DateTime eventDate;
   final String eventPlace;
   final String eventDescription;
 
@@ -40,7 +41,7 @@ class EventTopInfo extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Text(
-                          'Дата проведения:\n$eventDate',
+                          'Дата проведения:\n${dateTimeParseUtil(eventDate)}',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Text(

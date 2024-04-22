@@ -1,5 +1,6 @@
 import 'package:eventyle_app/features/event/domain/usecases/get_all_event.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import '/features/auth/presentation/view/sign_in_view.dart';
 import 'core/constants/theme/themeData.dart';
@@ -64,7 +65,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => ChatListViewModel()),
         ChangeNotifierProvider(create: (context) => ChatViewModel()),
       ],
+
       child: MaterialApp(
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate
+        ],
         theme: CustomThemeData,
         routes: {
           '/': (context) => SignInView(),

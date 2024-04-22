@@ -3,17 +3,19 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/constants/theme/colors.dart';
 import '../../../../../../core/constants/theme/fonts.dart';
 import '../../../../../../core/constants/widgets/container_box_decoration.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
-class EventCreateTopInfo extends StatelessWidget {
+import 'event_select_date.dart';
+
+class EventCreateMainInfo extends StatelessWidget {
   final TextEditingController nameController;
-  final TextEditingController dateController;
   final TextEditingController placeController;
   final TextEditingController infoDescriptionController;
 
-  EventCreateTopInfo(
+  EventCreateMainInfo(
       {super.key,
       required this.nameController,
-      required this.dateController,
       required this.placeController,
       required this.infoDescriptionController});
 
@@ -22,34 +24,6 @@ class EventCreateTopInfo extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(8.0),
-          child: Image.asset(
-            'assets/images/test_image.png',
-            width: 150,
-            height: 150,
-            fit: BoxFit.cover,
-          ),
-        ),
-        const SizedBox(height: 15),
-        InkWell(
-          onTap: () {},
-          child: Container(
-            decoration: const BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  color: AppColors.commonTextColor,
-                  width: 1.0,
-                ),
-              ),
-            ),
-            child: const Text(
-              'Выбрать фотографию',
-              style: AppFonts.inkWellButtonTextStyle,
-            ),
-          ),
-        ),
-        const SizedBox(height: 20),
         Container(
           decoration: CustomContainerBoxDecoration.customDecoration,
           child: Padding(
@@ -62,11 +36,6 @@ class EventCreateTopInfo extends StatelessWidget {
                 ),
                 Divider(color: Colors.grey.shade300, thickness: 1, height: 1),
                 CustomCreateEventTextField(
-                  fieldHintText: 'Дата проведения',
-                  textController: dateController,
-                ),
-                Divider(color: Colors.grey.shade300, thickness: 1, height: 1),
-                CustomCreateEventTextField(
                   fieldHintText: 'Место проведения',
                   textController: placeController,
                 ),
@@ -74,7 +43,7 @@ class EventCreateTopInfo extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 15),
+        SizedBox(height: 20),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 16),
           decoration: CustomContainerBoxDecoration.customDecoration,

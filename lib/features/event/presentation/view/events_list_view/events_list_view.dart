@@ -49,9 +49,8 @@ class _EventsListViewState extends State<EventsListView> {
                 return GestureDetector(
                   onTap: () => viewModel.onEventPressed(context, index),
                   child: ListTileCard(
-                    eventTitle: viewModel.listEvents[index].name,
-                    eventDate: viewModel.listEvents[index].date,
-                  ),
+                      eventTitle: viewModel.listEvents[index].name,
+                      eventDate: viewModel.listEvents[index].date),
                 );
               },
             );

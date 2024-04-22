@@ -17,8 +17,9 @@ class EventMainViewModel extends ChangeNotifier {
 
   List<EventInfoEntity> listEventInfo = [];
 
-  Future<void> getListEventInfo(int idEvent) async {
+  Future<void> getListEventInfo(String idEvent) async {
     listEventInfo = await getAllEventInfoUseCase.call(idEvent);
+    print(listEventInfo[0]);
     notifyListeners();
   }
 

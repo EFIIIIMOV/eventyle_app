@@ -19,7 +19,7 @@ class EventRepositoryImpl implements EventRepository {
   @override
   Future<void> addEvent(EventEntity eventEntity) async {
     final EventModel eventModel = EventModel(
-        id: eventEntity.id,
+        event_id: eventEntity.event_id,
         name: eventEntity.name,
         date: eventEntity.date,
         place: eventEntity.place,

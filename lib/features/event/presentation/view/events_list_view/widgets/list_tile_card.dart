@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../../core/utils/datetime_parse_util.dart';
+
 class ListTileCard extends StatelessWidget {
   final String eventTitle;
-  final String eventDate;
+  final DateTime eventDate;
 
   const ListTileCard(
       {super.key, required this.eventTitle, required this.eventDate});
@@ -31,7 +33,7 @@ class ListTileCard extends StatelessWidget {
             ),
           ),
           title: Text(eventTitle),
-          subtitle: Text(eventDate),
+          subtitle: Text(dateTimeParseUtil(eventDate)),
         ),
       ),
     );

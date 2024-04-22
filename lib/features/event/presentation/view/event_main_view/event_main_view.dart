@@ -27,7 +27,7 @@ class EventMainView extends StatelessWidget {
         onButtonPressed: () => viewModel.onEditEventButtonPressed(context),
       ),
       body: FutureBuilder(
-        future: viewModel.getListEventInfo(eventEntity.id),
+        future: viewModel.getListEventInfo(eventEntity.event_id),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             return SingleChildScrollView(
