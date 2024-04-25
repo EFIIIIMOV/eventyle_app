@@ -24,7 +24,8 @@ class EventListInfo extends StatelessWidget {
         children: [
           ListTile(
             onTap: () => eventMainViewModel.onNewInfoButtonPressed(
-              context: context, event_id: event_id,
+              context: context,
+              event_id: event_id,
             ),
             leading: const Icon(Icons.add, color: Colors.blue),
             title: const Text('Добавить информацию',
