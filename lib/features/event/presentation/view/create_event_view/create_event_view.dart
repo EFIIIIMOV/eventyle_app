@@ -75,11 +75,18 @@ class _CreateEventViewState extends State<CreateEventView> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Center(
             child: Column(
               children: [
-                EventSelectImage(),
+                Consumer<CreateEventViewModel>(
+                  builder: (context, viewModel, child) {
+                    return EventSelectImage(
+                      selectedImage: viewModel.eventSelectedImage,
+                      onTap: () => viewModel.updateImageField(),
+                    );
+                  },
+                ),
                 SizedBox(height: 30),
                 Consumer<CreateEventViewModel>(
                   builder: (context, viewModel, child) {

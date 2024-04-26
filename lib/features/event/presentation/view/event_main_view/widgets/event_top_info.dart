@@ -44,7 +44,6 @@ class EventTopInfo extends StatelessWidget {
                             width: 100,
                             child: Transform.scale(
                               scale: 0.5,
-                              // Измените это значение, чтобы изменить размер индикатора
                               child: const CircularProgressIndicator(
                                 valueColor: AlwaysStoppedAnimation<Color>(
                                     Colors.black26),

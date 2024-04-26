@@ -38,11 +38,15 @@ class ListTileCard extends StatelessWidget {
                   'http://10.0.2.2:8000/events/image/image_id/${eventId.replaceAll('-', '')}'),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const SizedBox(
+                  return SizedBox(
                     height: 50,
                     width: 50,
-                    child: CircularProgressIndicator(
-                      color: Colors.black26,
+                    child: Transform.scale(
+                      scale: 0.5,
+                      child: const CircularProgressIndicator(
+                        valueColor:
+                            AlwaysStoppedAnimation<Color>(Colors.black26),
+                      ),
                     ),
                   );
                 } else if (snapshot.hasData) {
