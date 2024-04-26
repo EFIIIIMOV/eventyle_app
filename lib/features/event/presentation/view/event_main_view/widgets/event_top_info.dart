@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../core/constants/widgets/container_box_decoration.dart';
 import '../../../../../../core/utils/datetime_parse_util.dart';
+import 'package:http/http.dart' as http;
+import 'dart:ui' as ui;
 
 class EventTopInfo extends StatelessWidget {
+  final String eventId;
   final DateTime eventDate;
   final String eventPlace;
   final String eventDescription;
@@ -12,10 +15,12 @@ class EventTopInfo extends StatelessWidget {
       {super.key,
       required this.eventDate,
       required this.eventPlace,
-      required this.eventDescription});
+      required this.eventDescription,
+      required this.eventId});
 
   @override
   Widget build(BuildContext context) {
+    print(eventId);
     return Container(
       decoration: CustomContainerBoxDecoration.customDecoration,
       child: Padding(
@@ -28,10 +33,32 @@ class EventTopInfo extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
-                    child: Image.asset(
-                      'assets/images/test_image.png',
-                      width: 100,
-                      height: 100,
+                    child: FutureBuilder<Widget>(
+                      future: _fetchImage(
+                          'http://10.0.2.2:8000/events/image/image_id/${eventId.replaceAll('-', '')}'),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return SizedBox(
+                            height: 100,
+                            width: 100,
+                            child: Transform.scale(
+                              scale: 0.5,
+                              // Измените это значение, чтобы изменить размер индикатора
+                              child: const CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                    Colors.black26),
+                              ),
+                            ),
+                          );
+                        } else if (snapshot.hasData) {
+                          return SizedBox(height: 100, child: snapshot.data!);
+                        } else {
+                          return const SizedBox(
+                            height: 100,
+                          );
+                        }
+                      },
                     ),
                   ),
                   const SizedBox(width: 16),
@@ -42,11 +69,11 @@ class EventTopInfo extends StatelessWidget {
                       children: [
                         Text(
                           'Дата проведения:\n${dateTimeParseUtil(eventDate)}',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Text(
                           'Место проведения:\n$eventPlace',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -64,6 +91,35 @@ class EventTopInfo extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+Future<Widget> _fetchImage(String imageUrl) async {
+  final response = await http.get(Uri.parse(imageUrl));
+  if (response.statusCode == 200) {
+    try {
+      await ui.instantiateImageCodec(response.bodyBytes);
+      return Image(
+        image: MemoryImage(response.bodyBytes),
+        width: 100,
+        height: 100,
+        fit: BoxFit.cover,
+      );
+    } catch (_) {
+      return Image.asset(
+        'assets/images/image_default.png',
+        width: 100,
+        height: 100,
+        fit: BoxFit.cover,
+      );
+    }
+  } else {
+    return Image.asset(
+      'assets/images/image_default.png',
+      width: 100,
+      height: 100,
+      fit: BoxFit.cover,
     );
   }
 }

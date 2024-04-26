@@ -39,7 +39,7 @@ class _EventsListViewState extends State<EventsListView> {
       body: RefreshIndicator(
         color: Colors.black,
         onRefresh: () async {
-          await context.read<EventsListViewModel>().getListEvents();
+          await viewModel.getListEvents();
         },
         child: Consumer<EventsListViewModel>(
           builder: (context, viewModel, child) {

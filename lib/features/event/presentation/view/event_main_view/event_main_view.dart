@@ -32,13 +32,14 @@ class EventMainView extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             return SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   children: [
                     EventTopInfo(
                       eventDate: eventEntity.date,
                       eventPlace: eventEntity.place,
                       eventDescription: eventEntity.description,
+                      eventId: eventEntity.event_id,
                     ),
                     const SizedBox(height: 15),
                     EventListInfo(

@@ -65,11 +65,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => ChatListViewModel()),
         ChangeNotifierProvider(create: (context) => ChatViewModel()),
       ],
-
       child: MaterialApp(
-        localizationsDelegates: [
-          GlobalMaterialLocalizations.delegate
-        ],
+        //debugShowMaterialGrid: true,
+        localizationsDelegates: [GlobalMaterialLocalizations.delegate],
         theme: CustomThemeData,
         routes: {
           '/': (context) => SignInView(),
