@@ -13,6 +13,7 @@ abstract class EventImageRemoteDataSource {
 class EventImageRemoteDataSourceImpl implements EventImageRemoteDataSource {
   final http.Client client = http.Client();
 
+
   @override
   Future<void> addImageEvent(EventImageModel eventImageModel) async {
     final Map<String, dynamic> eventImageData = eventImageModel.toJson();
