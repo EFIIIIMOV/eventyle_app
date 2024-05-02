@@ -4,9 +4,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import '/features/auth/presentation/view/sign_in_view.dart';
 import 'core/constants/theme/themeData.dart';
-import 'features/auth/presentation/view/sign_up_view.dart';
+import 'features/auth/presentation/view/sign_up_auth_info_view.dart';
+import 'features/auth/presentation/view/sign_up_user_info_view.dart';
 import 'features/auth/presentation/viewmodel/sign_in_view_model.dart';
-import 'features/auth/presentation/viewmodel/sign_up_view_model.dart';
+import 'features/auth/presentation/viewmodel/sign_up_auth_info_view_model.dart';
+import 'features/auth/presentation/viewmodel/sign_up_user_info_view_model.dart';
 import 'features/chat/presentation/view/chat_create_view/chat_create_view.dart';
 import 'features/chat/presentation/view/chat_list_view/chat_list_view.dart';
 import 'features/chat/presentation/view/chat_view/chat_view.dart';
@@ -46,7 +48,8 @@ class MyApp extends StatelessWidget {
       providers: [
         //AUTH
         ChangeNotifierProvider(create: (context) => SignInViewModel()),
-        ChangeNotifierProvider(create: (context) => SignUpViewModel()),
+        ChangeNotifierProvider(create: (context) => SignUpAuthInfoViewModel()),
+        ChangeNotifierProvider(create: (context) => SignUpUserInfoViewModel()),
 
         //EVENT
         ChangeNotifierProvider(create: (context) => CreateEventInfoViewModel()),
@@ -71,7 +74,8 @@ class MyApp extends StatelessWidget {
         theme: CustomThemeData,
         routes: {
           '/': (context) => SignInView(),
-          '/signUp': (context) => SignUpView(),
+          '/signUp': (context) => SignAuthInfoUpView(),
+          '/signUpUserInfo': (context) => SignUpUserInfoView(),
           '/events': (context) => EventsListView(),
           '/eventMain': (context) => EventMainView(),
           '/eventCreate': (context) => CreateEventView(),

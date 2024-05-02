@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 import '../../../../core/constants/theme/colors.dart';
 import '../../../../core/constants/theme/fonts.dart';
 import '../../../../core/constants/widgets/app_bar_widget.dart';
-import '../viewmodel/sign_up_view_model.dart';
+import '../viewmodel/sign_up_auth_info_view_model.dart';
 
-class SignUpView extends StatelessWidget {
-  SignUpView({super.key});
+class SignAuthInfoUpView extends StatelessWidget {
+  SignAuthInfoUpView({super.key});
 
   final _loginController = TextEditingController();
   final _passwordControllerFirst = TextEditingController();
@@ -18,7 +18,7 @@ class SignUpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.read<SignUpViewModel>();
+    final viewModel = context.read<SignUpAuthInfoViewModel>();
 
     return Scaffold(
       backgroundColor: AppColors.viewBackgroundColor,
@@ -49,8 +49,19 @@ class SignUpView extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             SignInUpButton(
-              onPressed: () => viewModel.onSignUpButtonPressed(context),
-              text: "Зарегистрироваться",
+              onPressed: () => _passwordControllerFirst.text ==
+                      _passwordControllerSecond.text
+                  ? viewModel.onSignUpNextButtonPressed(
+                      context: context,
+                      email: _loginController.text,
+                      password: _passwordControllerFirst.text,
+                    )
+                  : ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Пароли не совпадают"),
+                      ),
+                    ),
+              text: "Далее",
             ),
             const SizedBox(height: 15),
             SignInUpTextButton(

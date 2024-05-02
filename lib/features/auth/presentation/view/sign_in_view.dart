@@ -39,7 +39,11 @@ class SignInView extends StatelessWidget {
                   controller: _passwordController, hintText: "Пароль"),
               const SizedBox(height: 30),
               SignInUpButton(
-                onPressed: () => viewModel.onSignInButtonPressed(context),
+                onPressed: () => viewModel.onSignInButtonPressed(
+                  context: context,
+                  email: _loginController.text,
+                  password: _passwordController.text,
+                ),
                 text: "Вход",
               ),
               const SizedBox(height: 15),
