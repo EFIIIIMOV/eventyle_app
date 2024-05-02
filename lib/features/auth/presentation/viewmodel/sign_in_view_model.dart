@@ -25,7 +25,7 @@ class SignInViewModel extends ChangeNotifier {
       password: password,
     );
     await loginUserUseCase.call(userLoginEntity);
-    //Navigator.pushReplacementNamed(context, '/events');
+    Navigator.pushReplacementNamed(context, '/events');
   }
 
   Future<void> onForgotTextButtonPressed(BuildContext context) async {

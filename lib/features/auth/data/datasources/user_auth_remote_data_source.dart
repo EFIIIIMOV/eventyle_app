@@ -7,6 +7,8 @@ import 'package:eventyle_app/features/auth/data/models/user_register_model.dart'
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../../core/utils/secure_storage.dart';
+
 abstract class UserAuthRemoteDataSource {
   Future<void> registerUser(UserRegisterModel userRegisterModel);
 
@@ -44,6 +46,13 @@ class UserAuthRemoteDataSourceImpl extends UserAuthRemoteDataSource {
     if (response.statusCode != 200) {
       throw ServerException();
     }
-    print(response.body);
+    final Map<String, dynamic> responseBody = jsonDecode(response.body);
+    final String accessToken = responseBody['access'];
+    final String refreshToken = responseBody['refresh'];
+
+    await saveTokens(accessToken, refreshToken);
+
+    print('getAccessToken = ${await getAccessToken()}');
+    print('getRefreshToken = ${await getRefreshToken()}');
   }
 }

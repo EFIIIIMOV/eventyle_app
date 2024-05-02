@@ -72,6 +72,7 @@ class SignUpUserInfoViewModel extends ChangeNotifier {
       aboutUser: aboutUser,
     );
     await registerUserUseCase.call(userRegisterEntity);
-    Navigator.pushReplacementNamed(context, '/');
+    Navigator.pushNamedAndRemoveUntil(
+        context, '/', (Route<dynamic> route) => false);
   }
 }
