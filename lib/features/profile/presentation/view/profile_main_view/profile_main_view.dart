@@ -8,12 +8,25 @@ import '../../../../../core/constants/widgets/bottom_bar_widget.dart';
 import '../../viewmodel/profile_main_view_model.dart';
 import 'widgets/profile_post_list.dart';
 
-class ProfileMainView extends StatelessWidget {
+class ProfileMainView extends StatefulWidget {
   const ProfileMainView({super.key});
 
   @override
+  State<ProfileMainView> createState() => _ProfileMainViewState();
+}
+
+class _ProfileMainViewState extends State<ProfileMainView> {
+  late final ProfileMainViewModel viewModel;
+
+  @override
+  void didChangeDependencies() {
+    viewModel = context.read<ProfileMainViewModel>();
+    viewModel.getProfileInfo();
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final viewModel = context.read<ProfileMainViewModel>();
     return Scaffold(
       backgroundColor: AppColors.viewSecondBackgroundColor,
       appBar: CustomAppBar(
@@ -29,7 +42,23 @@ class ProfileMainView extends StatelessWidget {
           child: Center(
             child: Column(
               children: [
-                ProfileTopInfo(),
+                Consumer<ProfileMainViewModel>(
+                  builder: (context, viewModel, child) {
+                    return viewModel.profileInfoEntity == null
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.black,
+                            ),
+                          )
+                        : ProfileTopInfo(
+                            name: viewModel.profileInfoEntity!.name,
+                            surname: viewModel.profileInfoEntity!.surname,
+                            role: viewModel.profileInfoEntity!.role,
+                            description:
+                                viewModel.profileInfoEntity!.description,
+                          );
+                  },
+                ),
                 SizedBox(height: 20),
                 ProfilePostList(
                   onTap: () => viewModel.onNewPostButtonPressed(context),

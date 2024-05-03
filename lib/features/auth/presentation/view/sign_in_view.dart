@@ -12,8 +12,8 @@ import '../viewmodel/sign_in_view_model.dart';
 class SignInView extends StatelessWidget {
   SignInView({super.key});
 
-  final _loginController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final _loginController = TextEditingController(text: 'user@mail.ru');
+  final _passwordController = TextEditingController(text: '1234');
 
   @override
   Widget build(BuildContext context) {

@@ -27,9 +27,9 @@ class SignUpUserInfoViewModel extends ChangeNotifier {
 
   List<String> profileSpecializations = <String>[
     'Укажите специальность',
-    'Первый вариант',
-    'Второй вариант',
-    'Третий вариант',
+    'Организатор',
+    'Декоратор',
+    'Кейтеринг',
   ];
 
   void updateImageField() async {

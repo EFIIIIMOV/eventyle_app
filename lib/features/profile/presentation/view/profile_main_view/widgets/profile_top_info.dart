@@ -3,11 +3,18 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/constants/widgets/container_box_decoration.dart';
 
 class ProfileTopInfo extends StatelessWidget {
-  final String nameSurname = 'Имя Фамилия';
-  final String speciality = 'Специальность';
-  final String description = 'data';
+  final String name;
+  final String surname;
+  final String role;
+  final String description;
 
-  const ProfileTopInfo({super.key});
+  const ProfileTopInfo({
+    super.key,
+    required this.name,
+    required this.surname,
+    required this.role,
+    required this.description,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +36,12 @@ class ProfileTopInfo extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    nameSurname,
+                    '$name $surname',
                     style: TextStyle(fontSize: 25),
                   ),
                   SizedBox(height: 10),
                   Text(
-                    speciality,
+                    role,
                     style: TextStyle(fontSize: 16),
                   ),
                 ],
@@ -45,7 +52,6 @@ class ProfileTopInfo extends StatelessWidget {
         SizedBox(height: 20),
         Container(
           decoration: CustomContainerBoxDecoration.customDecoration,
-          height: 150,
           child: Padding(
             padding: EdgeInsets.all(16),
             child: Column(
@@ -57,9 +63,8 @@ class ProfileTopInfo extends StatelessWidget {
                 ),
                 Divider(color: Colors.grey.shade300, thickness: 1, height: 10),
                 Text(
+                  maxLines: 5,
                   description,
-                  maxLines: 4,
-                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(fontSize: 14),
                 ),
               ],
