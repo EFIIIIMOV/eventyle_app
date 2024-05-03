@@ -5,9 +5,10 @@ import 'package:eventyle_app/core/mySQL/mySQL.dart';
 import 'package:eventyle_app/features/auth/data/models/user_login_model.dart';
 import 'package:eventyle_app/features/auth/data/models/user_register_model.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../../core/utils/secure_storage.dart';
+import '../../../../core/utils/token_util.dart';
 
 abstract class UserAuthRemoteDataSource {
   Future<void> registerUser(UserRegisterModel userRegisterModel);
@@ -17,6 +18,10 @@ abstract class UserAuthRemoteDataSource {
 
 class UserAuthRemoteDataSourceImpl extends UserAuthRemoteDataSource {
   final http.Client client = http.Client();
+  final TokenUtil tokenUtil = TokenUtil(
+    flutterSecureStorage: FlutterSecureStorage(),
+    client: http.Client(),
+  );
 
   @override
   Future<void> registerUser(UserRegisterModel userRegisterModel) async {
@@ -46,13 +51,12 @@ class UserAuthRemoteDataSourceImpl extends UserAuthRemoteDataSource {
     if (response.statusCode != 200) {
       throw ServerException();
     }
-    final Map<String, dynamic> responseBody = jsonDecode(response.body);
-    final String accessToken = responseBody['access'];
-    final String refreshToken = responseBody['refresh'];
+    await tokenUtil.saveTokens(
+      jsonDecode(response.body)['access'],
+      jsonDecode(response.body)['refresh'],
+    );
 
-    await saveTokens(accessToken, refreshToken);
-
-    print('getAccessToken = ${await getAccessToken()}');
-    print('getRefreshToken = ${await getRefreshToken()}');
+    print('getAccessToken = ${await tokenUtil.getAccessToken()}');
+    print('getRefreshToken = ${await tokenUtil.getRefreshToken()}');
   }
 }

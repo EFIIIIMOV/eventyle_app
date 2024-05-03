@@ -23,7 +23,7 @@ class EventSelectImage extends StatelessWidget {
         borderRadius: BorderRadius.circular(8.0),
         child: Image(
           image: selectedImage == null
-              ? const AssetImage('assets/images/test_image.png')
+              ? const AssetImage('assets/images/image_default.png')
                   as ImageProvider<Object>
               : FileImage(selectedImage!),
           width: 150,

@@ -1,10 +1,11 @@
 import 'dart:convert';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:eventyle_app/core/error/exception.dart';
 import 'package:eventyle_app/features/event/data/models/event_model.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../core/utils/secure_storage.dart';
+import '../../../../core/utils/token_util.dart';
 
 abstract class EventRemoteDataSource {
   Future<List<EventModel>> getAllEvents();
@@ -14,36 +15,28 @@ abstract class EventRemoteDataSource {
 
 class EventRemoteDataSourceImpl implements EventRemoteDataSource {
   final http.Client client = http.Client();
+  final TokenUtil tokenUtil = TokenUtil(
+    flutterSecureStorage: FlutterSecureStorage(),
+    client: http.Client(),
+  );
 
   @override
   Future<List<EventModel>> getAllEvents() async {
     final response = await client.get(
       Uri.parse('http://10.0.2.2:8000/events/'),
       headers: <String, String>{
-        'Authorization': 'Bearer ${await getAccessToken()}',
+        'Authorization': 'Bearer ${await tokenUtil.getAccessToken()}',
         'Content-Type': 'application/json; charset=UTF-8',
       },
     );
-    if (response.statusCode == 401) {
-      final response = await client.post(
-        Uri.parse('http://10.0.2.2:8000/auth/token/refresh/'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode({"refresh": "${await getRefreshToken()}"}),
-      );
-      final Map<String, dynamic> responseBody = jsonDecode(response.body);
-      final String accessToken = responseBody['access'];
-      final String refreshToken = responseBody['refresh'];
-
-      await saveTokens(accessToken, refreshToken);
-
-      return await getAllEvents();
-    } else if (response.statusCode == 200) {
+    if (response.statusCode == 200) {
       final events = json.decode(utf8.decode(response.bodyBytes));
       return (events['events'] as List)
           .map((event) => EventModel.fromJson(event))
           .toList();
+    } else if (response.statusCode == 401) {
+      tokenUtil.updateAccessToken();
+      return await getAllEvents();
     } else {
       throw ServerException();
     }
@@ -56,13 +49,17 @@ class EventRemoteDataSourceImpl implements EventRemoteDataSource {
     final response = await client.post(
       Uri.parse('http://10.0.2.2:8000/events/create/'),
       headers: <String, String>{
-        'Authorization': 'Bearer ${await getAccessToken()}',
+        'Authorization': 'Bearer ${await tokenUtil.getAccessToken()}',
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(eventData),
     );
-
-    if (response.statusCode != 200) {
+    if (response.statusCode == 200) {
+      return;
+    } else if (response.statusCode == 401) {
+      tokenUtil.updateAccessToken();
+      return await addEvent(eventModel);
+    } else {
       throw ServerException();
     }
   }
