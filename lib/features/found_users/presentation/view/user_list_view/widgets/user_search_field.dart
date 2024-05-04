@@ -3,9 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
 class UserSearchField extends StatelessWidget {
-  final _controller = TextEditingController();
+  final TextEditingController searchQuery;
+  final void Function()? onPressed;
 
-  UserSearchField({super.key});
+  UserSearchField({
+    super.key,
+    required this.searchQuery,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +33,7 @@ class UserSearchField extends StatelessWidget {
                   border: Border.all(color: Colors.black),
                 ),
                 child: TextField(
-                  controller: _controller,
+                  controller: searchQuery,
                   decoration: const InputDecoration(
                     contentPadding: EdgeInsets.symmetric(horizontal: 16),
                     hintText: 'Поиск',
@@ -40,7 +45,7 @@ class UserSearchField extends StatelessWidget {
           ),
           IconButton(
             padding: EdgeInsets.only(right: 15),
-            onPressed: () {},
+            onPressed: onPressed,
             icon: const Icon(
               Icons.search,
               color: Colors.black,

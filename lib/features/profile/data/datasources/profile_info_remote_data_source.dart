@@ -37,13 +37,5 @@ class ProfileInfoRemoteDataSourceImpl implements ProfileInfoRemoteDataSource {
     } else {
       throw ServerException();
     }
-    // ProfileInfoModel profileInfoModel = ProfileInfoModel(
-    //   user_id: 'user_id',
-    //   role: 'role',
-    //   name: 'name',
-    //   surname: 'surname',
-    //   description: 'description',
-    // );
-    // return profileInfoModel;
   }
 }

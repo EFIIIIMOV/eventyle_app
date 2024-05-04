@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/constants/widgets/container_box_decoration.dart';
+import 'package:http/http.dart' as http;
+import 'dart:ui' as ui;
+
+import '../../../../../../core/utils/fetch_image_util.dart';
 
 class ProfileTopInfo extends StatelessWidget {
+  final String user_id;
   final String name;
   final String surname;
   final String role;
@@ -10,6 +15,7 @@ class ProfileTopInfo extends StatelessWidget {
 
   const ProfileTopInfo({
     super.key,
+    required this.user_id,
     required this.name,
     required this.surname,
     required this.role,
@@ -24,10 +30,34 @@ class ProfileTopInfo extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(150.0),
-              child: Image.asset(
-                'assets/images/test_image.png',
-                width: 130,
-                height: 130,
+              child: FutureBuilder<Widget>(
+                future: fetchImage(
+                    imageUrl:
+                        'http://10.0.2.2:8000/user/profile/image/?user_id=${user_id.replaceAll('-', '')}',
+                    boxSize: 130),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return SizedBox(
+                      height: 130,
+                      width: 130,
+                      child: Transform.scale(
+                        scale: 0.5,
+                        child: const CircularProgressIndicator(
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.black26),
+                        ),
+                      ),
+                    );
+                  } else if (snapshot.hasData) {
+                    return SizedBox(
+                        height: 130, width: 130, child: snapshot.data!);
+                  } else {
+                    return const SizedBox(
+                      height: 130,
+                      width: 130,
+                    );
+                  }
+                },
               ),
             ),
             const SizedBox(width: 16),

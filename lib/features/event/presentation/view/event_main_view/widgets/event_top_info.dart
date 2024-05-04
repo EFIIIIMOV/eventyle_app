@@ -5,6 +5,8 @@ import '../../../../../../core/utils/datetime_parse_util.dart';
 import 'package:http/http.dart' as http;
 import 'dart:ui' as ui;
 
+import '../../../../../../core/utils/fetch_image_util.dart';
+
 class EventTopInfo extends StatelessWidget {
   final String eventId;
   final DateTime eventDate;
@@ -34,8 +36,11 @@ class EventTopInfo extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: FutureBuilder<Widget>(
-                      future: _fetchImage(
-                          'http://10.0.2.2:8000/events/image/image_id/${eventId.replaceAll('-', '')}'),
+                      future: fetchImage(
+                        imageUrl:
+                            'http://10.0.2.2:8000/events/image/image_id/${eventId.replaceAll('-', '')}',
+                        boxSize: 100,
+                      ),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
@@ -94,31 +99,31 @@ class EventTopInfo extends StatelessWidget {
   }
 }
 
-Future<Widget> _fetchImage(String imageUrl) async {
-  final response = await http.get(Uri.parse(imageUrl));
-  if (response.statusCode == 200) {
-    try {
-      await ui.instantiateImageCodec(response.bodyBytes);
-      return Image(
-        image: MemoryImage(response.bodyBytes),
-        width: 100,
-        height: 100,
-        fit: BoxFit.cover,
-      );
-    } catch (_) {
-      return Image.asset(
-        'assets/images/image_default.png',
-        width: 100,
-        height: 100,
-        fit: BoxFit.cover,
-      );
-    }
-  } else {
-    return Image.asset(
-      'assets/images/image_default.png',
-      width: 100,
-      height: 100,
-      fit: BoxFit.cover,
-    );
-  }
-}
+// Future<Widget> _fetchImage(String imageUrl) async {
+//   final response = await http.get(Uri.parse(imageUrl));
+//   if (response.statusCode == 200) {
+//     try {
+//       await ui.instantiateImageCodec(response.bodyBytes);
+//       return Image(
+//         image: MemoryImage(response.bodyBytes),
+//         width: 100,
+//         height: 100,
+//         fit: BoxFit.cover,
+//       );
+//     } catch (_) {
+//       return Image.asset(
+//         'assets/images/image_default.png',
+//         width: 100,
+//         height: 100,
+//         fit: BoxFit.cover,
+//       );
+//     }
+//   } else {
+//     return Image.asset(
+//       'assets/images/image_default.png',
+//       width: 100,
+//       height: 100,
+//       fit: BoxFit.cover,
+//     );
+//   }
+// }

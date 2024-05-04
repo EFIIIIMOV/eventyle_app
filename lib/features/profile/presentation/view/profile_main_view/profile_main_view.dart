@@ -51,6 +51,7 @@ class _ProfileMainViewState extends State<ProfileMainView> {
                             ),
                           )
                         : ProfileTopInfo(
+                            user_id: viewModel.profileInfoEntity!.user_id,
                             name: viewModel.profileInfoEntity!.name,
                             surname: viewModel.profileInfoEntity!.surname,
                             role: viewModel.profileInfoEntity!.role,
