@@ -49,6 +49,7 @@ dependencies:
   path_provider: ^2.0.0
   image_picker:
   flutter_secure_storage:
+  sliding_up_panel:
 
 dev_dependencies:
   flutter_test:

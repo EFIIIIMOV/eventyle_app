@@ -45,8 +45,9 @@ class _CreateEventViewState extends State<CreateEventView> {
   }
 
   @override
-  void didChangeDependencies() {
+  void didChangeDependencies() async {
     viewModel = context.read<CreateEventViewModel>();
+    await viewModel.getUsers();
     super.didChangeDependencies();
   }
 
@@ -69,9 +70,6 @@ class _CreateEventViewState extends State<CreateEventView> {
                   content: Text("Дата не указана"),
                 ),
               ),
-      ),
-      bottomNavigationBar: const CustomBottomNavigationBar(
-        currentIndex: 2,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -103,7 +101,16 @@ class _CreateEventViewState extends State<CreateEventView> {
                   infoDescriptionController: _infoDescriptionController,
                 ),
                 SizedBox(height: 20),
-                EventCreateUsers(),
+                Consumer<CreateEventViewModel>(
+                  builder: (context, viewModel, child) {
+                    return EventCreateUsers(
+                      userList: viewModel.userList,
+                      selectedUserList: viewModel.selectedUserList,
+                      onTapDoneSelectUsersButton: viewModel.getSelectedUsers,
+                      toggleUserSelected: viewModel.toggleUserSelected,
+                    );
+                  },
+                )
               ],
             ),
           ),
@@ -112,45 +119,3 @@ class _CreateEventViewState extends State<CreateEventView> {
     );
   }
 }
-
-//
-//
-// class CreateEventView extends StatelessWidget {
-//   const CreateEventView({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final viewModel = context.read<CreateEventViewModel>();
-//
-//     return Scaffold(
-//       backgroundColor: AppColors.viewSecondBackgroundColor,
-//       appBar: CustomAppBar(
-//         title: 'Новое мероприятие',
-//         buttonIcon: Icons.save,
-//         onButtonPressed: () => viewModel.onSaveNewEventButtonPressed(context),
-//       ),
-//       bottomNavigationBar: const CustomBottomNavigationBar(
-//         currentIndex: 2,
-//       ),
-//       body: SingleChildScrollView(
-//         child: Padding(
-//           padding: EdgeInsets.all(16),
-//           child: Center(
-//             child: Column(
-//               children: [
-//                 EventCreateTopInfo(
-//                   nameController: _nameController,
-//                   dateController: _dateController,
-//                   placeController: _placeController,
-//                   infoDescriptionController: _infoDescriptionController,
-//                 ),
-//                 SizedBox(height: 20),
-//                 EventCreateUsers(),
-//               ],
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }

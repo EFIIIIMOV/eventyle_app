@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../core/constants/widgets/container_box_decoration.dart';
+import '../../../../../../core/constants/theme/container_box_decoration.dart';
 import 'package:http/http.dart' as http;
 import 'dart:ui' as ui;
 
+import '../../../../../../core/constants/widgets/create_image_widget.dart';
 import '../../../../../../core/utils/fetch_image_util.dart';
 
 class ProfileTopInfo extends StatelessWidget {
@@ -28,38 +29,11 @@ class ProfileTopInfo extends StatelessWidget {
       children: [
         Row(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(150.0),
-              child: FutureBuilder<Widget>(
-                future: fetchImage(
-                    imageUrl:
-                        'http://10.0.2.2:8000/user/profile/image/?user_id=${user_id.replaceAll('-', '')}',
-                    boxSize: 130),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return SizedBox(
-                      height: 130,
-                      width: 130,
-                      child: Transform.scale(
-                        scale: 0.5,
-                        child: const CircularProgressIndicator(
-                          valueColor:
-                              AlwaysStoppedAnimation<Color>(Colors.black26),
-                        ),
-                      ),
-                    );
-                  } else if (snapshot.hasData) {
-                    return SizedBox(
-                        height: 130, width: 130, child: snapshot.data!);
-                  } else {
-                    return const SizedBox(
-                      height: 130,
-                      width: 130,
-                    );
-                  }
-                },
-              ),
-            ),
+            createImageWidget(
+                borderRadiusCircular: 150,
+                containerSize: 130,
+                imageUrl:
+                    'http://10.0.2.2:8000/user/profile/image/?user_id=${user_id.replaceAll('-', '')}'),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
@@ -105,3 +79,36 @@ class ProfileTopInfo extends StatelessWidget {
     );
   }
 }
+
+//ClipRRect(
+//   borderRadius: BorderRadius.circular(150.0),
+//   child: FutureBuilder<Widget>(
+//     future: fetchImage(
+//         imageUrl:
+//             'http://10.0.2.2:8000/user/profile/image/?user_id=${user_id.replaceAll('-', '')}',
+//         boxSize: 130),
+//     builder: (context, snapshot) {
+//       if (snapshot.connectionState == ConnectionState.waiting) {
+//         return SizedBox(
+//           height: 130,
+//           width: 130,
+//           child: Transform.scale(
+//             scale: 0.5,
+//             child: const CircularProgressIndicator(
+//               valueColor:
+//                   AlwaysStoppedAnimation<Color>(Colors.black26),
+//             ),
+//           ),
+//         );
+//       } else if (snapshot.hasData) {
+//         return SizedBox(
+//             height: 130, width: 130, child: snapshot.data!);
+//       } else {
+//         return const SizedBox(
+//           height: 130,
+//           width: 130,
+//         );
+//       }
+//     },
+//   ),
+// ),

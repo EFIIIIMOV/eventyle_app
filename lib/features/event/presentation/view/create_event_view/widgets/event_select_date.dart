@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../../core/constants/theme/themeData.dart';
-import '../../../../../../core/constants/widgets/container_box_decoration.dart';
+import '../../../../../../core/constants/theme/container_box_decoration.dart';
 import '../../../../../../core/utils/datetime_parse_util.dart';
 import '../../../viewmodel/create_event_view_model.dart';
 

@@ -1,6 +1,6 @@
 import 'package:eventyle_app/core/constants/theme/colors.dart';
 import 'package:eventyle_app/core/constants/widgets/app_bar_widget.dart';
-import 'package:eventyle_app/core/constants/widgets/container_box_decoration.dart';
+import 'package:eventyle_app/core/constants/theme/container_box_decoration.dart';
 import 'package:flutter/material.dart';
 
 import '../../../domain/entities/event_info_entity.dart';

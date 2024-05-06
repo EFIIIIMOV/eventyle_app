@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:eventyle_app/features/event/data/datasources/event_image_remote_data_source.dart';
 import 'package:eventyle_app/features/event/domain/entities/event_entity.dart';
 import 'package:eventyle_app/features/event/domain/entities/event_image_entity.dart';
+import 'package:eventyle_app/features/event/domain/entities/event_user_entity.dart';
 import 'package:eventyle_app/features/event/domain/usecases/add_event_image.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -31,6 +32,8 @@ class CreateEventViewModel extends ChangeNotifier {
   late String event_id;
   DateTime? eventSelectDate = null;
   File? eventSelectedImage = null;
+  List<EventUserEntity> userList = [];
+  List<EventUserEntity> selectedUserList = [];
 
   CreateEventViewModel();
 
@@ -82,28 +85,31 @@ class CreateEventViewModel extends ChangeNotifier {
     eventSelectedImage = File(returnedImage!.path);
     notifyListeners();
   }
+
+  Future<void> getUsers() async {
+    userList = await List.generate(
+      10,
+      (index) => EventUserEntity(
+        user_id: '${index + 1}',
+        role: 'roleUser ${index + 1}',
+        name: 'nameUser ${index + 1}',
+        surname: 'surnameUser ${index + 1}',
+        description: 'descriptionUser ${index + 1}',
+        isSelected: false,
+      ),
+    );
+    notifyListeners();
+  }
+
+  void getSelectedUsers(BuildContext context) {
+    selectedUserList =
+        userList.where((user) => user.isSelected).map((user) => user).toList();
+    notifyListeners();
+    Navigator.pop(context);
+  }
+
+  void toggleUserSelected(int index) {
+    userList[index].isSelected = !userList[index].isSelected;
+    notifyListeners();
+  }
 }
-//
-// Future<void> uploadImage(File imageFile, String imageId) async {
-//   final imageBytes = await imageFile.readAsBytes();
-//   final base64Image = base64Encode(imageBytes);
-//
-//   final requestBody = jsonEncode({
-//     '_id': imageId,
-//     'image': base64Image,
-//   });
-//   print(requestBody);
-//   final response = await http.post(
-//     Uri.parse('http://10.0.2.2:8000/events/image/add'),
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: requestBody,
-//   );
-//
-//   if (response.statusCode == 201) {
-//     print('Image uploaded successfully');
-//   } else {
-//     print('Failed to upload image: ${response.statusCode}');
-//   }
-// }

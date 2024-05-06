@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../core/constants/widgets/container_box_decoration.dart';
+import '../../../../../../core/constants/theme/container_box_decoration.dart';
 
 class ProfilePostCard extends StatelessWidget {
   const ProfilePostCard({super.key});

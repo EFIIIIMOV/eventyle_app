@@ -2,7 +2,7 @@ import 'package:eventyle_app/features/event/presentation/viewmodel/event_main_vi
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../core/constants/widgets/container_box_decoration.dart';
+import '../../../../../../core/constants/theme/container_box_decoration.dart';
 import '../../../../domain/entities/event_info_entity.dart';
 
 class EventListInfo extends StatelessWidget {
