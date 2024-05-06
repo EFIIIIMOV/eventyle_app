@@ -5,14 +5,18 @@ import 'package:eventyle_app/features/event/domain/entities/event_entity.dart';
 import 'package:eventyle_app/features/event/domain/entities/event_image_entity.dart';
 import 'package:eventyle_app/features/event/domain/entities/event_user_entity.dart';
 import 'package:eventyle_app/features/event/domain/usecases/add_event_image.dart';
+import 'package:eventyle_app/features/event/domain/usecases/add_user_to_event.dart';
+import 'package:eventyle_app/features/event/domain/usecases/get_all_users.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:io';
 import '../../../../core/constants/theme/themeData.dart';
 import '../../data/datasources/event_remote_data_source.dart';
+import '../../data/datasources/event_user_remote_data_source.dart';
 import '../../data/repositories/event_image_repository_impl.dart';
 import '../../data/repositories/event_repository_impl.dart';
+import '../../data/repositories/event_user_repository_impl.dart';
 import '../../domain/usecases/add_event.dart';
 import 'package:http/http.dart' as http;
 
@@ -26,6 +30,18 @@ class CreateEventViewModel extends ChangeNotifier {
   final AddEventImageUseCase addEventImageUseCase = AddEventImageUseCase(
     eventImageRepository: EventImageRepositoryImpl(
       eventImageRemoteDataSource: EventImageRemoteDataSourceImpl(),
+    ),
+  );
+
+  final GetAllUsersUseCase getAllUsersUseCase = GetAllUsersUseCase(
+    eventUserRepository: EventUserRepositoryImpl(
+      eventUserRemoteDataSource: EventUserRemoteDataSourceImpl(),
+    ),
+  );
+
+  final AddUserToEventUseCase addUserToEventUseCase = AddUserToEventUseCase(
+    eventUserRepository: EventUserRepositoryImpl(
+      eventUserRemoteDataSource: EventUserRemoteDataSourceImpl(),
     ),
   );
 
@@ -50,7 +66,7 @@ class CreateEventViewModel extends ChangeNotifier {
         date: eventSelectDate!,
         place: place,
         description: description);
-    addEventUseCase.call(eventEntity);
+    await addEventUseCase.call(eventEntity);
     if (eventSelectedImage != null) {
       final imageBytes = await eventSelectedImage!.readAsBytes();
       final base64Image = base64Encode(imageBytes);
@@ -58,10 +74,20 @@ class CreateEventViewModel extends ChangeNotifier {
         image_id: event_id,
         image: base64Image,
       );
-      addEventImageUseCase.call(eventImageEntity);
+      await addEventImageUseCase.call(eventImageEntity);
+    }
+    if (selectedUserList.isNotEmpty) {
+      final List<String> userIds = [];
+      selectedUserList.forEach((EventUserEntity selectUser) {
+        userIds.add(selectUser.user_id);
+      });
+      final response = {"event_id": event_id, "user_ids": userIds};
+      await addUserToEventUseCase.call(response);
     }
     eventSelectDate = null;
     eventSelectedImage = null;
+    userList = [];
+    selectedUserList = [];
     Navigator.pop(context);
   }
 
@@ -86,18 +112,8 @@ class CreateEventViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getUsers() async {
-    userList = await List.generate(
-      10,
-      (index) => EventUserEntity(
-        user_id: '${index + 1}',
-        role: 'roleUser ${index + 1}',
-        name: 'nameUser ${index + 1}',
-        surname: 'surnameUser ${index + 1}',
-        description: 'descriptionUser ${index + 1}',
-        isSelected: false,
-      ),
-    );
+  Future<void> getAllUsers() async {
+    userList = await getAllUsersUseCase.call("");
     notifyListeners();
   }
 

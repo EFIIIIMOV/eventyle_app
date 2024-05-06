@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../../core/constants/widgets/create_image_widget.dart';
 import '../../../../domain/entities/event_user_entity.dart';
 import '../../../viewmodel/create_event_view_model.dart';
 
@@ -29,13 +30,13 @@ class ListUserItem extends StatelessWidget {
         ListTile(
           onTap: onUserToggled == null ? () {} : () => onUserToggled!(index!),
           contentPadding: const EdgeInsets.symmetric(horizontal: 5),
-          leading: const Padding(
+          leading: Padding(
             padding: EdgeInsets.only(left: 10),
-            child: Icon(
-              Icons.account_circle_rounded,
-              color: Colors.blue,
-              size: 45,
-            ),
+            child: createImageWidget(
+                borderRadiusCircular: 150,
+                containerSize: 50,
+                imageUrl:
+                    'http://10.0.2.2:8000/user/profile/image/?user_id=${eventUserEntity.user_id.replaceAll('-', '')}'),
           ),
           title: Text('${eventUserEntity.name} ${eventUserEntity.name}'),
           subtitle: Text(eventUserEntity.role),

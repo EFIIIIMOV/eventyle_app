@@ -47,7 +47,7 @@ class _CreateEventViewState extends State<CreateEventView> {
   @override
   void didChangeDependencies() async {
     viewModel = context.read<CreateEventViewModel>();
-    await viewModel.getUsers();
+    await viewModel.getAllUsers();
     super.didChangeDependencies();
   }
 

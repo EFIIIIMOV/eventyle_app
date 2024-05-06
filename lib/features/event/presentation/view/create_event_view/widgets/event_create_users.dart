@@ -53,7 +53,7 @@ void _selectUserBottomSheet({
   required List<EventUserEntity> userList,
   required void Function(BuildContext context)? onTapSelectUsersButton,
   required void Function(int index)? toggleUserSelected,
-}) {
+})  {
   showModalBottomSheet(
     backgroundColor: Colors.white,
     context: context,
