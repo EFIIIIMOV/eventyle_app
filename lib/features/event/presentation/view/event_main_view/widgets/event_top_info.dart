@@ -34,7 +34,7 @@ class EventTopInfo extends StatelessWidget {
             IntrinsicHeight(
               child: Row(
                 children: [
-                  createImageWidget(
+                  CreateImageWidget(
                       borderRadiusCircular: 8,
                       containerSize: 100,
                       imageUrl:

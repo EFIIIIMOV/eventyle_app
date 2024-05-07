@@ -50,7 +50,7 @@ class _CreateEventViewState extends State<CreateEventView> {
   @override
   void didChangeDependencies() async {
     viewModel = context.read<CreateEventViewModel>();
-    await viewModel.getAllUsers();
+    await viewModel.getEventUsers();
     super.didChangeDependencies();
   }
 
@@ -104,18 +104,14 @@ class _CreateEventViewState extends State<CreateEventView> {
                   infoDescriptionController: _infoDescriptionController,
                 ),
                 SizedBox(height: 20),
-                Consumer<CreateEventViewModel>(
-                  builder: (context, viewModel, child) {
-                    return EventCreateUsers(
-                      userList: viewModel.userList,
-                      selectedUserList: viewModel.selectedUserList,
-                      onTapDoneSelectUsersButton: viewModel.getSelectedUsers,
-                      toggleUserSelected: viewModel.toggleUserSelected,
-                      searchQuery: _searchQuery,
-                      onTapSearchButton: () =>
-                          viewModel.filterResult(_searchQuery.text),
-                    );
-                  },
+                EventCreateUsers(
+                  userList: viewModel.userList,
+                  selectedUserList: viewModel.selectedUserList,
+                  toggleUserSelected: viewModel.toggleUserSelected,
+                  searchQuery: _searchQuery,
+                  onTapSearchButton: () =>
+                      viewModel.filterResult(_searchQuery.text!),
+                  isUserSelected: viewModel.isUserSelected,
                 )
               ],
             ),

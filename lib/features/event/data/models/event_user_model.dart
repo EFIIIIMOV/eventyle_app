@@ -7,7 +7,6 @@ class EventUserModel extends EventUserEntity {
     required super.name,
     required super.surname,
     required super.description,
-    super.isSelected = false,
   });
 
   factory EventUserModel.fromJson(Map<String, dynamic> json) {

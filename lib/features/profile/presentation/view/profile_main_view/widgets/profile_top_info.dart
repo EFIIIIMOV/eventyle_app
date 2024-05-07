@@ -29,7 +29,7 @@ class ProfileTopInfo extends StatelessWidget {
       children: [
         Row(
           children: [
-            createImageWidget(
+            CreateImageWidget(
                 borderRadiusCircular: 150,
                 containerSize: 130,
                 imageUrl:

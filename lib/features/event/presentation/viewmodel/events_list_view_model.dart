@@ -21,13 +21,12 @@ class EventsListViewModel extends ChangeNotifier {
 
   void onNewEventButtonPressed(BuildContext context) {
     Navigator.pushNamed(context, '/eventCreate');
-    notifyListeners();
+    //notifyListeners();
   }
 
   void onEventPressed(BuildContext context, int index) {
     Navigator.pushNamed(context, '/eventMain',
         arguments: {'event': listEvents[index]});
-    notifyListeners();
+    //notifyListeners();
   }
-
 }

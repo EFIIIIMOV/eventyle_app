@@ -1,6 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:ui' as ui;
 
 Future<Widget> fetchImage({
   required String imageUrl,
@@ -9,13 +9,11 @@ Future<Widget> fetchImage({
   final response = await http.get(Uri.parse(imageUrl));
   if (response.statusCode == 200) {
     try {
-      await ui.instantiateImageCodec(response.bodyBytes);
-      return Image(
-        image: MemoryImage(response.bodyBytes),
-        width: boxSize,
-        height: boxSize,
-        fit: BoxFit.cover,
-      );
+      return CachedNetworkImage(
+          imageUrl: imageUrl,
+          width: boxSize,
+          height: boxSize,
+          fit: BoxFit.cover);
     } catch (_) {
       return Image.asset(
         'assets/images/image_default.png',

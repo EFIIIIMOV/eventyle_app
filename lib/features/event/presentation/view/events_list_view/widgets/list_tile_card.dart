@@ -29,7 +29,7 @@ class ListTileCard extends StatelessWidget {
       ),
       child: Center(
         child: ListTile(
-          leading: createImageWidget(
+          leading: CreateImageWidget(
               borderRadiusCircular: 8,
               containerSize: 50,
               imageUrl:
