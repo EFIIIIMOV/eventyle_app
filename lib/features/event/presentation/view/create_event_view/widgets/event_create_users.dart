@@ -1,6 +1,8 @@
 import 'package:eventyle_app/features/event/domain/entities/event_user_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../../../../core/constants/theme/container_box_decoration.dart';
+import '../../../viewmodel/create_event_view_model.dart';
 import 'event_create_user_card.dart';
 
 class EventCreateUsers extends StatelessWidget {
@@ -8,6 +10,8 @@ class EventCreateUsers extends StatelessWidget {
   final List<EventUserEntity> selectedUserList;
   final void Function(BuildContext context)? onTapDoneSelectUsersButton;
   final void Function(int index)? toggleUserSelected;
+  final TextEditingController searchQuery;
+  final void Function()? onTapSearchButton;
 
   const EventCreateUsers({
     Key? key,
@@ -15,6 +19,8 @@ class EventCreateUsers extends StatelessWidget {
     required this.selectedUserList,
     required this.onTapDoneSelectUsersButton,
     required this.toggleUserSelected,
+    required this.searchQuery,
+    required this.onTapSearchButton,
   }) : super(key: key);
 
   @override
@@ -29,6 +35,8 @@ class EventCreateUsers extends StatelessWidget {
               userList: userList,
               onTapSelectUsersButton: onTapDoneSelectUsersButton,
               toggleUserSelected: toggleUserSelected,
+              searchQuery: searchQuery,
+              onTapSearchButton: onTapSearchButton,
             ),
             leading: const Icon(Icons.add, color: Colors.blue),
             title: const Text(
@@ -53,7 +61,9 @@ void _selectUserBottomSheet({
   required List<EventUserEntity> userList,
   required void Function(BuildContext context)? onTapSelectUsersButton,
   required void Function(int index)? toggleUserSelected,
-})  {
+  required TextEditingController searchQuery,
+  required void Function()? onTapSearchButton,
+}) {
   showModalBottomSheet(
     backgroundColor: Colors.white,
     context: context,
@@ -94,17 +104,58 @@ void _selectUserBottomSheet({
           ),
         ),
         const Divider(height: 1, thickness: 1, color: Colors.black),
-        Expanded(
-          child: ListView.builder(
-            itemCount: userList.length,
+        Row(
+          children: [
+            Expanded(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.black),
+                  ),
+                  child: TextField(
+                    style: TextStyle(fontSize: 16),
+                    controller: searchQuery,
+                    decoration: const InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+                      hintText: 'Поиск',
+                      border: InputBorder.none,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(right: 10),
+              child: IconButton(
+                padding: EdgeInsets.zero,
+                iconSize: 25,
+                onPressed: onTapSearchButton,
+                icon: const Icon(
+                  size: 25,
+                  Icons.search,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ],
+        ),
+        const Divider(height: 1, thickness: 1, color: Colors.black),
+        Expanded(child: Consumer<CreateEventViewModel>(
+            builder: (context, viewModel, child) {
+          return ListView.builder(
+            itemCount: viewModel.userList.length,
             itemBuilder: (context, index) => ListUserItem(
               onUserToggled: toggleUserSelected,
-              eventUserEntity: userList[index],
+              eventUserEntity: viewModel.userList[index],
               index: index,
               showCheckbox: true,
             ),
-          ),
-        ),
+          );
+        })),
       ],
     ),
   );

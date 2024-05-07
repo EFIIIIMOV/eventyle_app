@@ -26,6 +26,7 @@ class _CreateEventViewState extends State<CreateEventView> {
   late final TextEditingController _nameController;
   late final TextEditingController _placeController;
   late final TextEditingController _infoDescriptionController;
+  late final TextEditingController _searchQuery;
 
   @override
   void initState() {
@@ -34,6 +35,7 @@ class _CreateEventViewState extends State<CreateEventView> {
     _placeController = TextEditingController(text: "testEventPlace");
     _infoDescriptionController =
         TextEditingController(text: "testEventDescription");
+    _searchQuery = TextEditingController();
   }
 
   @override
@@ -41,6 +43,7 @@ class _CreateEventViewState extends State<CreateEventView> {
     _nameController.dispose();
     _placeController.dispose();
     _infoDescriptionController.dispose();
+    _searchQuery.dispose();
     super.dispose();
   }
 
@@ -108,6 +111,9 @@ class _CreateEventViewState extends State<CreateEventView> {
                       selectedUserList: viewModel.selectedUserList,
                       onTapDoneSelectUsersButton: viewModel.getSelectedUsers,
                       toggleUserSelected: viewModel.toggleUserSelected,
+                      searchQuery: _searchQuery,
+                      onTapSearchButton: () =>
+                          viewModel.filterResult(_searchQuery.text),
                     );
                   },
                 )

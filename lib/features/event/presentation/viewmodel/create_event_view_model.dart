@@ -50,6 +50,7 @@ class CreateEventViewModel extends ChangeNotifier {
   File? eventSelectedImage = null;
   List<EventUserEntity> userList = [];
   List<EventUserEntity> selectedUserList = [];
+  String searchQuery = "";
 
   CreateEventViewModel();
 
@@ -113,19 +114,29 @@ class CreateEventViewModel extends ChangeNotifier {
   }
 
   Future<void> getAllUsers() async {
-    userList = await getAllUsersUseCase.call("");
+    userList = await getAllUsersUseCase.call(searchQuery);
+    notifyListeners();
+  }
+
+  Future<void> filterResult(String newSearchQuery) async {
+    searchQuery = newSearchQuery;
+    await getAllUsers();
     notifyListeners();
   }
 
   void getSelectedUsers(BuildContext context) {
-    selectedUserList =
-        userList.where((user) => user.isSelected).map((user) => user).toList();
+    // selectedUserList =
+    //     userList.where((user) => user.isSelected).map((user) => user).toList();
     notifyListeners();
     Navigator.pop(context);
   }
 
   void toggleUserSelected(int index) {
     userList[index].isSelected = !userList[index].isSelected;
+    userList[index].isSelected
+        ? selectedUserList.add(userList[index])
+        : selectedUserList.remove(userList[index]);
+    print(selectedUserList);
     notifyListeners();
   }
 }
