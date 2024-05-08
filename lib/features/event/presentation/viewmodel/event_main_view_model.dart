@@ -30,9 +30,7 @@ class EventMainViewModel extends ChangeNotifier {
     Navigator.pushNamed(
       context,
       '/eventInfoCreate',
-      arguments: {
-        'event_id': event_id,
-      },
+      arguments: {'event_id': event_id},
     );
   }
 
@@ -44,10 +42,7 @@ class EventMainViewModel extends ChangeNotifier {
     Navigator.pushNamed(
       context,
       '/eventInfo',
-      arguments: {
-        'eventInfo': listEventInfo[index],
-        'eventName': eventName,
-      },
+      arguments: {'eventInfo': listEventInfo[index], 'eventName': eventName},
     );
   }
 

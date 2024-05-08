@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/constants/widgets/create_image_widget.dart';
-import '../../../../../../core/utils/fetch_image_util.dart';
 
 class UserListTileCard extends StatelessWidget {
   final String user_id;

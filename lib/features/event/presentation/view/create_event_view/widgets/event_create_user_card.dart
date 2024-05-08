@@ -4,19 +4,19 @@ import 'package:provider/provider.dart';
 import '../../../../../../core/constants/widgets/create_image_widget.dart';
 import '../../../../domain/entities/event_user_entity.dart';
 
-class ListUserItem extends StatelessWidget {
-  final void Function(int index)? onUserToggled;
-  final bool Function(String user_id)? isUserSelected;
+class UserListCard extends StatelessWidget {
   final EventUserEntity eventUserEntity;
-  final int? index;
+  final int? userIndex;
   final bool? showCheckbox;
+  final void Function(int userIndex)? toggleUserSelected;
+  final bool Function(String user_id)? isUserSelected;
 
-  const ListUserItem({
+  const UserListCard({
     super.key,
     required this.eventUserEntity,
-    this.index,
-    this.onUserToggled,
+    this.userIndex,
     this.showCheckbox,
+    this.toggleUserSelected,
     this.isUserSelected,
   });
 
@@ -24,15 +24,19 @@ class ListUserItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Divider(height: 1, thickness: 1, color: Colors.grey),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: userIndex == 0
+              ? const SizedBox()
+              : const Divider(height: 1, thickness: 1, color: Colors.grey),
         ),
         ListTile(
-          //onTap: onUserToggled == null ? () {} : () => onUserToggled!(index!),
+          onTap: toggleUserSelected == null
+              ? () {}
+              : () => toggleUserSelected!(userIndex!),
           contentPadding: const EdgeInsets.symmetric(horizontal: 5),
           leading: Padding(
-            padding: EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.only(left: 10),
             child: CreateImageWidget(
                 borderRadiusCircular: 150,
                 containerSize: 50,
@@ -45,10 +49,10 @@ class ListUserItem extends StatelessWidget {
               ? Checkbox(
                   activeColor: Colors.black,
                   value: isUserSelected!(eventUserEntity.user_id!),
-                  onChanged: (value) => onUserToggled!(index!),
+                  onChanged: (value) => toggleUserSelected!(userIndex!),
                 )
               : const SizedBox(),
-        )
+        ),
       ],
     );
   }

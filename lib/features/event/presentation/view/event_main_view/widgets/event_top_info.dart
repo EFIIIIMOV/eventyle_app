@@ -3,10 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../core/constants/theme/container_box_decoration.dart';
 import '../../../../../../core/utils/datetime_parse_util.dart';
-import 'package:http/http.dart' as http;
-import 'dart:ui' as ui;
-
-import '../../../../../../core/utils/fetch_image_util.dart';
 
 class EventTopInfo extends StatelessWidget {
   final String eventId;

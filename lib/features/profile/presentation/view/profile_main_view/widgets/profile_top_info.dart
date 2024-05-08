@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../../../../../../core/constants/theme/container_box_decoration.dart';
-import 'package:http/http.dart' as http;
-import 'dart:ui' as ui;
-
 import '../../../../../../core/constants/widgets/create_image_widget.dart';
-import '../../../../../../core/utils/fetch_image_util.dart';
 
 class ProfileTopInfo extends StatelessWidget {
   final String user_id;
