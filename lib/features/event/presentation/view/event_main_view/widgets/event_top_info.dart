@@ -34,7 +34,7 @@ class EventTopInfo extends StatelessWidget {
                       borderRadiusCircular: 8,
                       containerSize: 100,
                       imageUrl:
-                          'http://10.0.2.2:8000/events/image/image_id/${eventId.replaceAll('-', '')}'),
+                          'http://10.0.2.2:8000/events/image/?image_id=${eventId.replaceAll('-', '')}'),
                   const SizedBox(width: 16),
                   Expanded(
                     child: Column(
