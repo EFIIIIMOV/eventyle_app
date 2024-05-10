@@ -24,7 +24,7 @@ class EventInfoRemoteDataSourceImpl implements EventInfoRemoteDataSource {
   @override
   Future<List<EventInfoModel>> getAllEventInfo(String idEvent) async {
     final response = await client.get(
-      Uri.parse('http://10.0.2.2:8000/events/info/event_id/$idEvent'),
+      Uri.parse('http://10.0.2.2:8000/events/info/?event_id=$idEvent'),
       headers: <String, String>{
         'Authorization': 'Bearer ${await tokenUtil.getAccessToken()}',
         'Content-Type': 'application/json; charset=UTF-8',
