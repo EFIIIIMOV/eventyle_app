@@ -33,6 +33,7 @@ class _EventCreateUsersState extends State<EventCreateUsers> {
           ListTile(
             onTap: () {
               showModalBottomSheet(
+                backgroundColor: Colors.white,
                 context: context,
                 isScrollControlled: true,
                 isDismissible: false,
@@ -108,7 +109,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
       children: [
         const SizedBox(height: 10),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 4),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

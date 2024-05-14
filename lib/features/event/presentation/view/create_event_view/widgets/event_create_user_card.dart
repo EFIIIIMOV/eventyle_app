@@ -43,7 +43,7 @@ class UserListCard extends StatelessWidget {
                 imageUrl:
                     'http://10.0.2.2:8000/user/profile/image/?user_id=${eventUserEntity.user_id.replaceAll('-', '')}'),
           ),
-          title: Text('${eventUserEntity.name} ${eventUserEntity.name}'),
+          title: Text('${eventUserEntity.name} ${eventUserEntity.surname}'),
           subtitle: Text(eventUserEntity.role),
           trailing: showCheckbox == true
               ? Checkbox(
