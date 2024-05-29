@@ -1,58 +1,203 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../../core/constants/theme/container_box_decoration.dart';
+import '../../../../domain/entities/chat_user_entity.dart';
+import '../../../viewmodel/chat_create_view_model.dart';
+import 'chat_create_user_card.dart';
 
-class ChatCreateUsers extends StatelessWidget {
-  const ChatCreateUsers({super.key});
+class ChatCreateUsers extends StatefulWidget {
+  final List<ChatUserEntity> selectedUserList;
+  final TextEditingController searchQuery;
+  final void Function()? onTapSearchButton;
+  final void Function() getChatUsers;
 
+  const ChatCreateUsers({
+    super.key,
+    required this.selectedUserList,
+    required this.searchQuery,
+    required this.onTapSearchButton,
+    required this.getChatUsers,
+  });
+
+  @override
+  State<ChatCreateUsers> createState() => _ChatCreateUsersState();
+}
+
+class _ChatCreateUsersState extends State<ChatCreateUsers> {
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: CustomContainerBoxDecoration.customDecoration,
       child: Column(
-        children: generateList(),
+        children: [
+          ListTile(
+            onTap: () {
+              showModalBottomSheet(
+                backgroundColor: Colors.white,
+                context: context,
+                isScrollControlled: true,
+                isDismissible: false,
+                useRootNavigator: true,
+                constraints: BoxConstraints(
+                  maxHeight: MediaQuery.of(context).size.height * 0.85,
+                ),
+                builder: (context) {
+                  return CustomBottomSheet(
+                    searchQuery: widget.searchQuery,
+                    onTapSearchButton: widget.onTapSearchButton,
+                    getChatUsers: widget.getChatUsers,
+                  );
+                },
+              );
+            },
+            leading: const Icon(
+              Icons.add,
+              color: Colors.blue,
+            ),
+            title: const Text(
+              'Добавить пользователя',
+              style: TextStyle(
+                color: Colors.blue,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Consumer<ChatCreateViewModel>(
+            builder: (context, viewModel, child) {
+              return Column(
+                children: generateSelectedUserList(
+                  widget.selectedUserList,
+                ),
+              );
+            },
+          )
+        ],
       ),
     );
   }
+
+  List<Widget> generateSelectedUserList(List<ChatUserEntity> selectedUsers) =>
+      selectedUsers.map((user) => UserListCard(eventUserEntity: user)).toList();
 }
 
-List<Widget> generateList() {
-  List<Widget> children = [];
+class CustomBottomSheet extends StatefulWidget {
+  final TextEditingController searchQuery;
+  final void Function()? onTapSearchButton;
+  final void Function() getChatUsers;
 
-  children.add(
-    ListTile(
-      onTap: () {},
-      leading: Icon(
-        Icons.add,
-        color: Colors.blue,
-      ),
-      title: Text(
-        'Добавить пользователя',
-        style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
-      ),
-    ),
-  );
+  const CustomBottomSheet({
+    super.key,
+    required this.searchQuery,
+    required this.onTapSearchButton,
+    required this.getChatUsers,
+  });
 
-  for (int i = 0; i < 3; i++) {
-    children.addAll(
-      [
+  @override
+  State<CustomBottomSheet> createState() => _CustomBottomSheetState();
+}
+
+class _CustomBottomSheetState extends State<CustomBottomSheet> {
+  @override
+  void didChangeDependencies() {
+    widget.getChatUsers();
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const SizedBox(height: 10),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Divider(
-            height: 1,
-            thickness: 1,
-            color: Colors.grey.shade300,
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text(
+                  'Отмена',
+                  style: TextStyle(color: Colors.black, fontSize: 16),
+                ),
+              ),
+              const Text(
+                'Добавить',
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text(
+                  'Готово',
+                  style: TextStyle(color: Colors.black, fontSize: 16),
+                ),
+              ),
+            ],
           ),
         ),
-        ListTile(
-          leading: const CircleAvatar(
-            child: Icon(Icons.person),
+        const Divider(height: 1, thickness: 1, color: Colors.black),
+        Row(
+          children: [
+            Expanded(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.black),
+                  ),
+                  child: TextField(
+                    style: TextStyle(fontSize: 16),
+                    controller: widget.searchQuery,
+                    decoration: const InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+                      hintText: 'Поиск',
+                      border: InputBorder.none,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(right: 10),
+              child: IconButton(
+                padding: EdgeInsets.zero,
+                iconSize: 25,
+                onPressed: widget.onTapSearchButton,
+                icon: const Icon(
+                  size: 25,
+                  Icons.search,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ],
+        ),
+        const Divider(height: 1, thickness: 1, color: Colors.black),
+        Expanded(
+          child: Consumer<ChatCreateViewModel>(
+            builder: (context, viewModel, child) {
+              return ListView.builder(
+                itemCount: viewModel.userList.length,
+                itemBuilder: (context, index) {
+                  return UserListCard(
+                    eventUserEntity: viewModel.userList[index],
+                    isUserSelected: viewModel.isUserSelected,
+                    toggleUserSelected: viewModel.toggleUserSelected,
+                    userIndex: index,
+                    showCheckbox: true,
+                  );
+                },
+              );
+            },
           ),
-          title: Text('Информация о мероприятии ${i + 1}'), // Текст
         ),
       ],
     );
   }
-
-  return children;
 }

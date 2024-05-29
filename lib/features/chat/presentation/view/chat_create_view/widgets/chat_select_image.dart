@@ -1,16 +1,15 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../../../../../../core/constants/theme/colors.dart';
 import '../../../../../../core/constants/theme/fonts.dart';
 
-class EventSelectImage extends StatelessWidget {
+class ChatSelectImage extends StatelessWidget {
   final File? selectedImage;
   final void Function()? onTap;
 
-  const EventSelectImage({
+  const ChatSelectImage({
     super.key,
     required this.selectedImage,
     required this.onTap,
@@ -22,7 +21,7 @@ class EventSelectImage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ClipRRect(
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(150),
           child: Image(
             image: selectedImage == null
                 ? const AssetImage('assets/images/image_default.png')
