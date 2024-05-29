@@ -43,7 +43,7 @@ dependencies:
   dcdg: ^4.1.0
   mysql1: ^0.20.0
   http:
-  intl: ^0.18.1
+  intl:
   uuid:
   cached_network_image:
   path_provider: ^2.0.0

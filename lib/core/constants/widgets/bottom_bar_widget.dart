@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../features/event/presentation/view/events_list_view/events_list_view.dart';
 import '../theme/colors.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {

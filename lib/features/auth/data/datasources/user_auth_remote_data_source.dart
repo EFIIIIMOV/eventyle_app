@@ -1,10 +1,8 @@
 import 'dart:convert';
 
 import 'package:eventyle_app/core/error/exception.dart';
-import 'package:eventyle_app/core/mySQL/mySQL.dart';
 import 'package:eventyle_app/features/auth/data/models/user_login_model.dart';
 import 'package:eventyle_app/features/auth/data/models/user_register_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
