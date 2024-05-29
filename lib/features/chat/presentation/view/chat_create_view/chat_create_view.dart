@@ -48,10 +48,14 @@ class _ChatCreateViewState extends State<ChatCreateView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.viewSecondBackgroundColor,
-      appBar: const CustomAppBar(
+      appBar: CustomAppBar(
         title: 'Новый чат',
         buttonIcon: Icons.save,
-        onButtonPressed: null,
+        onButtonPressed: () => viewModel.onSaveNewChatButtonPressed(
+          context,
+          name: _chatNameController.text,
+          description: _chatDescriptionController.text,
+        ),
       ),
       bottomNavigationBar: const CustomBottomNavigationBar(currentIndex: 1),
       body: SingleChildScrollView(

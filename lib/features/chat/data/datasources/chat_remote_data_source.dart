@@ -1,19 +1,17 @@
 import 'dart:convert';
-
-import 'package:eventyle_app/core/error/exception.dart';
-import 'package:eventyle_app/core/utils/token_util.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:eventyle_app/core/error/exception.dart';
+import '../../../../core/utils/token_util.dart';
+import '../models/chat_model.dart';
 
-import '../models/chat_user_model.dart';
+abstract class ChatRemoteDataSource {
+  Future<List<ChatModel>> getAllChats();
 
-abstract class ChatUserRemoteDataSource {
-  Future<List<ChatUserModel>> getAllUsers(String searchQuery);
-
-  Future<void> addUserToChat(Map<String, Object> usersList);
+  Future<void> addChat(ChatModel chatModel);
 }
 
-class ChatUserRemoteDataSourceImpl implements ChatUserRemoteDataSource {
+class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
   final http.Client client = http.Client();
   final TokenUtil tokenUtil = TokenUtil(
     flutterSecureStorage: FlutterSecureStorage(),
@@ -21,45 +19,43 @@ class ChatUserRemoteDataSourceImpl implements ChatUserRemoteDataSource {
   );
 
   @override
-  Future<List<ChatUserModel>> getAllUsers(String searchQuery) async {
-    String encodedQuery = Uri.encodeComponent(searchQuery);
-    final response = await http.get(
-      Uri.parse(
-          'http://10.0.2.2:8000/user/profiles/?searchQuery=$encodedQuery'),
+  Future<List<ChatModel>> getAllChats() async {
+    final response = await client.get(
+      Uri.parse('http://10.0.2.2:8000/chats/'),
       headers: <String, String>{
         'Authorization': 'Bearer ${await tokenUtil.getAccessToken()}',
         'Content-Type': 'application/json; charset=UTF-8',
       },
     );
     if (response.statusCode == 200) {
-      final users = jsonDecode(utf8.decode(response.bodyBytes));
-      print(users);
-      return (users['users'] as List)
-          .map((user) => ChatUserModel.fromJson(user))
+      final chats = json.decode(utf8.decode(response.bodyBytes));
+      return (chats['chats'] as List)
+          .map((chat) => ChatModel.fromJson(chat))
           .toList();
     } else if (response.statusCode == 401) {
       tokenUtil.updateAccessToken();
-      return await getAllUsers(searchQuery);
+      return await getAllChats();
     } else {
       throw ServerException();
     }
   }
 
   @override
-  Future<void> addUserToChat(Map<String, Object> usersList) async {
+  Future<void> addChat(ChatModel chatModel) async {
+    final Map<String, dynamic> chatData = chatModel.toJson();
     final response = await client.post(
-      Uri.parse('http://10.0.2.2:8000/chats/add_user/'),
+      Uri.parse('http://10.0.2.2:8000/chats/create/'),
       headers: <String, String>{
         'Authorization': 'Bearer ${await tokenUtil.getAccessToken()}',
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(usersList),
+      body: jsonEncode(chatData),
     );
     if (response.statusCode == 200) {
       return;
     } else if (response.statusCode == 401) {
       tokenUtil.updateAccessToken();
-      return await addUserToChat(usersList);
+      return await addChat(chatModel);
     } else {
       throw ServerException();
     }

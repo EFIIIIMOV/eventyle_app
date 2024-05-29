@@ -6,13 +6,38 @@ import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:io';
 
+import '../../data/datasources/chat_image_remote_data_source.dart';
+import '../../data/datasources/chat_remote_data_source.dart';
 import '../../data/datasources/chat_user_remote_data_source.dart';
+import '../../data/repositories/chat_image_repository_impl.dart';
+import '../../data/repositories/chat_repository_impl.dart';
 import '../../data/repositories/chat_user_repository_impl.dart';
 import '../../domain/entities/chat_entity.dart';
 import '../../domain/entities/chat_image_entity.dart';
 import '../../domain/entities/chat_user_entity.dart';
+import '../../domain/usecases/add_chat.dart';
+import '../../domain/usecases/add_chat_image.dart';
+import '../../domain/usecases/add_user_to_chat.dart';
 
 class ChatCreateViewModel extends ChangeNotifier {
+  final AddChatUseCase addChatUseCase = AddChatUseCase(
+    chatRepository: ChatRepositoryImpl(
+      chatRemoteDataSource: ChatRemoteDataSourceImpl(),
+    ),
+  );
+
+  final AddChatImageUseCase addChatImageUseCase = AddChatImageUseCase(
+    chatImageRepository: ChatImageRepositoryImpl(
+      chatImageRemoteDataSource: ChatImageRemoteDataSourceImpl(),
+    ),
+  );
+
+  final AddUserToChatUseCase addUserToChatUseCase = AddUserToChatUseCase(
+    chatUserRepository: ChatUserRepositoryImpl(
+      chatUserRemoteDataSource: ChatUserRemoteDataSourceImpl(),
+    ),
+  );
+
   final GetAllUsersUseCase getAllUsersUseCase = GetAllUsersUseCase(
     chatUserRepository: ChatUserRepositoryImpl(
       chatUserRemoteDataSource: ChatUserRemoteDataSourceImpl(),
@@ -58,16 +83,15 @@ class ChatCreateViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> onSaveNewEventButtonPressed(
+  Future<void> onSaveNewChatButtonPressed(
     BuildContext context, {
     required String name,
-    required String place,
     required String description,
   }) async {
     chat_id = Uuid().v4().replaceAll('-', '');
     final ChatEntity eventEntity =
         ChatEntity(chat_id: chat_id, name: name, description: description);
-    //await addChatUseCase.call(eventEntity);
+    await addChatUseCase.call(eventEntity);
     if (chatSelectedImage != null) {
       final imageBytes = await chatSelectedImage!.readAsBytes();
       final base64Image = base64Encode(imageBytes);
@@ -75,15 +99,15 @@ class ChatCreateViewModel extends ChangeNotifier {
         image_id: chat_id,
         image: base64Image,
       );
-      //await addChatImageUseCase.call(eventImageEntity);
+      await addChatImageUseCase.call(eventImageEntity);
     }
     if (selectedUserList.isNotEmpty) {
       final List<String> userIds = [];
       selectedUserList.forEach((ChatUserEntity selectUser) {
         userIds.add(selectUser.user_id);
       });
-      final response = {"event_id": chat_id, "user_ids": userIds};
-      //await addUserToChatUseCase.call(response);
+      final response = {"chat_id": chat_id, "user_ids": userIds};
+      await addUserToChatUseCase.call(response);
     }
     chatSelectedImage = null;
     userList = [];
