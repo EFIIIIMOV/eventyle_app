@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class ChatMessageBottomBar extends StatelessWidget {
-  final _controller = TextEditingController(text: '');
+  final messageController;
+
+  const ChatMessageBottomBar({
+    super.key,
+    required this.messageController,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +48,7 @@ class ChatMessageBottomBar extends StatelessWidget {
                             child: TextField(
                               maxLines: null,
                               keyboardType: TextInputType.multiline,
-                              controller: _controller,
+                              controller: messageController,
                               decoration: const InputDecoration(
                                 isDense: true,
                                 hintText: "Введите сообщение",

@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../../core/constants/widgets/create_image_widget.dart';
+
 class ChatListTileCard extends StatelessWidget {
-  const ChatListTileCard({super.key});
+  final String chat_id;
+  final String chatName;
+
+  const ChatListTileCard({
+    super.key,
+    required this.chat_id,
+    required this.chatName,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,15 +26,12 @@ class ChatListTileCard extends StatelessWidget {
         ),
       ),
       child: ListTile(
-        leading: ClipRRect(
-          borderRadius: BorderRadius.circular(150.0),
-          child: Image.asset(
-            'assets/images/test_image.png',
-            width: 50,
-            height: 50,
-          ),
-        ),
-        title: const Text('Название чата'),
+        leading: CreateImageWidget(
+            borderRadiusCircular: 150,
+            containerSize: 50,
+            imageUrl:
+                'http://10.0.2.2:8000/chats/image/?image_id=${chat_id.replaceAll('-', '')}'),
+        title: Text('$chatName'),
         subtitle: const Text('Последнее сообщение в чате'),
       ),
     );
