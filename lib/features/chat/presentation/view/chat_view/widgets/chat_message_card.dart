@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 
-class ChatMessageCard extends StatelessWidget {
-  final List<String> messages = [
-    'test 1test 1test 1test 1test 1test 1test 1test 1test 1test 1test 1test 1test 1test 1test 1test 1test 1test 1test 1test 1',
-  ];
-  final bool isMyMessage;
+import '../../../../../../core/constants/widgets/create_image_widget.dart';
+import '../../../../domain/entities/chat_user_entity.dart';
 
-  ChatMessageCard({super.key, required this.isMyMessage});
+class ChatMessageCard extends StatelessWidget {
+  final bool isMyMessage;
+  final String messageText;
+  final ChatUserEntity userInfo;
+
+  ChatMessageCard({
+    super.key,
+    required this.isMyMessage,
+    required this.messageText,
+    required this.userInfo,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +23,11 @@ class ChatMessageCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           if (!isMyMessage)
-            const CircleAvatar(
-              radius: 16,
-              backgroundColor: Colors.blue,
-            ),
+            CreateImageWidget(
+                borderRadiusCircular: 150,
+                containerSize: 32,
+                imageUrl:
+                    'http://10.0.2.2:8000/user/profile/image/?user_id=${userInfo.user_id.replaceAll('-', '')}'),
           SizedBox(width: 8),
           Expanded(
             child: Column(
@@ -50,15 +58,15 @@ class ChatMessageCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       if (!isMyMessage)
-                        const Text(
-                          "Имя Фамилия",
-                          style: TextStyle(
+                        Text(
+                          "${userInfo.name} ${userInfo.surname}",
+                          style: const TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       Text(
-                        messages.first,
+                        messageText,
                         style: TextStyle(
                           color: isMyMessage ? Colors.white : Colors.black,
                           fontWeight: FontWeight.bold,

@@ -12,7 +12,7 @@ import '../viewmodel/sign_in_view_model.dart';
 class SignInView extends StatelessWidget {
   SignInView({super.key});
 
-  final _loginController = TextEditingController(text: 'user@mail.ru');
+  final _loginController = TextEditingController(text: 'second@mail.ru');
   final _passwordController = TextEditingController(text: '1234');
 
   @override

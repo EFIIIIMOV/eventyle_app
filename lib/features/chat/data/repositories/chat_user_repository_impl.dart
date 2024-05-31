@@ -1,5 +1,3 @@
-
-
 import '../../domain/entities/chat_user_entity.dart';
 import '../../domain/interfaces/chat_user_repository.dart';
 import '../datasources/chat_user_remote_data_source.dart';
@@ -13,6 +11,15 @@ class ChatUserRepositoryImpl implements ChatUserRepository {
   Future<List<ChatUserEntity>> getAllUsers(String searchQuery) async {
     final chatUserModels =
         await chatUserRemoteDataSource.getAllUsers(searchQuery);
+    List<ChatUserEntity> userInfoEntities = chatUserModels
+        .map((userInfoModels) => userInfoModels as ChatUserEntity)
+        .toList();
+    return userInfoEntities;
+  }
+
+  @override
+  Future<List<ChatUserEntity>> getChatUsers(String chat_id) async {
+    final chatUserModels = await chatUserRemoteDataSource.getChatUsers(chat_id);
     List<ChatUserEntity> userInfoEntities = chatUserModels
         .map((userInfoModels) => userInfoModels as ChatUserEntity)
         .toList();

@@ -50,6 +50,7 @@ dependencies:
   image_picker:
   flutter_secure_storage:
   sliding_up_panel:
+  jwt_decoder:
 
 dev_dependencies:
   flutter_test:

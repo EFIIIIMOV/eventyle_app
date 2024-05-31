@@ -10,6 +10,8 @@ import '../models/chat_user_model.dart';
 abstract class ChatUserRemoteDataSource {
   Future<List<ChatUserModel>> getAllUsers(String searchQuery);
 
+  Future<List<ChatUserModel>> getChatUsers(String chat_id);
+
   Future<void> addUserToChat(Map<String, Object> usersList);
 }
 
@@ -40,6 +42,30 @@ class ChatUserRemoteDataSourceImpl implements ChatUserRemoteDataSource {
     } else if (response.statusCode == 401) {
       tokenUtil.updateAccessToken();
       return await getAllUsers(searchQuery);
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<ChatUserModel>> getChatUsers(String chat_id) async {
+    String encodedChat_id = Uri.encodeComponent(chat_id);
+    final response = await http.get(
+      Uri.parse('http://10.0.2.2:8000/chats/users/?chat_id=$encodedChat_id'),
+      headers: <String, String>{
+        'Authorization': 'Bearer ${await tokenUtil.getAccessToken()}',
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    if (response.statusCode == 200) {
+      final users = jsonDecode(utf8.decode(response.bodyBytes));
+      print(users);
+      return (users['users'] as List)
+          .map((user) => ChatUserModel.fromJson(user))
+          .toList();
+    } else if (response.statusCode == 401) {
+      tokenUtil.updateAccessToken();
+      return await getAllUsers(chat_id);
     } else {
       throw ServerException();
     }

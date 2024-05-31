@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class ChatMessageBottomBar extends StatelessWidget {
   final messageController;
+  final void Function()? onSendButtonPressed;
 
   const ChatMessageBottomBar({
     super.key,
     required this.messageController,
+    required this.onSendButtonPressed,
   });
 
   @override
@@ -68,7 +70,7 @@ class ChatMessageBottomBar extends StatelessWidget {
               IconButton(
                 icon: const Icon(Icons.send, size: 30),
                 color: Colors.black,
-                onPressed: () {},
+                onPressed: onSendButtonPressed,
               ),
             ],
           ),

@@ -14,8 +14,8 @@ class ChatMessageModel extends ChatMessageEntity {
       message_id: json['message_id'] ?? '',
       chat_id: json['chat_id'] ?? '',
       user_id: json['user_id'] ?? '',
-      messageText: json['messageText'] ?? '',
-      date: json['date'] ?? '',
+      messageText: json['message_text'] ?? '',
+      date: DateTime.parse(json['create_time']),
     );
   }
 
