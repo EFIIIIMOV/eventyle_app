@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:eventyle_app/features/chat/data/datasources/chat_message_remote_data_source.dart';
 import 'package:eventyle_app/features/chat/data/repositories/chat_message_repository_impl.dart';
 import 'package:eventyle_app/features/chat/domain/usecases/get_all_chat_message.dart';
@@ -6,6 +8,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:uuid/uuid.dart';
 import 'package:http/http.dart' as http;
 import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:web_socket_channel/io.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../../../../core/utils/token_util.dart';
 import '../../data/datasources/chat_user_remote_data_source.dart';
@@ -35,11 +39,34 @@ class ChatViewModel extends ChangeNotifier {
     ),
   );
 
-  ChatViewModel();
+  final WebSocketChannel channel = IOWebSocketChannel.connect(
+      'ws://10.0.2.2:8080/ws/chat/nfjnn3jn432jn4j3n/');
 
   List<ChatMessageEntity> messageList = [];
   List<ChatUserEntity> userList = [];
   String userId = '';
+
+  ChatViewModel() {
+    channel.stream.listen((message) {
+      print(message.runtimeType);
+      Map<String, dynamic> map = jsonDecode(message);
+      print(map);
+      // Преобразование внутреннего JSON-объекта, содержащего сообщение
+      final innerJson = map["message"];
+
+      // Создание объекта ChatMessageEntity из JSON-данных
+      ChatMessageEntity newMessage = ChatMessageEntity(
+        message_id: innerJson['message_id'],
+        chat_id: innerJson['chat_id'],
+        user_id: innerJson['user_id'],
+        messageText: innerJson['messageText'],
+        date: DateTime.now(),
+      );
+
+      messageList.add(newMessage);
+      notifyListeners();
+    });
+  }
 
   Future<void> getListMessage({
     required String chat_id,
@@ -59,14 +86,25 @@ class ChatViewModel extends ChangeNotifier {
     required String chat_id,
     required String messageText,
   }) async {
+    final message_id = Uuid().v4().replaceAll('-', '');
     ChatMessageEntity newMessage = ChatMessageEntity(
-      message_id: Uuid().v4().replaceAll('-', ''),
+      message_id: message_id,
       chat_id: chat_id,
       user_id: "",
       messageText: messageText,
       date: DateTime.now(),
     );
     addChatMessageUseCase.call(newMessage);
+    final newMessageJson = {
+      "message_id": message_id,
+      "chat_id": chat_id,
+      "user_id": userId,
+      "messageText": messageText,
+      "date": '2022-05-12T12:00:00.000Z'
+    };
+
+// Преобразуйте объект JSON в строку и отправьте его через канал
+    channel.sink.add(jsonEncode(newMessageJson));
     notifyListeners();
   }
 

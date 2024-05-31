@@ -51,6 +51,7 @@ dependencies:
   flutter_secure_storage:
   sliding_up_panel:
   jwt_decoder:
+  web_socket_channel:
 
 dev_dependencies:
   flutter_test:

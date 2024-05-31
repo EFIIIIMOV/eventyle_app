@@ -23,4 +23,14 @@ class ChatMessageEntity extends Equatable {
         messageText,
         date,
       ];
+
+  Map<String, dynamic> toJson() {
+    return {
+      'message_id': message_id,
+      'chat_id': chat_id,
+      'user_id': user_id,
+      'messageText': messageText,
+      'date': date.toIso8601String(),
+    };
+  }
 }
