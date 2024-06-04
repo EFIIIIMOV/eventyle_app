@@ -10,7 +10,7 @@ import '../models/post_image_model.dart';
 import '../models/post_model.dart';
 
 abstract class PostRemoteDataSource {
-  //Future<List<EventModel>> getAllPosts();
+  Future<List<PostModel>> getAllPosts(String user_id);
 
   Future<void> addPost(PostModel postModel);
 }
@@ -22,27 +22,27 @@ class PostRemoteDataSourceImpl implements PostRemoteDataSource {
     client: http.Client(),
   );
 
-  // @override
-  // Future<List<EventModel>> getAllPosts() async {
-  //   final response = await client.get(
-  //     Uri.parse('http://10.0.2.2:8000/events/'),
-  //     headers: <String, String>{
-  //       'Authorization': 'Bearer ${await tokenUtil.getAccessToken()}',
-  //       'Content-Type': 'application/json; charset=UTF-8',
-  //     },
-  //   );
-  //   if (response.statusCode == 200) {
-  //     final events = json.decode(utf8.decode(response.bodyBytes));
-  //     return (events['events'] as List)
-  //         .map((event) => EventModel.fromJson(event))
-  //         .toList();
-  //   } else if (response.statusCode == 401) {
-  //     tokenUtil.updateAccessToken();
-  //     return await getAllEvents();
-  //   } else {
-  //     throw ServerException();
-  //   }
-  // }
+  @override
+  Future<List<PostModel>> getAllPosts(String user_id) async {
+    final response = await client.get(
+      Uri.parse('http://10.0.2.2:8000/user/profile/post/?user_id=$user_id'),
+      headers: <String, String>{
+        'Authorization': 'Bearer ${await tokenUtil.getAccessToken()}',
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    if (response.statusCode == 200) {
+      final posts = json.decode(utf8.decode(response.bodyBytes));
+      return (posts['posts'] as List)
+          .map((post) => PostModel.fromJson(post))
+          .toList();
+    } else if (response.statusCode == 401) {
+      tokenUtil.updateAccessToken();
+      return await getAllPosts(user_id);
+    } else {
+      throw ServerException();
+    }
+  }
 
   @override
   Future<void> addPost(PostModel postModel) async {

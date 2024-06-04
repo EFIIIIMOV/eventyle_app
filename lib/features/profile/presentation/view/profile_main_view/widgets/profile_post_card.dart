@@ -1,9 +1,19 @@
+import 'dart:io';
+
+import 'package:eventyle_app/features/profile/domain/entities/post_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../../../core/constants/theme/container_box_decoration.dart';
+import '../../../../../../core/constants/widgets/create_image_widget.dart';
 
 class ProfilePostCard extends StatelessWidget {
-  const ProfilePostCard({super.key});
+  final PostEntity postEntity;
+
+  const ProfilePostCard({
+    super.key,
+    required this.postEntity,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,21 +24,11 @@ class ProfilePostCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Текст поста'),
+            Text(postEntity.postText),
             Divider(color: Colors.grey.shade300, thickness: 1, height: 10),
             SizedBox(height: 4),
             Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: generateList(context),
-                ),
-                SizedBox(height: 8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: generateList(context),
-                ),
-              ],
+              children: generateList(context, postEntity.imageIds!),
             ),
           ],
         ),
@@ -37,24 +37,27 @@ class ProfilePostCard extends StatelessWidget {
   }
 }
 
-List<Widget> generateList(BuildContext context) {
-  List<Widget> children = [];
-
-  for (int i = 0; i < 5; i++) {
-    children.addAll(
-      [
-        ClipRRect(
+List<Widget> generateList(BuildContext context, List<String> imageIds) {
+  return [
+    GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: imageIds.length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 5,
+        crossAxisSpacing: 8.0,
+        mainAxisSpacing: 8.0,
+      ),
+      itemBuilder: (BuildContext context, int index) {
+        return ClipRRect(
           borderRadius: BorderRadius.circular(8.0),
-          child: Image.asset(
-            'assets/images/test_image.png',
-            width: MediaQuery.of(context).size.width / 7,
-            height: MediaQuery.of(context).size.width / 7,
-            fit: BoxFit.cover,
-          ),
-        ),
-      ],
-    );
-  }
-
-  return children;
+          child: CreateImageWidget(
+              borderRadiusCircular: 8,
+              containerSize: 50,
+              imageUrl:
+                  'http://10.0.2.2:8000/user/profile/post/image/?image_id=${imageIds[index].replaceAll('-', '')}'),
+        );
+      },
+    ),
+  ];
 }

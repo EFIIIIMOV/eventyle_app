@@ -22,6 +22,7 @@ class _ProfileMainViewState extends State<ProfileMainView> {
   void didChangeDependencies() {
     viewModel = context.read<ProfileMainViewModel>();
     viewModel.getProfileInfo();
+    viewModel.getAllPosts();
     super.didChangeDependencies();
   }
 
@@ -36,39 +37,42 @@ class _ProfileMainViewState extends State<ProfileMainView> {
             viewModel.onEditProfileInfoButtonPressed(context),
       ),
       bottomNavigationBar: const CustomBottomNavigationBar(currentIndex: 3),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(16),
-          child: Center(
-            child: Column(
-              children: [
-                Consumer<ProfileMainViewModel>(
+        body: RefreshIndicator(
+          color: Colors.black,
+          onRefresh: () async {
+            await viewModel.getAllPosts();
+          },
+          child: ListView(
+            padding: EdgeInsets.all(16),
+            children: [
+              Consumer<ProfileMainViewModel>(
+                builder: (context, viewModel, child) {
+                  return viewModel.profileInfoEntity == null
+                      ? const Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.black,
+                    ),
+                  )
+                      : ProfileTopInfo(
+                    user_id: viewModel.profileInfoEntity!.user_id,
+                    name: viewModel.profileInfoEntity!.name,
+                    surname: viewModel.profileInfoEntity!.surname,
+                    role: viewModel.profileInfoEntity!.role,
+                    description: viewModel.profileInfoEntity!.description,
+                  );
+                },
+              ),
+              SizedBox(height: 20),
+              Consumer<ProfileMainViewModel>(
                   builder: (context, viewModel, child) {
-                    return viewModel.profileInfoEntity == null
-                        ? const Center(
-                            child: CircularProgressIndicator(
-                              color: Colors.black,
-                            ),
-                          )
-                        : ProfileTopInfo(
-                            user_id: viewModel.profileInfoEntity!.user_id,
-                            name: viewModel.profileInfoEntity!.name,
-                            surname: viewModel.profileInfoEntity!.surname,
-                            role: viewModel.profileInfoEntity!.role,
-                            description:
-                                viewModel.profileInfoEntity!.description,
-                          );
-                  },
-                ),
-                SizedBox(height: 20),
-                ProfilePostList(
-                  onTap: () => viewModel.onNewPostButtonPressed(context),
-                ),
-              ],
-            ),
+                    return ProfilePostList(
+                      onTap: () => viewModel.onNewPostButtonPressed(context),
+                      postEntityList: viewModel.posts,
+                    );
+                  })
+            ],
           ),
-        ),
-      ),
+        )
     );
   }
 }

@@ -15,13 +15,13 @@ class PostRepositoryImpl implements PostRepository {
 
   PostRepositoryImpl({required this.postRemoteDataSource});
 
-  // @override
-  // Future<List<PostEntity>> getAllPosts() async {
-  //   final postModels = await postRemoteDataSource.getAllPosts();
-  //   List<PostEntity> postEntities =
-  //       postModels.map((postModel) => postModel as PostEntity).toList();
-  //   return postEntities;
-  // }
+  @override
+  Future<List<PostEntity>> getAllPosts(String user_id) async {
+    final postModels = await postRemoteDataSource.getAllPosts(user_id);
+    List<PostEntity> postEntities =
+        postModels.map((postModel) => postModel as PostEntity).toList();
+    return postEntities;
+  }
 
   @override
   Future<void> addPost(PostEntity postEntity) async {

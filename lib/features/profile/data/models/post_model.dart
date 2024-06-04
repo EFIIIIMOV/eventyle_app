@@ -12,8 +12,8 @@ class PostModel extends PostEntity {
   factory PostModel.fromJson(Map<String, dynamic> json) {
     return PostModel(
         post_id: json['post_id'] ?? '',
-        postText: json['postText'] ?? '',
-        imageIds: json['imageIds'] ?? '');
+        postText: json['post_text'] ?? '',
+        imageIds: List<String>.from(json['images'].map((x) => x.toString())));
   }
 
   Map<String, dynamic> toJson() {
