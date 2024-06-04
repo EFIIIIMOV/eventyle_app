@@ -4,18 +4,18 @@ import 'package:eventyle_app/features/profile/domain/entities/post_image_entity.
 class PostEntity extends Equatable {
   final String post_id;
   final String postText;
-  final List<PostImageEntity>? images;
+  final List<String>? imageIds;
 
   const PostEntity({
     required this.post_id,
     required this.postText,
-    required this.images,
+    required this.imageIds,
   });
 
   @override
   List<Object?> get props => [
         post_id,
         postText,
-        images,
+    imageIds,
       ];
 }

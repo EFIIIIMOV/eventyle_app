@@ -7,9 +7,27 @@ import 'dart:io';
 
 import 'package:uuid/uuid.dart';
 
+import '../../data/datasources/post_image_remote_data_source.dart';
+import '../../data/datasources/post_remote_data_source.dart';
+import '../../data/repositories/post_image_repository_impl.dart';
+import '../../data/repositories/post_repository_impl.dart';
 import '../../domain/entities/post_image_entity.dart';
+import '../../domain/usecases/add_post.dart';
+import '../../domain/usecases/add_post_image.dart';
 
 class ProfileCreatePostViewModel extends ChangeNotifier {
+  final AddPostUseCase addPostUseCase = AddPostUseCase(
+    postRepository: PostRepositoryImpl(
+      postRemoteDataSource: PostRemoteDataSourceImpl(),
+    ),
+  );
+
+  final AddPostImageUseCase addPostImageUseCase = AddPostImageUseCase(
+    postImageRepository: PostImageRepositoryImpl(
+      postImageRemoteDataSource: PostImageRemoteDataSourceImpl(),
+    ),
+  );
+
   ProfileCreatePostViewModel();
 
   List<XFile> selectedImageFileList = [];
@@ -30,22 +48,19 @@ class ProfileCreatePostViewModel extends ChangeNotifier {
       );
     }
 
+    List<String> imageIds = postImageEntities
+        .map((postImageEntity) => postImageEntity.image_id)
+        .toList();
+
     final post_id = Uuid().v4().replaceAll('-', '');
     final PostEntity postEntity = PostEntity(
       post_id: post_id,
       postText: postText,
-      images: postImageEntities,
+      imageIds: imageIds,
     );
 
-    print(postEntity.post_id);
-    print(postEntity.postText);
-    if (postEntity.images != null && postEntity.images!.isNotEmpty) {
-      print(postEntity.images![0].image_id);
-      if (postEntity.images!.length > 9) {
-        print(postEntity.images![9].image_id);
-      }
-    }
-
+    addPostUseCase.call(postEntity);
+    addPostImageUseCase.call(postImageEntities);
     selectedImageFileList = [];
     Navigator.pop(context);
   }
