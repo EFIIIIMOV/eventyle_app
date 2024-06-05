@@ -63,7 +63,7 @@ class _UserListViewState extends State<UserListView> {
                   itemCount: viewModel.listUsersInfo.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
-                      onTap: () {},
+                      onTap: () => viewModel.onUserPressed(context, index),
                       child: UserListTileCard(
                         user_id: viewModel.listUsersInfo[index].user_id,
                         name: viewModel.listUsersInfo[index].name,

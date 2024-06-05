@@ -28,7 +28,8 @@ class UserListViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> onNewEventButtonPressed(BuildContext context) async {
-    Navigator.pushNamed(context, '/eventCreate');
+  Future<void> onUserPressed(BuildContext context, int index) async {
+    Navigator.pushNamed(context, '/userProfile',
+        arguments: {'user': listUsersInfo[index]});
   }
 }

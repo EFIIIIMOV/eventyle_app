@@ -26,7 +26,9 @@ import 'features/event/presentation/viewmodel/create_event_info_view_model.dart'
 import 'features/event/presentation/viewmodel/create_event_view_model.dart';
 import 'features/event/presentation/viewmodel/event_main_view_model.dart';
 import 'features/event/presentation/viewmodel/events_list_view_model.dart';
+import 'features/found_users/presentation/view/profile_main_view/profile_main_view.dart';
 import 'features/found_users/presentation/view/user_list_view/user_list_view.dart';
+import 'features/found_users/presentation/viewmodel/profile_main_view_model.dart';
 import 'features/found_users/presentation/viewmodel/user_list_view_model.dart';
 import 'features/profile/presentation/view/profile_create_post_view/profile_create_post_view.dart';
 import 'features/profile/presentation/view/profile_edit_view/profile_edit_view.dart';
@@ -71,6 +73,7 @@ class MyApp extends StatelessWidget {
 
         //FOUND_USERS
         ChangeNotifierProvider(create: (context) => UserListViewModel()),
+        ChangeNotifierProvider(create: (context) => UserProfileMainViewModel()),
       ],
       child: MaterialApp(
         //debugShowMaterialGrid: true,
@@ -92,6 +95,7 @@ class MyApp extends StatelessWidget {
           '/chatCreate': (context) => ChatCreateView(),
           '/chatMain': (context) => ChatMainView(),
           '/userList': (context) => UserListView(),
+          '/userProfile': (context) => UserProfileMainView(),
         },
         debugShowCheckedModeBanner: false,
       ),
