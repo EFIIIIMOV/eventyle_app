@@ -17,22 +17,22 @@ class UserProfileMainView extends StatefulWidget {
 }
 
 class _ProfileMainViewState extends State<UserProfileMainView> {
-  late final Map<String, dynamic>? args;
-  late final UserInfoEntity? userInfoEntity;
-  late final UserProfileMainViewModel viewModel;
+  Map<String, dynamic>? args;
+  UserInfoEntity? userInfoEntity;
+  UserProfileMainViewModel? viewModel;
 
   @override
   void didChangeDependencies() async {
     args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
     userInfoEntity = args?['user'] as UserInfoEntity;
     viewModel = context.read<UserProfileMainViewModel>();
-    await viewModel.getAllPosts(userInfoEntity!.user_id);
+    await viewModel!.getAllPosts(userInfoEntity!.user_id);
     super.didChangeDependencies();
   }
 
   @override
   void dispose() {
-    viewModel.posts = [];
+    viewModel!.posts = [];
     super.dispose();
   }
 
@@ -42,15 +42,15 @@ class _ProfileMainViewState extends State<UserProfileMainView> {
       backgroundColor: AppColors.viewSecondBackgroundColor,
       appBar: CustomAppBar(
         title: 'Профиль',
-        buttonIcon: Icons.edit,
+        buttonIcon: null,
         onButtonPressed: () =>
-            viewModel.onEditProfileInfoButtonPressed(context),
+            viewModel!.onEditProfileInfoButtonPressed(context),
       ),
       bottomNavigationBar: const CustomBottomNavigationBar(currentIndex: 0),
       body: RefreshIndicator(
         color: Colors.black,
         onRefresh: () async {
-          await viewModel.getAllPosts(userInfoEntity!.user_id);
+          await viewModel!.getAllPosts(userInfoEntity!.user_id);
         },
         child: ListView(
           padding: EdgeInsets.all(16),
