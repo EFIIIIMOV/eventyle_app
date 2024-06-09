@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:eventyle_app/core/error/exception.dart';
+import '../../../../core/utils/get_platform_localhost.dart';
 import '../../../../core/utils/token_util.dart';
 import '../models/chat_model.dart';
 
@@ -17,11 +18,12 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
     flutterSecureStorage: FlutterSecureStorage(),
     client: http.Client(),
   );
+  final String baseUrl = getBaseUrl();
 
   @override
   Future<List<ChatModel>> getAllChats() async {
     final response = await client.get(
-      Uri.parse('http://10.0.2.2:8000/chats/'),
+      Uri.parse('$baseUrl/chats/'),
       headers: <String, String>{
         'Authorization': 'Bearer ${await tokenUtil.getAccessToken()}',
         'Content-Type': 'application/json; charset=UTF-8',
@@ -44,7 +46,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
   Future<void> addChat(ChatModel chatModel) async {
     final Map<String, dynamic> chatData = chatModel.toJson();
     final response = await client.post(
-      Uri.parse('http://10.0.2.2:8000/chats/create/'),
+      Uri.parse('$baseUrl/chats/create/'),
       headers: <String, String>{
         'Authorization': 'Bearer ${await tokenUtil.getAccessToken()}',
         'Content-Type': 'application/json; charset=UTF-8',

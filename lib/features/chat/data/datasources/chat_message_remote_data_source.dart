@@ -3,6 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:eventyle_app/core/error/exception.dart';
 import 'package:intl/intl.dart';
+import '../../../../core/utils/get_platform_localhost.dart';
 import '../../../../core/utils/token_util.dart';
 import '../models/chat_message_model.dart';
 import '../models/chat_model.dart';
@@ -19,11 +20,12 @@ class ChatMessageRemoteDataSourceImpl implements ChatMessageRemoteDataSource {
     flutterSecureStorage: FlutterSecureStorage(),
     client: http.Client(),
   );
+  final String baseUrl = getBaseUrl();
 
   @override
   Future<List<ChatMessageModel>> getAllChatMessages(String chat_id) async {
     final response = await client.get(
-      Uri.parse('http://10.0.2.2:8000/chats/message/?chat_id=$chat_id'),
+      Uri.parse('$baseUrl/chats/message/?chat_id=$chat_id'),
       headers: <String, String>{
         'Authorization': 'Bearer ${await tokenUtil.getAccessToken()}',
         'Content-Type': 'application/json; charset=UTF-8',
@@ -48,7 +50,7 @@ class ChatMessageRemoteDataSourceImpl implements ChatMessageRemoteDataSource {
     messageData['date'] = DateFormat('yyyy-MM-dd hh:mm:ss').format(messageData['date']!);
     print(messageData['date']);
     final response = await client.post(
-      Uri.parse('http://10.0.2.2:8000/chats/message/create/'),
+      Uri.parse('$baseUrl/chats/message/create/'),
       headers: <String, String>{
         'Authorization': 'Bearer ${await tokenUtil.getAccessToken()}',
         'Content-Type': 'application/json; charset=UTF-8',

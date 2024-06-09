@@ -33,7 +33,7 @@ class ListTileCard extends StatelessWidget {
               borderRadiusCircular: 8,
               containerSize: 50,
               imageUrl:
-                  'http://10.0.2.2:8000/events/image/?image_id=${eventId.replaceAll('-', '')}'),
+                  '/events/image/?image_id=${eventId.replaceAll('-', '')}'),
           title: Text(eventTitle),
           subtitle: Text(dateTimeParseUtil(eventDate)),
         ),

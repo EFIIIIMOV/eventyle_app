@@ -6,6 +6,7 @@ import 'package:eventyle_app/features/auth/data/models/user_register_model.dart'
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../../core/utils/get_platform_localhost.dart';
 import '../../../../core/utils/token_util.dart';
 
 abstract class UserAuthRemoteDataSource {
@@ -20,12 +21,13 @@ class UserAuthRemoteDataSourceImpl extends UserAuthRemoteDataSource {
     flutterSecureStorage: FlutterSecureStorage(),
     client: http.Client(),
   );
+  final String baseUrl = getBaseUrl();
 
   @override
   Future<void> registerUser(UserRegisterModel userRegisterModel) async {
     final Map<String, dynamic> userData = userRegisterModel.toJson();
     final response = await client.post(
-      Uri.parse('http://10.0.2.2:8000/auth/create/'),
+      Uri.parse('$baseUrl/auth/create/'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -40,7 +42,7 @@ class UserAuthRemoteDataSourceImpl extends UserAuthRemoteDataSource {
   Future<void> loginUser(UserLoginModel userLoginModel) async {
     final Map<String, dynamic> userData = userLoginModel.toJson();
     final response = await client.post(
-      Uri.parse('http://10.0.2.2:8000/auth/token/'),
+      Uri.parse('$baseUrl/auth/token/'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -53,8 +55,5 @@ class UserAuthRemoteDataSourceImpl extends UserAuthRemoteDataSource {
       jsonDecode(response.body)['access'],
       jsonDecode(response.body)['refresh'],
     );
-
-    print('getAccessToken = ${await tokenUtil.getAccessToken()}');
-    print('getRefreshToken = ${await tokenUtil.getRefreshToken()}');
   }
 }

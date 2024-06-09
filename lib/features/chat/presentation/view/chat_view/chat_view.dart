@@ -30,7 +30,7 @@ class _ChatMainViewState extends State<ChatMainView> {
   @override
   void dispose() {
     _messageController.dispose();
-    viewModel.channel.sink.close();
+    viewModel.channel!.sink.close();
     super.dispose();
   }
 

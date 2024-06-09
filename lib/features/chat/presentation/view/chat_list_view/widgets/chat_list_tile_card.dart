@@ -30,7 +30,7 @@ class ChatListTileCard extends StatelessWidget {
             borderRadiusCircular: 150,
             containerSize: 50,
             imageUrl:
-                'http://10.0.2.2:8000/chats/image/?image_id=${chat_id.replaceAll('-', '')}'),
+                '/chats/image/?image_id=${chat_id.replaceAll('-', '')}'),
         title: Text('$chatName'),
         subtitle: const Text('Последнее сообщение в чате'),
       ),

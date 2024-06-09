@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:eventyle_app/core/error/exception.dart';
+import '../../../../core/utils/get_platform_localhost.dart';
 import '../../../../core/utils/token_util.dart';
 import '../models/post_model.dart';
 
@@ -17,11 +18,12 @@ class PostRemoteDataSourceImpl implements PostRemoteDataSource {
     flutterSecureStorage: FlutterSecureStorage(),
     client: http.Client(),
   );
+  final String baseUrl = getBaseUrl();
 
   @override
   Future<List<PostModel>> getAllPosts(String user_id) async {
     final response = await client.get(
-      Uri.parse('http://10.0.2.2:8000/user/profile/post/?user_id=$user_id'),
+      Uri.parse('$baseUrl/user/profile/post/?user_id=$user_id'),
       headers: <String, String>{
         'Authorization': 'Bearer ${await tokenUtil.getAccessToken()}',
         'Content-Type': 'application/json; charset=UTF-8',
@@ -44,7 +46,7 @@ class PostRemoteDataSourceImpl implements PostRemoteDataSource {
   Future<void> addPost(PostModel postModel) async {
     final Map<String, dynamic> postData = postModel.toJson();
     final response = await client.post(
-      Uri.parse('http://10.0.2.2:8000/user/profile/post/create/'),
+      Uri.parse('$baseUrl/user/profile/post/create/'),
       headers: <String, String>{
         'Authorization': 'Bearer ${await tokenUtil.getAccessToken()}',
         'Content-Type': 'application/json; charset=UTF-8',

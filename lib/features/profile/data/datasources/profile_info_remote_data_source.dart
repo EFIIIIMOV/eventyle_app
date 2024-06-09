@@ -5,6 +5,7 @@ import 'package:eventyle_app/core/error/exception.dart';
 import 'package:eventyle_app/features/event/data/models/event_model.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../core/utils/get_platform_localhost.dart';
 import '../../../../core/utils/token_util.dart';
 import '../models/profile_info_model.dart';
 
@@ -18,11 +19,12 @@ class ProfileInfoRemoteDataSourceImpl implements ProfileInfoRemoteDataSource {
     flutterSecureStorage: FlutterSecureStorage(),
     client: http.Client(),
   );
+  final String baseUrl = getBaseUrl();
 
   @override
   Future<ProfileInfoModel> getProfileInfo() async {
     final response = await client.get(
-      Uri.parse('http://10.0.2.2:8000/user/profile'),
+      Uri.parse('$baseUrl/user/profile'),
       headers: <String, String>{
         'Authorization': 'Bearer ${await tokenUtil.getAccessToken()}',
         'Content-Type': 'application/json; charset=UTF-8',

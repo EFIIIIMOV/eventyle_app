@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:eventyle_app/features/chat/data/datasources/chat_message_remote_data_source.dart';
 import 'package:eventyle_app/features/chat/data/repositories/chat_message_repository_impl.dart';
@@ -39,15 +40,33 @@ class ChatViewModel extends ChangeNotifier {
     ),
   );
 
-  final WebSocketChannel channel = IOWebSocketChannel.connect(
-      'ws://10.0.2.2:8080/ws/chat/nfjnn3jn432jn4j3n/');
+  String getBaseUrl() {
+    if (Platform.isAndroid) {
+      return '10.0.2.2'; // Android эмулятор
+    } else if (Platform.isIOS) {
+      return '127.0.0.1'; // iOS симулятор
+    } else {
+      return 'localhost'; // другие платформы
+    }
+  }
+
+  // final WebSocketChannel channel = IOWebSocketChannel.connect(
+  //     'ws://10.0.2.2:8080/ws/chat/nfjnn3jn432jn4j3n/');
 
   List<ChatMessageEntity> messageList = [];
   List<ChatUserEntity> userList = [];
   String userId = '';
+  WebSocketChannel? channel;
 
   ChatViewModel() {
-    channel.stream.listen((message) {
+    if (Platform.isAndroid) {
+      channel = IOWebSocketChannel.connect(
+          'ws://10.0.2.2:8080/ws/chat/nfjnn3jn432jn4j3n/');
+    } else if (Platform.isIOS) {
+      channel = IOWebSocketChannel.connect(
+          'ws://127.0.0.1:8080/ws/chat/nfjnn3jn432jn4j3n/');
+    }
+    channel!.stream.listen((message) {
       print(message.runtimeType);
       Map<String, dynamic> map = jsonDecode(message);
       print(map);
@@ -104,7 +123,7 @@ class ChatViewModel extends ChangeNotifier {
     };
 
 // Преобразуйте объект JSON в строку и отправьте его через канал
-    channel.sink.add(jsonEncode(newMessageJson));
+    channel!.sink.add(jsonEncode(newMessageJson));
     notifyListeners();
   }
 

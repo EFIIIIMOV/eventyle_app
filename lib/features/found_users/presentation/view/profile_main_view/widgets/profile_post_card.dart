@@ -97,7 +97,7 @@ class ProfilePostCard extends StatelessWidget {
                   borderRadiusCircular: 8,
                   containerSize: 50,
                   imageUrl:
-                      'http://10.0.2.2:8000/user/profile/post/image/?image_id=${imageIds[index].replaceAll('-', '')}'),
+                      '/user/profile/post/image/?image_id=${imageIds[index].replaceAll('-', '')}'),
             ),
           );
         },

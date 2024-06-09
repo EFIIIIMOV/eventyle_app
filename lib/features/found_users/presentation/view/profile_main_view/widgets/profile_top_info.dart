@@ -28,7 +28,7 @@ class ProfileTopInfo extends StatelessWidget {
                 borderRadiusCircular: 150,
                 containerSize: 130,
                 imageUrl:
-                    'http://10.0.2.2:8000/user/profile/image/?user_id=${user_id.replaceAll('-', '')}'),
+                    '/user/profile/image/?user_id=${user_id.replaceAll('-', '')}'),
             const SizedBox(width: 16),
             Expanded(
               child: Column(

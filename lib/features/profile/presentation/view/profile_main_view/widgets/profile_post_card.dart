@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../../../../core/constants/theme/container_box_decoration.dart';
 import '../../../../../../core/constants/widgets/create_image_widget.dart';
+import '../../../../../../core/utils/get_platform_localhost.dart';
 
 class ProfilePostCard extends StatelessWidget {
   final PostEntity postEntity;
@@ -16,6 +17,7 @@ class ProfilePostCard extends StatelessWidget {
   });
 
   void _showImageOnFullScreen(BuildContext context, String imagePath) async {
+    final String baseUrl = await getBaseUrl();
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -34,7 +36,7 @@ class ProfilePostCard extends StatelessWidget {
                 child: Container(
                   color: Colors.black,
                   child: Image.network(
-                    imagePath,
+                    "$baseUrl+$imagePath",
                     fit: BoxFit.fill,
                     frameBuilder: (BuildContext context, Widget child,
                         int? frame, bool wasSynchronouslyLoaded) {
@@ -93,14 +95,14 @@ class ProfilePostCard extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () => _showImageOnFullScreen(context,
-                'http://10.0.2.2:8000/user/profile/post/image/?image_id=${imageIds[index].replaceAll('-', '')}'),
+                '/user/profile/post/image/?image_id=${imageIds[index].replaceAll('-', '')}'),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
               child: CreateImageWidget(
                   borderRadiusCircular: 8,
                   containerSize: 50,
                   imageUrl:
-                      'http://10.0.2.2:8000/user/profile/post/image/?image_id=${imageIds[index].replaceAll('-', '')}'),
+                      '/user/profile/post/image/?image_id=${imageIds[index].replaceAll('-', '')}'),
             ),
           );
         },

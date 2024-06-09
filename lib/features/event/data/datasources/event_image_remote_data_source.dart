@@ -5,6 +5,7 @@ import 'package:eventyle_app/core/error/exception.dart';
 import 'package:eventyle_app/features/event/data/models/event_model.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../core/utils/get_platform_localhost.dart';
 import '../../../../core/utils/token_util.dart';
 import '../models/event_image_model.dart';
 
@@ -18,12 +19,13 @@ class EventImageRemoteDataSourceImpl implements EventImageRemoteDataSource {
     flutterSecureStorage: FlutterSecureStorage(),
     client: http.Client(),
   );
+  final String baseUrl = getBaseUrl();
 
   @override
   Future<void> addImageEvent(EventImageModel eventImageModel) async {
     final Map<String, dynamic> eventImageData = eventImageModel.toJson();
     final response = await client.post(
-      Uri.parse('http://10.0.2.2:8000/events/image/create/'),
+      Uri.parse('$baseUrl/events/image/create/'),
       headers: <String, String>{
         'Authorization': 'Bearer ${await tokenUtil.getAccessToken()}',
         'Content-Type': 'application/json; charset=UTF-8',

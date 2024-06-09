@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../../core/utils/get_platform_localhost.dart';
 import '../../../../core/utils/token_util.dart';
 import '../models/event_info_model.dart';
 
@@ -20,11 +21,12 @@ class EventInfoRemoteDataSourceImpl implements EventInfoRemoteDataSource {
     flutterSecureStorage: FlutterSecureStorage(),
     client: http.Client(),
   );
+  final String baseUrl = getBaseUrl();
 
   @override
   Future<List<EventInfoModel>> getAllEventInfo(String idEvent) async {
     final response = await client.get(
-      Uri.parse('http://10.0.2.2:8000/events/info/?event_id=$idEvent'),
+      Uri.parse('$baseUrl/events/info/?event_id=$idEvent'),
       headers: <String, String>{
         'Authorization': 'Bearer ${await tokenUtil.getAccessToken()}',
         'Content-Type': 'application/json; charset=UTF-8',
@@ -47,7 +49,7 @@ class EventInfoRemoteDataSourceImpl implements EventInfoRemoteDataSource {
   Future<void> addEventInfo(EventInfoModel eventInfoModel) async {
     final Map<String, dynamic> eventInfoData = eventInfoModel.toJson();
     final response = await client.post(
-      Uri.parse('http://10.0.2.2:8000/events/info/create/'),
+      Uri.parse('$baseUrl/events/info/create/'),
       headers: <String, String>{
         'Authorization': 'Bearer ${await tokenUtil.getAccessToken()}',
         'Content-Type': 'application/json; charset=UTF-8',

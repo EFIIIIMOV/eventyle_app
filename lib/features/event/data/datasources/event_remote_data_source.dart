@@ -5,6 +5,7 @@ import 'package:eventyle_app/core/error/exception.dart';
 import 'package:eventyle_app/features/event/data/models/event_model.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../core/utils/get_platform_localhost.dart';
 import '../../../../core/utils/token_util.dart';
 
 abstract class EventRemoteDataSource {
@@ -19,11 +20,12 @@ class EventRemoteDataSourceImpl implements EventRemoteDataSource {
     flutterSecureStorage: FlutterSecureStorage(),
     client: http.Client(),
   );
+  final String baseUrl = getBaseUrl();
 
   @override
   Future<List<EventModel>> getAllEvents() async {
     final response = await client.get(
-      Uri.parse('http://10.0.2.2:8000/events/'),
+      Uri.parse('$baseUrl/events/'),
       headers: <String, String>{
         'Authorization': 'Bearer ${await tokenUtil.getAccessToken()}',
         'Content-Type': 'application/json; charset=UTF-8',
@@ -47,7 +49,7 @@ class EventRemoteDataSourceImpl implements EventRemoteDataSource {
     final Map<String, dynamic> eventData = eventModel.toJson();
     eventData['date'] = DateFormat('yyyy-MM-dd').format(eventData['date']!);
     final response = await client.post(
-      Uri.parse('http://10.0.2.2:8000/events/create/'),
+      Uri.parse('$baseUrl/events/create/'),
       headers: <String, String>{
         'Authorization': 'Bearer ${await tokenUtil.getAccessToken()}',
         'Content-Type': 'application/json; charset=UTF-8',

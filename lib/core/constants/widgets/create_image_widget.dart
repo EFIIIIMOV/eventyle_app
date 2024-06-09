@@ -1,12 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../utils/get_platform_localhost.dart';
+
 class CreateImageWidget extends StatelessWidget {
   final double borderRadiusCircular;
   final double containerSize;
   final String imageUrl;
+  final String baseUrl = getBaseUrl();
 
-  const CreateImageWidget({
+  CreateImageWidget({
     super.key,
     required double this.borderRadiusCircular,
     required double this.containerSize,
@@ -21,7 +24,7 @@ class CreateImageWidget extends StatelessWidget {
         height: containerSize,
         width: containerSize,
         child: CachedNetworkImage(
-          imageUrl: imageUrl,
+          imageUrl: "$baseUrl$imageUrl",
           width: containerSize,
           height: containerSize,
           fit: BoxFit.cover,

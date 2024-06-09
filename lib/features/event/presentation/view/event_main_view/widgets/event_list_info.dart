@@ -1,9 +1,6 @@
 import 'package:eventyle_app/features/event/presentation/viewmodel/event_main_view_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../../../core/constants/theme/container_box_decoration.dart';
-import '../../../../domain/entities/event_info_entity.dart';
 
 class EventListInfo extends StatelessWidget {
   final String event_id;
@@ -32,42 +29,46 @@ class EventListInfo extends StatelessWidget {
                 style:
                     TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
           ),
-          eventMainViewModel.listEventInfo.isEmpty
-              ? SizedBox(height: 0)
-              : const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Divider(height: 0, thickness: 0.5, color: Colors.grey),
-                ),
-          ...generateList(context),
+          if (eventMainViewModel.listEventInfo.isNotEmpty)
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                children: [
+                  Divider(height: 0, thickness: 0.5, color: Colors.grey),
+                  ...generateList(context),
+                ],
+              ),
+            ),
         ],
       ),
     );
   }
 
   List<Widget> generateList(BuildContext context) {
-    return [
-      ListView.separated(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: eventMainViewModel.listEventInfo.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            onTap: () =>
-                eventMainViewModel.onInfoPressed(context, index, eventName),
-            title: Text(eventMainViewModel.listEventInfo[index].name),
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return const Padding(
+    List<Widget> listTiles = [];
+    for (int index = 0;
+        index < eventMainViewModel.listEventInfo.length;
+        index++) {
+      listTiles.add(
+        ListTile(
+          onTap: () =>
+              eventMainViewModel.onInfoPressed(context, index, eventName),
+          title: Text(eventMainViewModel.listEventInfo[index].name),
+        ),
+      );
+      if (index < eventMainViewModel.listEventInfo.length - 1) {
+        listTiles.add(
+          const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Divider(
               height: 0,
               thickness: 0.5,
               color: Colors.grey,
             ),
-          );
-        },
-      ),
-    ];
+          ),
+        );
+      }
+    }
+    return listTiles;
   }
 }

@@ -27,7 +27,7 @@ class ChatMessageCard extends StatelessWidget {
                 borderRadiusCircular: 150,
                 containerSize: 32,
                 imageUrl:
-                    'http://10.0.2.2:8000/user/profile/image/?user_id=${userInfo.user_id.replaceAll('-', '')}'),
+                    '/user/profile/image/?user_id=${userInfo.user_id.replaceAll('-', '')}'),
           SizedBox(width: 8),
           Expanded(
             child: Column(
