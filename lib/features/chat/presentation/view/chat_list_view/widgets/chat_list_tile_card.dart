@@ -16,6 +16,7 @@ class ChatListTileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
+      height: 70,
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border(
@@ -25,14 +26,15 @@ class ChatListTileCard extends StatelessWidget {
           ),
         ),
       ),
-      child: ListTile(
-        leading: CreateImageWidget(
-            borderRadiusCircular: 150,
-            containerSize: 50,
-            imageUrl:
-                '/chats/image/?image_id=${chat_id.replaceAll('-', '')}'),
-        title: Text('$chatName'),
-        subtitle: const Text('Последнее сообщение в чате'),
+      child: Center(
+        child: ListTile(
+          leading: CreateImageWidget(
+              borderRadiusCircular: 150,
+              containerSize: 55,
+              imageUrl:
+                  '/chats/image/?image_id=${chat_id.replaceAll('-', '')}'),
+          title: Expanded(child: Text('$chatName')),
+        ),
       ),
     );
   }

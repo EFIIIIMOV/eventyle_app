@@ -31,10 +31,10 @@ class _CreateEventViewState extends State<CreateEventView> {
   @override
   void initState() {
     super.initState();
-    _nameController = TextEditingController(text: "testEventName");
-    _placeController = TextEditingController(text: "testEventPlace");
+    _nameController = TextEditingController();
+    _placeController = TextEditingController();
     _infoDescriptionController =
-        TextEditingController(text: "testEventDescription");
+        TextEditingController();
     _searchQuery = TextEditingController();
   }
 

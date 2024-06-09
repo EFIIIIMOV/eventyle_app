@@ -76,11 +76,13 @@ class _SignUpUserInfoViewState extends State<SignUpUserInfoView> {
                   CustomTextField(
                     controller: _nameController,
                     hintText: 'Имя',
+                    isObscure: false,
                   ),
                   SizedBox(height: 20),
                   CustomTextField(
                     controller: _surnameController,
                     hintText: 'Фамилия',
+                    isObscure: false,
                   ),
                   SizedBox(height: 20),
                   AboutUserTextField(

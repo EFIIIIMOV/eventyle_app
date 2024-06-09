@@ -41,13 +41,21 @@ class EventTopInfo extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text(
-                          'Дата проведения:\n${dateTimeParseUtil(eventDate)}',
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        const Text(
+                          'Дата проведения:',
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          'Место проведения:\n$eventPlace',
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          dateTimeParseUtil(eventDate),
+                          style: const TextStyle(fontWeight: FontWeight.w400),
+                        ),
+                        const Text(
+                          'Место проведения:',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          eventPlace,
+                          style: const TextStyle(fontWeight: FontWeight.w400),
                         ),
                       ],
                     ),

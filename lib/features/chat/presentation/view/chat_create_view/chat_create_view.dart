@@ -25,9 +25,8 @@ class _ChatCreateViewState extends State<ChatCreateView> {
   @override
   void initState() {
     super.initState();
-    _chatNameController = TextEditingController(text: 'testChatName');
-    _chatDescriptionController =
-        TextEditingController(text: 'testChatDescription');
+    _chatNameController = TextEditingController();
+    _chatDescriptionController = TextEditingController();
     _searchQuery = TextEditingController();
   }
 

@@ -5,9 +5,14 @@ import '../../../../core/constants/theme/colors.dart';
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
+  final bool isObscure;
 
-  const CustomTextField(
-      {super.key, required this.controller, required this.hintText});
+  const CustomTextField({
+    super.key,
+    required this.controller,
+    required this.hintText,
+    required this.isObscure,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +25,7 @@ class CustomTextField extends StatelessWidget {
           border: Border.all(color: AppColors.appBarTextColor),
         ),
         child: TextField(
+          obscureText: isObscure,
           controller: controller,
           decoration: InputDecoration(
             contentPadding:

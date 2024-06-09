@@ -12,8 +12,8 @@ import '../viewmodel/sign_in_view_model.dart';
 class SignInView extends StatelessWidget {
   SignInView({super.key});
 
-  final _loginController = TextEditingController(text: 'second@mail.ru');
-  final _passwordController = TextEditingController(text: '1234');
+  final _loginController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +33,17 @@ class SignInView extends StatelessWidget {
             children: [
               const Text('АВТОРИЗАЦИЯ', style: AppFonts.signTitleTextStyle),
               const SizedBox(height: 30),
-              CustomTextField(controller: _loginController, hintText: "Логин"),
+              CustomTextField(
+                controller: _loginController,
+                hintText: "Логин",
+                isObscure: false,
+              ),
               const SizedBox(height: 20),
               CustomTextField(
-                  controller: _passwordController, hintText: "Пароль"),
+                controller: _passwordController,
+                hintText: "Пароль",
+                isObscure: true,
+              ),
               const SizedBox(height: 30),
               SignInUpButton(
                 onPressed: () => viewModel.onSignInButtonPressed(

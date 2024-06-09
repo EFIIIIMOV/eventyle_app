@@ -36,16 +36,19 @@ class SignAuthInfoUpView extends StatelessWidget {
             CustomTextField(
               controller: _loginController,
               hintText: "Логин",
+              isObscure: false,
             ),
             const SizedBox(height: 20),
             CustomTextField(
               controller: _passwordControllerFirst,
               hintText: "Пароль",
+              isObscure: false,
             ),
             const SizedBox(height: 20),
             CustomTextField(
               controller: _passwordControllerSecond,
               hintText: "Повторить пароль",
+              isObscure: false,
             ),
             const SizedBox(height: 30),
             SignInUpButton(
