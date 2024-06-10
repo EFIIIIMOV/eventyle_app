@@ -65,10 +65,13 @@ class _ChatMainViewState extends State<ChatMainView> {
           }),
           ChatMessageBottomBar(
             messageController: _messageController,
-            onSendButtonPressed: () => viewModel.sendMessage(
-              chat_id: chatEntity.chat_id,
-              messageText: _messageController.text,
-            ),
+            onSendButtonPressed: () {
+              viewModel.sendMessage(
+                chat_id: chatEntity.chat_id,
+                messageText: _messageController.text,
+              );
+              _messageController.text = "";
+            },
           ),
         ],
       ),

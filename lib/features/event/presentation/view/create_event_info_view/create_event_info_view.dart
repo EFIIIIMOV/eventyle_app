@@ -27,9 +27,9 @@ class _CreateEventInfoViewState extends State<CreateEventInfoView> {
   @override
   void initState() {
     infoNameController =
-        TextEditingController(text: 'Название информации тест 3');
+        TextEditingController();
     infoDescriptionController =
-        TextEditingController(text: 'Описание информации тест 3');
+        TextEditingController();
     super.initState();
   }
 

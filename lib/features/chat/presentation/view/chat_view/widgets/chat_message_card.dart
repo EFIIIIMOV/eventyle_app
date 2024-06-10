@@ -69,7 +69,7 @@ class ChatMessageCard extends StatelessWidget {
                         messageText,
                         style: TextStyle(
                           color: isMyMessage ? Colors.white : Colors.black,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                     ],
