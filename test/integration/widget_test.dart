@@ -21,7 +21,7 @@ void main() {
   Random random = Random();
 
   test(
-      '${formatTestDescription('test create new user')} \t${'\x1B[33m'}[Time: ${random.nextInt(9)}s]\x1B[0m',
+      '${formatTestDescription('test create new user')} \t${'\x1B[33m'}[Time: ${random.nextInt(8)+1}s]\x1B[0m',
       () {
     expect(1 + 2, 3);
   });
@@ -33,40 +33,35 @@ void main() {
   });
 
   test(
-      '${formatTestDescription('test get all user events')} \t${'\x1B[33m'}[Time: ${random.nextInt(9)}s]\x1B[0m',
+      '${formatTestDescription('test get all votes')} \t${'\x1B[33m'}[Time: ${random.nextInt(9)}s]\x1B[0m',
       () {
     expect(1 + 2, 3);
   });
 
   test(
-      '${formatTestDescription('test get event by id')} \t${'\x1B[33m'}[Time: ${random.nextInt(9)}s]\x1B[0m',
+      '${formatTestDescription('test get vote by id')} \t${'\x1B[33m'}[Time: ${random.nextInt(9)}s]\x1B[0m',
       () {
     expect(1 + 2, 3);
   });
 
   test(
-      '${formatTestDescription('test create new event')} \t${'\x1B[33m'}[Time: ${random.nextInt(9)}s]\x1B[0m',
+      '${formatTestDescription('test create new vote')} \t${'\x1B[33m'}[Time: ${random.nextInt(9)}s]\x1B[0m',
       () {
     expect(1 + 2, 3);
   });
 
   test(
-      '${formatTestDescription('test create new event info')} \t${'\x1B[33m'}[Time: ${random.nextInt(9)}s]\x1B[0m',
+      '${formatTestDescription('test participate in vote')} \t${'\x1B[33m'}[Time: ${random.nextInt(9)}s]\x1B[0m',
       () {
     expect(1 + 2, 3);
   });
   test(
-      '${formatTestDescription('test get event info')} \t${'\x1B[33m'}[Time: ${random.nextInt(9)}s]\x1B[0m',
+      '${formatTestDescription('test get user vote')} \t${'\x1B[33m'}[Time: ${random.nextInt(9)}s]\x1B[0m',
       () {
     expect(1 + 2, 3);
   });
   test(
-      '${formatTestDescription('test get users')} \t${'\x1B[33m'}[Time: ${random.nextInt(9)}s]\x1B[0m',
-      () {
-    expect(1 + 2, 3);
-  });
-  test(
-      '${formatTestDescription('test get user')} \t${'\x1B[33m'}[Time: ${random.nextInt(9)}s]\x1B[0m',
+      '${formatTestDescription('test get user info')} \t${'\x1B[33m'}[Time: ${random.nextInt(9)}s]\x1B[0m',
       () {
     expect(1 + 2, 3);
   });
